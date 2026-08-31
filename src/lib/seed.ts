@@ -83,7 +83,7 @@ export const SEED_PROJECTS: Project[] = [
     storeUrl: "https://www.lowes.com/pl/kitchen-countertops-accessories/quartz-countertops/4294515760",
     inspirationImage: img("photo-1556911220-bff31c812dba"),
     beforeImage: img("photo-1600489000022-c2086d79f9d4"),
-    hotspot: { x: -0.35, y: 0.62, z: -1.28 },
+    hotspot: { x: -0.9, y: 0.62, z: -1.28 },
     priceHistory: [
       { date: ago(90), price: 6900, note: "Showroom quote" },
       { date: ago(55), price: 6550 },
@@ -373,7 +373,7 @@ export const SEED_PROJECTS: Project[] = [
     storeName: "Ace Hardware",
     storeUrl: "https://www.acehardware.com/",
     inspirationImage: img("photo-1600607687939-ce8a6c25118c"),
-    hotspot: { x: -1.05, y: 1.62, z: 0.97 },
+    hotspot: { x: -0.7, y: 1.62, z: 0.97 },
     priceHistory: [{ date: ago(17), price: 240 }],
     createdAt: ago(19),
   },

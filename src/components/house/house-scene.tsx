@@ -260,14 +260,14 @@ function Hotspot({
         style={{ color: status }}
       >
         <span
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/80 shadow-[0_8px_24px_-6px_rgba(0,0,0,0.55)] backdrop-blur"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-white/80 shadow-[0_8px_24px_-6px_rgba(0,0,0,0.55)] backdrop-blur"
           style={{ background: pastel }}
         >
-          <Icon className="h-4.5 w-4.5 text-neutral-800" strokeWidth={2} />
+          <Icon className="h-4 w-4 text-neutral-800" strokeWidth={2} />
         </span>
         {/* Status dot */}
         <span
-          className="absolute -bottom-0.5 -right-0.5 block h-3.5 w-3.5 rounded-full border-2 border-white shadow"
+          className="absolute -bottom-0.5 -right-0.5 block h-3 w-3 rounded-full border-2 border-white shadow"
           style={{ background: status }}
         />
         <span

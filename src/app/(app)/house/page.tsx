@@ -147,9 +147,6 @@ export default function HousePage() {
               </span>
             ))}
           </div>
-          <p className="mt-1.5 text-[11px] font-light text-white/40">
-            Marker icon = area of the house · dot = status
-          </p>
         </div>
 
         {/* Orbit hint */}
@@ -188,13 +185,16 @@ export default function HousePage() {
         </div>
 
         {/* Left floating panel — marker index */}
-        <div className="glass absolute bottom-6 left-6 top-[132px] hidden w-[300px] flex-col rounded-3xl p-5 lg:flex">
-          <div className="mb-3 flex items-baseline justify-between">
+        <div className="glass absolute bottom-6 left-6 top-[128px] hidden w-[300px] flex-col rounded-3xl p-5 lg:flex">
+          <div className="mb-1 flex items-baseline justify-between">
             <h2 className="font-light">Upgrade markers</h2>
             <span className="text-[11px] font-light text-muted-foreground">
               {marked.length} placed
             </span>
           </div>
+          <p className="mb-3 text-[10.5px] font-light text-muted-foreground">
+            Icon = area of the house · dot = status
+          </p>
           <div className="-mr-2 flex-1 space-y-1.5 overflow-y-auto pr-2">
             {[...marked]
               .sort((a, b) => a.rank - b.rank)
