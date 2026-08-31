@@ -9,7 +9,6 @@ import {
   Lightformer,
   OrbitControls,
   RoundedBox,
-  SoftShadows,
   Sparkles,
 } from "@react-three/drei";
 import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
@@ -530,7 +529,6 @@ export default function HouseScene({
         camera={{ position: [5.4, 3.4, 6.2], fov: 42 }}
         gl={{ antialias: true, alpha: true, toneMapping: ACESFilmicToneMapping }}
       >
-        {highQuality && <SoftShadows size={22} samples={14} focus={0.6} />}
         <fog attach="fog" args={["#0a191c", 13, 30]} />
 
         {/* Dusk key light — low warm sun */}
