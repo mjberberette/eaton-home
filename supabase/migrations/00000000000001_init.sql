@@ -28,7 +28,10 @@ create table public.projects (
   hotspot jsonb,
   -- array of {date, price, note?} points for best-time-to-buy tracking
   price_history jsonb not null default '[]'::jsonb,
-  created_at date not null default current_date
+  created_at date not null default current_date,
+  -- household member attribution ("changed by Nate")
+  updated_by text,
+  updated_at timestamptz
 );
 
 create table public.recurring_tasks (
@@ -72,3 +75,10 @@ create policy "household read budget" on public.budget
   for select to authenticated using (true);
 create policy "household write budget" on public.budget
   for all to authenticated using (true) with check (true);
+
+-- Live sync: broadcast table changes so both members' dashboards update
+-- the moment either of them edits anything.
+alter publication supabase_realtime add table public.projects;
+alter publication supabase_realtime add table public.recurring_tasks;
+alter publication supabase_realtime add table public.budget;
+alter publication supabase_realtime add table public.categories;

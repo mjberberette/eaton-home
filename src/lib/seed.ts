@@ -5,6 +5,11 @@ function ago(days: number): string {
   return new Date(Date.now() - days * 86400000).toISOString().slice(0, 10);
 }
 
+/** Hours ago -> full ISO timestamp (for updatedAt attribution) */
+function agoTime(hours: number): string {
+  return new Date(Date.now() - hours * 3600000).toISOString();
+}
+
 export const SEED_CATEGORIES: Category[] = [
   { id: "yard", name: "Yard", slug: "yard", zone: "outdoor", sort: 1 },
   { id: "outside", name: "Outside", slug: "outside", zone: "outdoor", sort: 2 },
@@ -46,6 +51,8 @@ export const SEED_PROJECTS: Project[] = [
       { date: ago(10), price: 4800, note: "Memorial Day pricing" },
     ],
     createdAt: ago(140),
+    updatedBy: "Nate",
+    updatedAt: agoTime(2),
   },
   {
     id: "p-countertops",
@@ -69,6 +76,8 @@ export const SEED_PROJECTS: Project[] = [
       { date: ago(20), price: 6200, note: "Contractor referral discount" },
     ],
     createdAt: ago(95),
+    updatedBy: "Melanie",
+    updatedAt: agoTime(26),
   },
   {
     id: "p-shower",
@@ -90,6 +99,8 @@ export const SEED_PROJECTS: Project[] = [
       { date: ago(25), price: 7400 },
     ],
     createdAt: ago(70),
+    updatedBy: "Melanie",
+    updatedAt: agoTime(78),
   },
   {
     id: "p-fireplace",
@@ -113,6 +124,8 @@ export const SEED_PROJECTS: Project[] = [
       { date: ago(12), price: 2900, note: "Fireplace insert on sale" },
     ],
     createdAt: ago(110),
+    updatedBy: "Nate",
+    updatedAt: agoTime(5),
   },
   {
     id: "p-ev-charger",
@@ -136,6 +149,8 @@ export const SEED_PROJECTS: Project[] = [
       { date: ago(7), price: 1250, note: "Lowest tracked — good time to buy" },
     ],
     createdAt: ago(160),
+    updatedBy: "Nate",
+    updatedAt: agoTime(30),
   },
   {
     id: "p-walkway",
@@ -157,6 +172,8 @@ export const SEED_PROJECTS: Project[] = [
       { date: ago(9), price: 2100 },
     ],
     createdAt: ago(48),
+    updatedBy: "Melanie",
+    updatedAt: agoTime(120),
   },
   {
     id: "p-front-door",
@@ -237,6 +254,8 @@ export const SEED_PROJECTS: Project[] = [
       { date: ago(14), price: 1150 },
     ],
     createdAt: ago(58),
+    updatedBy: "Melanie",
+    updatedAt: agoTime(96),
   },
   {
     id: "p-garage-storage",
@@ -261,6 +280,8 @@ export const SEED_PROJECTS: Project[] = [
       { date: ago(150), price: 1600, note: "Bought at this price" },
     ],
     createdAt: ago(220),
+    updatedBy: "Nate",
+    updatedAt: agoTime(700),
   },
   {
     id: "p-bedroom-wall",
@@ -282,6 +303,8 @@ export const SEED_PROJECTS: Project[] = [
       { date: ago(3), price: 1900 },
     ],
     createdAt: ago(35),
+    updatedBy: "Melanie",
+    updatedAt: agoTime(50),
   },
   {
     id: "p-gutter-drainage",
@@ -303,6 +326,8 @@ export const SEED_PROJECTS: Project[] = [
       { date: ago(11), price: 850 },
     ],
     createdAt: ago(50),
+    updatedBy: "Nate",
+    updatedAt: agoTime(200),
   },
   {
     id: "p-window-seal",

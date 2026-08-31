@@ -21,6 +21,8 @@ interface DataContextValue {
   db: HomeDB;
   loading: boolean;
   demoMode: boolean;
+  /** Display name of the signed-in household member (e.g. "Melanie") */
+  userName: string;
   updateProject: (id: string, patch: Partial<Project>) => void;
   addProject: (project: Project, atRank?: number) => void;
   moveRank: (id: string, direction: -1 | 1) => void;
@@ -52,6 +54,8 @@ type ProjectRow = {
   hotspot: Project["hotspot"] | null;
   price_history: PricePoint[] | null;
   created_at: string;
+  updated_by: string | null;
+  updated_at: string | null;
 };
 
 function rowToProject(r: ProjectRow): Project {
@@ -73,6 +77,8 @@ function rowToProject(r: ProjectRow): Project {
     hotspot: r.hotspot ?? undefined,
     priceHistory: r.price_history ?? [],
     createdAt: r.created_at,
+    updatedBy: r.updated_by ?? undefined,
+    updatedAt: r.updated_at ?? undefined,
   };
 }
 
@@ -95,6 +101,8 @@ function projectToRow(p: Project): ProjectRow {
     hotspot: p.hotspot ?? null,
     price_history: p.priceHistory,
     created_at: p.createdAt,
+    updated_by: p.updatedBy ?? null,
+    updated_at: p.updatedAt ?? null,
   };
 }
 
@@ -133,7 +141,13 @@ async function loadFromSupabase(supabase: SupabaseClient): Promise<HomeDB | null
 
 /* ---------- Provider ---------- */
 
-export function DataProvider({ children }: { children: ReactNode }) {
+export function DataProvider({
+  children,
+  userName = "Eatons",
+}: {
+  children: ReactNode;
+  userName?: string;
+}) {
   const [db, setDb] = useState<HomeDB>(SEED_DB);
   const [loading, setLoading] = useState(true);
   const [remote, setRemote] = useState<SupabaseClient | null>(null);
@@ -173,6 +187,44 @@ export function DataProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  // Live sync: when Supabase is connected, any change made by either member
+  // (from any device) refreshes everyone else's view within a moment.
+  useEffect(() => {
+    if (!remote) return;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const reload = () => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(async () => {
+        const data = await loadFromSupabase(remote);
+        if (data) setDb(data);
+      }, 400);
+    };
+    const channel = remote
+      .channel("eaton-home-live")
+      .on("postgres_changes", { event: "*", schema: "public" }, reload)
+      .subscribe();
+    return () => {
+      if (timer) clearTimeout(timer);
+      void remote.removeChannel(channel);
+    };
+  }, [remote]);
+
+  // Demo mode: keep multiple open tabs of the same browser in sync.
+  useEffect(() => {
+    if (remote) return;
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== STORAGE_KEY || !e.newValue) return;
+      try {
+        const parsed = JSON.parse(e.newValue) as HomeDB;
+        if (parsed.projects?.length) setDb(parsed);
+      } catch {
+        // Ignore malformed updates
+      }
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, [remote]);
+
   const persist = useCallback(
     (next: HomeDB) => {
       if (!remote) {
@@ -197,11 +249,20 @@ export function DataProvider({ children }: { children: ReactNode }) {
     [persist]
   );
 
+  const stamp = useCallback(
+    (): Pick<Project, "updatedBy" | "updatedAt"> => ({
+      updatedBy: userName,
+      updatedAt: new Date().toISOString(),
+    }),
+    [userName]
+  );
+
   const updateProject = useCallback(
     (id: string, patch: Partial<Project>) => {
+      const stamped = { ...patch, ...stamp() };
       apply((prev) => ({
         ...prev,
-        projects: prev.projects.map((p) => (p.id === id ? { ...p, ...patch } : p)),
+        projects: prev.projects.map((p) => (p.id === id ? { ...p, ...stamped } : p)),
       }));
       if (remote) {
         setDb((current) => {
@@ -211,28 +272,35 @@ export function DataProvider({ children }: { children: ReactNode }) {
         });
       }
     },
-    [apply, remote]
+    [apply, remote, stamp]
   );
 
   /** Reorders the full list so ranks are always a clean 1..n sequence. */
   const applyOrder = useCallback(
-    (prev: HomeDB, orderedIds: string[]) => {
+    (prev: HomeDB, orderedIds: string[], stampId?: string) => {
       const rankOf = new Map(orderedIds.map((id, i) => [id, i + 1]));
-      const changed: { id: string; rank: number }[] = [];
+      const meta = stamp();
+      const changed: { id: string; rank: number; updated_by?: string; updated_at?: string }[] = [];
       const projects = prev.projects.map((p) => {
         const rank = rankOf.get(p.id);
-        if (rank === undefined || rank === p.rank) return p;
-        changed.push({ id: p.id, rank });
-        return { ...p, rank };
+        const isMoved = p.id === stampId;
+        if (rank === undefined || (rank === p.rank && !isMoved)) return p;
+        changed.push({
+          id: p.id,
+          rank,
+          ...(isMoved && { updated_by: meta.updatedBy, updated_at: meta.updatedAt }),
+        });
+        return isMoved ? { ...p, rank, ...meta } : { ...p, rank };
       });
       if (remote && changed.length) void remote.from("projects").upsert(changed);
       return { ...prev, projects };
     },
-    [remote]
+    [remote, stamp]
   );
 
   const addProject = useCallback(
     (project: Project, atRank?: number) => {
+      const stamped = { ...project, ...stamp() };
       apply((prev) => {
         const sorted = [...prev.projects].sort((a, b) => a.rank - b.rank);
         const target = Math.max(
@@ -240,16 +308,16 @@ export function DataProvider({ children }: { children: ReactNode }) {
           Math.min(sorted.length + 1, Math.round(atRank ?? sorted.length + 1))
         );
         const ids = sorted.map((p) => p.id);
-        ids.splice(target - 1, 0, project.id);
+        ids.splice(target - 1, 0, stamped.id);
         const withNew = {
           ...prev,
-          projects: [...prev.projects, { ...project, rank: target }],
+          projects: [...prev.projects, { ...stamped, rank: target }],
         };
-        if (remote) void remote.from("projects").insert(projectToRow({ ...project, rank: target }));
+        if (remote) void remote.from("projects").insert(projectToRow({ ...stamped, rank: target }));
         return applyOrder(withNew, ids);
       });
     },
-    [apply, applyOrder, remote]
+    [apply, applyOrder, remote, stamp]
   );
 
   const setRank = useCallback(
@@ -263,7 +331,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
         const ids = sorted.map((p) => p.id);
         ids.splice(idx, 1);
         ids.splice(target - 1, 0, id);
-        return applyOrder(prev, ids);
+        return applyOrder(prev, ids, id);
       });
     },
     [apply, applyOrder]
@@ -325,11 +393,12 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   const addPricePoint = useCallback(
     (projectId: string, point: PricePoint) => {
+      const meta = stamp();
       apply((prev) => ({
         ...prev,
         projects: prev.projects.map((p) =>
           p.id === projectId
-            ? { ...p, priceHistory: [...p.priceHistory, point], estimatedCost: point.price }
+            ? { ...p, priceHistory: [...p.priceHistory, point], estimatedCost: point.price, ...meta }
             : p
         ),
       }));
@@ -341,7 +410,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
         });
       }
     },
-    [apply, remote]
+    [apply, remote, stamp]
   );
 
   const value = useMemo(
@@ -349,6 +418,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
       db,
       loading,
       demoMode: !remote,
+      userName,
       updateProject,
       addProject,
       moveRank,
@@ -357,7 +427,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
       updateBudget,
       addPricePoint,
     }),
-    [db, loading, remote, updateProject, addProject, moveRank, setRank, completeTask, updateBudget, addPricePoint]
+    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, completeTask, updateBudget, addPricePoint]
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

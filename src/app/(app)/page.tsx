@@ -21,7 +21,7 @@ import { daysUntilDue, formatMoney } from "@/lib/types";
 const HouseScene = dynamic(() => import("@/components/house/house-scene"), { ssr: false });
 
 export default function DashboardPage() {
-  const { db } = useHome();
+  const { db, userName } = useHome();
   const { projects, tasks, budget, categories } = db;
 
   const active = projects.filter((p) => p.status === "in_progress");
@@ -59,7 +59,7 @@ export default function DashboardPage() {
             })}
           </p>
           <h1 className="text-display mt-1 text-4xl sm:text-5xl">
-            {greeting}, <span className="font-normal">Eatons</span>
+            {greeting}, <span className="font-normal">{userName}</span>
           </h1>
         </div>
         <Button asChild className="h-11 rounded-2xl px-5 font-light">

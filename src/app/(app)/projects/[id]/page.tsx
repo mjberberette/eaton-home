@@ -33,6 +33,7 @@ import {
   STATUS_LABEL,
   STATUS_ORDER,
   formatMoney,
+  timeAgo,
   type ProjectStatus,
 } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -88,6 +89,11 @@ export default function ProjectDetailPage() {
               Priority #{project.rank}
             </span>
             <TrendChip history={history} />
+            {project.updatedBy && project.updatedAt && (
+              <span className="glass-chip rounded-full px-3 py-1 text-[11px] font-light text-muted-foreground">
+                Updated by {project.updatedBy} · {timeAgo(project.updatedAt)}
+              </span>
+            )}
           </div>
         </div>
         <div className="flex items-center gap-2.5">

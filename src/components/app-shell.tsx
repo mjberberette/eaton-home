@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+const subscribeNoop = () => () => {};
 import {
   CalendarCheck,
   House,
@@ -32,8 +34,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   // All page content is time- and client-data-dependent (greetings, due-day
   // countdowns, localStorage/Supabase data), so it only renders after mount.
   // The server prerender ships this same skeleton, which keeps hydration clean.
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useSyncExternalStore(
+    subscribeNoop,
+    () => true,
+    () => false
+  );
 
   return (
     <TooltipProvider delayDuration={150}>

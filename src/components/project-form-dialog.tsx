@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -52,19 +52,21 @@ export function ProjectFormDialog({
   const [description, setDescription] = useState("");
 
   // (Re)fill the form whenever the dialog opens
-  useEffect(() => {
-    if (!open) return;
-    setTitle(project?.title ?? "");
-    setCategoryId(project?.categoryId ?? "");
-    setRankInput(String(project?.rank ?? projects.length + 1));
-    setCost(project ? String(project.estimatedCost) : "");
-    setStoreName(project?.storeName ?? "");
-    setStoreUrl(project?.storeUrl ?? "");
-    setInspiration(project?.inspirationImage ?? "");
-    setBeforeImage(project?.beforeImage ?? "");
-    setAfterImage(project?.afterImage ?? "");
-    setDescription(project?.description ?? "");
-  }, [open, project, projects.length]);
+  function handleOpenChange(next: boolean) {
+    if (next) {
+      setTitle(project?.title ?? "");
+      setCategoryId(project?.categoryId ?? "");
+      setRankInput(String(project?.rank ?? projects.length + 1));
+      setCost(project ? String(project.estimatedCost) : "");
+      setStoreName(project?.storeName ?? "");
+      setStoreUrl(project?.storeUrl ?? "");
+      setInspiration(project?.inspirationImage ?? "");
+      setBeforeImage(project?.beforeImage ?? "");
+      setAfterImage(project?.afterImage ?? "");
+      setDescription(project?.description ?? "");
+    }
+    setOpen(next);
+  }
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -110,7 +112,7 @@ export function ProjectFormDialog({
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="glass max-h-[90vh] max-w-lg overflow-y-auto rounded-3xl border-white/10">
         <DialogHeader>

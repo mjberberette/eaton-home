@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { EatonLogo, EatonMark } from "@/components/logo";
+import { EatonLogo } from "@/components/logo";
 import { Reveal } from "@/components/anim";
 import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
@@ -208,22 +208,37 @@ export default function LoginPage() {
               <Separator className="flex-1" />
             </div>
 
-            <Button
-              variant="outline"
-              disabled={demoPending}
-              onClick={() => startDemo(() => enterDemo())}
-              className="glass-chip group h-12 w-full rounded-2xl text-base font-light"
-            >
-              {demoPending ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <>
-                  <EatonMark className="h-5 w-5 rounded-md" />
-                  Step inside the demo home
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </>
-              )}
-            </Button>
+            <p className="mb-3 text-center text-xs font-light text-muted-foreground">
+              Step inside the demo home as…
+            </p>
+            <div className="grid grid-cols-2 gap-3">
+              {(["Melanie", "Nate"] as const).map((member) => (
+                <Button
+                  key={member}
+                  variant="outline"
+                  disabled={demoPending}
+                  onClick={() => startDemo(() => enterDemo(member))}
+                  className="glass-chip group h-12 rounded-2xl text-base font-light"
+                >
+                  {demoPending ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <>
+                      <span
+                        className={
+                          "flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-medium text-brand-ink " +
+                          (member === "Melanie" ? "bg-brand-green" : "bg-brand-orange")
+                        }
+                      >
+                        {member[0]}
+                      </span>
+                      {member}
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </>
+                  )}
+                </Button>
+              ))}
+            </div>
           </div>
         </div>
       </Reveal>

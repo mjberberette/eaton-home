@@ -5,3 +5,4 @@ export const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 export const isSupabaseConfigured = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
 
 export const DEMO_COOKIE = "eaton_home_demo";
+export const DEMO_USER_COOKIE = "eaton_home_user";

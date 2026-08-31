@@ -12,6 +12,7 @@ import {
   X,
 } from "lucide-react";
 import { Reveal } from "@/components/anim";
+import { categoryMeta } from "@/lib/category-meta";
 import { StatusBadge } from "@/components/project-bits";
 import { Progress } from "@/components/ui/progress";
 import { useHome } from "@/lib/data-context";
@@ -93,6 +94,9 @@ export default function HousePage() {
               </span>
             ))}
           </div>
+          <p className="mt-1.5 text-[11px] font-light text-white/40">
+            Marker icon = area of the house · dot = status
+          </p>
         </div>
 
         {/* Orbit hint */}
@@ -238,6 +242,7 @@ function MarkerRow({
   active: boolean;
   onClick: () => void;
 }) {
+  const meta = categoryMeta(project.categoryId);
   return (
     <button
       onClick={onClick}
@@ -246,10 +251,18 @@ function MarkerRow({
         active && "border-brand-cyan/40 bg-white/[0.09]"
       )}
     >
-      <span
-        className="h-2.5 w-2.5 shrink-0 rounded-full"
-        style={{ background: LEGEND.find((l) => l.status === project.status)?.color }}
-      />
+      <span className="relative shrink-0">
+        <span
+          className="flex h-8 w-8 items-center justify-center rounded-full border border-white/60"
+          style={{ background: meta.pastel }}
+        >
+          <meta.icon className="h-3.5 w-3.5 text-neutral-800" strokeWidth={2} />
+        </span>
+        <span
+          className="absolute -bottom-0.5 -right-0.5 block h-2.5 w-2.5 rounded-full border border-white/80"
+          style={{ background: LEGEND.find((l) => l.status === project.status)?.color }}
+        />
+      </span>
       <span className="min-w-0 flex-1">
         <span className="block truncate text-sm font-normal">{project.title}</span>
         <span className="block text-[11px] font-light text-muted-foreground">

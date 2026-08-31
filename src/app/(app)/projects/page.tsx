@@ -26,7 +26,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useHome } from "@/lib/data-context";
-import { formatMoney, type Category, type Project } from "@/lib/types";
+import { formatMoney, timeAgo, type Category, type Project } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export default function ProjectsPage() {
@@ -249,6 +249,9 @@ function SortableRow({
         <p className="truncate text-xs font-light text-muted-foreground">
           {categories.find((c) => c.id === p.categoryId)?.name}
           {p.storeName ? ` · ${p.storeName}` : ""}
+          {p.updatedBy && p.updatedAt
+            ? ` · updated by ${p.updatedBy} ${timeAgo(p.updatedAt)}`
+            : ""}
         </p>
       </Link>
       <div className="hidden w-28 lg:block">
