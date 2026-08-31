@@ -1,11 +1,21 @@
 import { cn } from "@/lib/utils";
 
+/** Brand mark geometry — traced from the official Eaton Home SVG. */
 export const LOGO = {
-  viewBox: "0 0 260 320",
-  ring: "M233 170 L233 119 A92 92 0 0 0 141 27 L119 27 A92 92 0 0 0 27 119 L27 201 A92 92 0 0 0 119 293 L141 293 A92 92 0 0 0 233 236",
-  roof: "M60 152 L128 100 L250 207",
-  teal: "#56d3c4",
-  yellow: "#f7d842",
+  viewBox: "0 0 252 320",
+  // Starts at the roof junction: draws up the right side, across the top,
+  // down the left, around the bottom to the tail cut.
+  ring: "M236 166 L236 110 A95 95 0 0 0 141 15 L110 15 A95 95 0 0 0 15 110 L15 210 A95 95 0 0 0 110 305 L141 305 A95 95 0 0 0 235 222",
+  // Left end → peak → down-right through the ring edge.
+  roof: "M58 152 L120 104 L247 210",
+  ringWidth: 30,
+  roofWidth: 26,
+  windows: [
+    { x: 88, y: 186, size: 26 },
+    { x: 140, y: 186, size: 26 },
+  ],
+  teal: "#3edbc8",
+  yellow: "#ffdc26",
 };
 
 /** Eaton Home mark — a home tucked inside an "e", windows glowing. */
@@ -18,10 +28,19 @@ export function EatonMark({ className }: { className?: string }) {
       className={cn("h-10 w-auto", className)}
       aria-hidden
     >
-      <path d={LOGO.ring} stroke={LOGO.teal} strokeWidth="34" />
-      <path d={LOGO.roof} stroke={LOGO.teal} strokeWidth="30" />
-      <rect x="96" y="190" width="30" height="30" rx="2" fill={LOGO.yellow} />
-      <rect x="140" y="190" width="30" height="30" rx="2" fill={LOGO.yellow} />
+      <path d={LOGO.ring} stroke={LOGO.teal} strokeWidth={LOGO.ringWidth} />
+      <path d={LOGO.roof} stroke={LOGO.teal} strokeWidth={LOGO.roofWidth} />
+      {LOGO.windows.map((win) => (
+        <rect
+          key={win.x}
+          x={win.x}
+          y={win.y}
+          width={win.size}
+          height={win.size}
+          rx="2"
+          fill={LOGO.yellow}
+        />
+      ))}
     </svg>
   );
 }

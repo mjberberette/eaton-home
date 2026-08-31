@@ -30,17 +30,22 @@ export function AnimatedLogo({
     () => {
       const el = host.current;
       if (!el) return;
+      const windowRects = LOGO.windows
+        .map(
+          (win) => `
+          <rect data-window x="${win.x}" y="${win.y}" width="${win.size}" height="${win.size}"
+                rx="2" opacity="0" fill="${LOGO.yellow}"
+                style="transform-box:fill-box;transform-origin:50% 50%;scale:0.4"/>`
+        )
+        .join("");
       el.innerHTML = `
         <svg viewBox="${LOGO.viewBox}" fill="none" xmlns="http://www.w3.org/2000/svg"
              style="display:block;height:100%;width:auto">
           <path data-ring d="${LOGO.ring}" pathLength="1" stroke-dasharray="1"
-                stroke-dashoffset="1" stroke="${LOGO.teal}" stroke-width="34"/>
+                stroke-dashoffset="1" stroke="${LOGO.teal}" stroke-width="${LOGO.ringWidth}"/>
           <path data-roof d="${LOGO.roof}" pathLength="1" stroke-dasharray="1"
-                stroke-dashoffset="1" stroke="${LOGO.teal}" stroke-width="30"/>
-          <rect data-window x="96" y="190" width="30" height="30" rx="2" opacity="0"
-                fill="${LOGO.yellow}" style="transform-box:fill-box;transform-origin:50% 50%;scale:0.4"/>
-          <rect data-window x="140" y="190" width="30" height="30" rx="2" opacity="0"
-                fill="${LOGO.yellow}" style="transform-box:fill-box;transform-origin:50% 50%;scale:0.4"/>
+                stroke-dashoffset="1" stroke="${LOGO.teal}" stroke-width="${LOGO.roofWidth}"/>
+          ${windowRects}
         </svg>`;
 
       const roof = el.querySelector("[data-roof]");
