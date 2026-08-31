@@ -257,7 +257,7 @@ function SortableRow({
         <Progress value={p.progress} className="h-1.5" />
       </div>
       <TrendChip history={p.priceHistory} className="hidden md:inline-flex" />
-      <span className="w-20 text-right font-light tabular-nums">
+      <span className="shrink-0 text-right text-sm font-light tabular-nums sm:w-20 sm:text-base">
         {formatMoney(p.estimatedCost)}
       </span>
       <StatusBadge status={p.status} className="hidden sm:inline-flex" />
@@ -266,7 +266,7 @@ function SortableRow({
         trigger={
           <button
             aria-label={`Edit ${p.title}`}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-muted-foreground/60 transition-colors hover:bg-white/10 hover:text-foreground"
+            className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-xl text-muted-foreground/60 transition-colors hover:bg-white/10 hover:text-foreground sm:flex"
           >
             <Pencil className="h-4 w-4" />
           </button>

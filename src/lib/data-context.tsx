@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -13,7 +14,19 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { createClient } from "./supabase/client";
 import { isSupabaseConfigured } from "./supabase/config";
 import { SEED_DB } from "./seed";
-import type { Budget, HomeDB, PricePoint, Project, ProjectNote, RecurringTask } from "./types";
+import {
+  STATUS_LABEL,
+  formatMoney,
+  type ActivityAction,
+  type ActivityEntry,
+  type Budget,
+  type HomeDB,
+  type HomeInfo,
+  type PricePoint,
+  type Project,
+  type ProjectNote,
+  type RecurringTask,
+} from "./types";
 
 const STORAGE_KEY = "eaton-home-db-v1";
 
@@ -32,6 +45,7 @@ interface DataContextValue {
   addPricePoint: (projectId: string, point: PricePoint) => void;
   addNote: (projectId: string, text: string) => void;
   deleteNote: (projectId: string, noteId: string) => void;
+  updateHomeInfo: (info: HomeInfo) => void;
 }
 
 const DataContext = createContext<DataContextValue | null>(null);
@@ -111,12 +125,48 @@ function projectToRow(p: Project): ProjectRow {
   };
 }
 
+type ActivityRow = {
+  id: string;
+  actor: string;
+  action: ActivityAction;
+  target_id: string | null;
+  target_title: string;
+  detail: string | null;
+  created_at: string;
+};
+
+function rowToActivity(r: ActivityRow): ActivityEntry {
+  return {
+    id: r.id,
+    actor: r.actor,
+    action: r.action,
+    targetId: r.target_id ?? undefined,
+    targetTitle: r.target_title,
+    detail: r.detail ?? undefined,
+    createdAt: r.created_at,
+  };
+}
+
+function activityToRow(a: ActivityEntry): ActivityRow {
+  return {
+    id: a.id,
+    actor: a.actor,
+    action: a.action,
+    target_id: a.targetId ?? null,
+    target_title: a.targetTitle,
+    detail: a.detail ?? null,
+    created_at: a.createdAt,
+  };
+}
+
 async function loadFromSupabase(supabase: SupabaseClient): Promise<HomeDB | null> {
-  const [cats, projs, tasks, budget] = await Promise.all([
+  const [cats, projs, tasks, budget, activity, homeInfo] = await Promise.all([
     supabase.from("categories").select("*").order("sort"),
     supabase.from("projects").select("*").order("rank"),
     supabase.from("recurring_tasks").select("*"),
     supabase.from("budget").select("*").limit(1).maybeSingle(),
+    supabase.from("activity_log").select("*").order("created_at", { ascending: false }).limit(200),
+    supabase.from("home_info").select("*").limit(1).maybeSingle(),
   ]);
   if (cats.error || projs.error || tasks.error || budget.error) return null;
   if (!cats.data?.length) return null;
@@ -141,6 +191,8 @@ async function loadFromSupabase(supabase: SupabaseClient): Promise<HomeDB | null
     budget: budget.data
       ? { monthlyBudget: Number(budget.data.monthly_budget), projectFund: Number(budget.data.project_fund) }
       : SEED_DB.budget,
+    activity: ((activity.data as ActivityRow[]) ?? []).map(rowToActivity),
+    homeInfo: (homeInfo.data?.data as HomeInfo) ?? SEED_DB.homeInfo,
   };
 }
 
@@ -178,7 +230,13 @@ export function DataProvider({
         const raw = localStorage.getItem(STORAGE_KEY);
         if (raw && !cancelled) {
           const parsed = JSON.parse(raw) as HomeDB;
-          if (parsed.projects?.length) setDb(parsed);
+          if (parsed.projects?.length) {
+            setDb({
+              ...parsed,
+              activity: parsed.activity ?? SEED_DB.activity,
+              homeInfo: parsed.homeInfo ?? SEED_DB.homeInfo,
+            });
+          }
         }
       } catch {
         // Corrupt storage — fall back to seed
@@ -262,9 +320,62 @@ export function DataProvider({
     [userName]
   );
 
+  // Live mirror of db for lookups inside event-handler callbacks
+  const dbRef = useRef(db);
+  useEffect(() => {
+    dbRef.current = db;
+  }, [db]);
+
+  /**
+   * Append to the household change log. Rapid repeats of the same action on
+   * the same target (slider drags, typing) merge into one entry.
+   */
+  const logActivity = useCallback(
+    (
+      action: ActivityAction,
+      targetTitle: string,
+      opts?: { targetId?: string; detail?: string }
+    ) => {
+      const now = new Date().toISOString();
+      const entry: ActivityEntry = {
+        id: `a-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`,
+        actor: userName,
+        action,
+        targetId: opts?.targetId,
+        targetTitle,
+        detail: opts?.detail,
+        createdAt: now,
+      };
+      apply((prev) => {
+        const list = prev.activity ?? [];
+        const last = list[0];
+        const isRepeat =
+          last &&
+          last.actor === entry.actor &&
+          last.action === entry.action &&
+          last.targetId === entry.targetId &&
+          Date.now() - new Date(last.createdAt).getTime() < 60000;
+        if (isRepeat) {
+          const merged = { ...last, detail: entry.detail ?? last.detail, createdAt: now };
+          if (remote) void remote.from("activity_log").upsert(activityToRow(merged));
+          return { ...prev, activity: [merged, ...list.slice(1)].slice(0, 200) };
+        }
+        if (remote) void remote.from("activity_log").insert(activityToRow(entry));
+        return { ...prev, activity: [entry, ...list].slice(0, 200) };
+      });
+    },
+    [apply, remote, userName]
+  );
+
+  const projectTitle = useCallback(
+    (id: string) => dbRef.current.projects.find((p) => p.id === id)?.title ?? "a project",
+    []
+  );
+
   const updateProject = useCallback(
     (id: string, patch: Partial<Project>) => {
       const stamped = { ...patch, ...stamp() };
+      const title = patch.title ?? projectTitle(id);
       apply((prev) => ({
         ...prev,
         projects: prev.projects.map((p) => (p.id === id ? { ...p, ...stamped } : p)),
@@ -276,8 +387,20 @@ export function DataProvider({
           return current;
         });
       }
+      const keys = Object.keys(patch);
+      const storeOnly = keys.every((k) => k === "storeName" || k === "storeUrl");
+      if (storeOnly) return; // covered by the accompanying logged_price entry
+      if (patch.status !== undefined) {
+        logActivity("changed_status", title, { targetId: id, detail: `now ${STATUS_LABEL[patch.status]}` });
+      } else if (patch.progress !== undefined) {
+        logActivity("updated_project", title, { targetId: id, detail: `progress → ${patch.progress}%` });
+      } else if (patch.spent !== undefined) {
+        logActivity("updated_project", title, { targetId: id, detail: `spent → ${formatMoney(patch.spent)}` });
+      } else {
+        logActivity("updated_project", title, { targetId: id, detail: "edited details" });
+      }
     },
-    [apply, remote, stamp]
+    [apply, remote, stamp, logActivity, projectTitle]
   );
 
   /** Reorders the full list so ranks are always a clean 1..n sequence. */
@@ -321,12 +444,26 @@ export function DataProvider({
         if (remote) void remote.from("projects").insert(projectToRow({ ...stamped, rank: target }));
         return applyOrder(withNew, ids);
       });
+      const rank = Math.max(
+        1,
+        Math.min(dbRef.current.projects.length + 1, Math.round(atRank ?? dbRef.current.projects.length + 1))
+      );
+      logActivity("added_project", project.title, {
+        targetId: project.id,
+        detail: `priority #${rank} · ${formatMoney(project.estimatedCost)}`,
+      });
     },
-    [apply, applyOrder, remote, stamp]
+    [apply, applyOrder, remote, stamp, logActivity]
   );
 
   const setRank = useCallback(
     (id: string, rank: number) => {
+      const sortedNow = [...dbRef.current.projects].sort((a, b) => a.rank - b.rank);
+      const idxNow = sortedNow.findIndex((p) => p.id === id);
+      if (idxNow < 0) return;
+      const targetNow = Math.max(1, Math.min(sortedNow.length, Math.round(rank)));
+      if (targetNow === idxNow + 1) return;
+
       apply((prev) => {
         const sorted = [...prev.projects].sort((a, b) => a.rank - b.rank);
         const idx = sorted.findIndex((p) => p.id === id);
@@ -338,8 +475,12 @@ export function DataProvider({
         ids.splice(target - 1, 0, id);
         return applyOrder(prev, ids, id);
       });
+      logActivity("changed_priority", projectTitle(id), {
+        targetId: id,
+        detail: `moved to #${targetNow}`,
+      });
     },
-    [apply, applyOrder]
+    [apply, applyOrder, logActivity, projectTitle]
   );
 
   const moveRank = useCallback(
@@ -371,13 +512,15 @@ export function DataProvider({
   const completeTask = useCallback(
     (id: string) => {
       const today = new Date().toISOString().slice(0, 10);
+      const name = dbRef.current.tasks.find((t) => t.id === id)?.name ?? "a task";
       apply((prev) => ({
         ...prev,
         tasks: prev.tasks.map((t): RecurringTask => (t.id === id ? { ...t, lastDone: today } : t)),
       }));
       if (remote) void remote.from("recurring_tasks").update({ last_done: today }).eq("id", id);
+      logActivity("completed_task", name, { detail: "cycle restarted" });
     },
-    [apply, remote]
+    [apply, remote, logActivity]
   );
 
   const updateBudget = useCallback(
@@ -392,8 +535,14 @@ export function DataProvider({
           })
           .eq("id", 1);
       }
+      const parts: string[] = [];
+      if (patch.monthlyBudget !== undefined)
+        parts.push(`monthly → ${formatMoney(patch.monthlyBudget)}`);
+      if (patch.projectFund !== undefined)
+        parts.push(`fund → ${formatMoney(patch.projectFund)}`);
+      logActivity("updated_budget", "the budget", { detail: parts.join(" · ") || undefined });
     },
-    [apply, remote]
+    [apply, remote, logActivity]
   );
 
   const addPricePoint = useCallback(
@@ -414,8 +563,12 @@ export function DataProvider({
           return current;
         });
       }
+      logActivity("logged_price", projectTitle(projectId), {
+        targetId: projectId,
+        detail: `${formatMoney(point.price)}${point.note ? ` · ${point.note}` : ""}`,
+      });
     },
-    [apply, remote, stamp]
+    [apply, remote, stamp, logActivity, projectTitle]
   );
 
   const addNote = useCallback(
@@ -442,8 +595,9 @@ export function DataProvider({
           return current;
         });
       }
+      logActivity("added_note", projectTitle(projectId), { targetId: projectId });
     },
-    [apply, remote, stamp, userName]
+    [apply, remote, stamp, userName, logActivity, projectTitle]
   );
 
   const deleteNote = useCallback(
@@ -463,8 +617,18 @@ export function DataProvider({
           return current;
         });
       }
+      logActivity("deleted_note", projectTitle(projectId), { targetId: projectId });
     },
-    [apply, remote]
+    [apply, remote, logActivity, projectTitle]
+  );
+
+  const updateHomeInfo = useCallback(
+    (info: HomeInfo) => {
+      apply((prev) => ({ ...prev, homeInfo: info }));
+      if (remote) void remote.from("home_info").upsert({ id: 1, data: info });
+      logActivity("updated_home", "the home facts");
+    },
+    [apply, remote, logActivity]
   );
 
   const value = useMemo(
@@ -482,8 +646,9 @@ export function DataProvider({
       addPricePoint,
       addNote,
       deleteNote,
+      updateHomeInfo,
     }),
-    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, completeTask, updateBudget, addPricePoint, addNote, deleteNote]
+    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, completeTask, updateBudget, addPricePoint, addNote, deleteNote, updateHomeInfo]
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

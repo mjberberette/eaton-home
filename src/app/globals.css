@@ -67,6 +67,83 @@
   --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
 }
 
+:root {
+  /* Themeable atmosphere tints (overridden per palette below) */
+  --scene-tint: rgba(60, 219, 200, 0.16);
+  --scene-tint-deep: rgba(24, 110, 100, 0.28);
+}
+
+/*
+ * Curated household palettes — pick yours in Settings.
+ * Status colors (green/orange/yellow/red) stay constant for meaning;
+ * the accent + atmosphere shift with the theme.
+ */
+[data-theme="ember"] {
+  --primary: #ff9d68;
+  --primary-foreground: #2b1305;
+  --ring: #ff9d68;
+  --accent: rgba(255, 157, 104, 0.12);
+  --accent-foreground: #ffcfae;
+  --brand-cyan: #ff9d68;
+  --scene-tint: rgba(255, 157, 104, 0.12);
+  --scene-tint-deep: rgba(146, 78, 36, 0.24);
+}
+
+[data-theme="lavender"] {
+  --primary: #b8a7ff;
+  --primary-foreground: #17103a;
+  --ring: #b8a7ff;
+  --accent: rgba(184, 167, 255, 0.12);
+  --accent-foreground: #d7cdff;
+  --brand-cyan: #b8a7ff;
+  --scene-tint: rgba(184, 167, 255, 0.13);
+  --scene-tint-deep: rgba(94, 78, 178, 0.26);
+}
+
+[data-theme="rose"] {
+  --primary: #f7a8c4;
+  --primary-foreground: #3a0f20;
+  --ring: #f7a8c4;
+  --accent: rgba(247, 168, 196, 0.12);
+  --accent-foreground: #ffd0e0;
+  --brand-cyan: #f7a8c4;
+  --scene-tint: rgba(247, 168, 196, 0.11);
+  --scene-tint-deep: rgba(158, 74, 106, 0.24);
+}
+
+[data-theme="golden"] {
+  --primary: #ffcf5e;
+  --primary-foreground: #2e1e02;
+  --ring: #ffcf5e;
+  --accent: rgba(255, 207, 94, 0.12);
+  --accent-foreground: #ffe4a3;
+  --brand-cyan: #ffcf5e;
+  --scene-tint: rgba(255, 207, 94, 0.1);
+  --scene-tint-deep: rgba(150, 112, 34, 0.22);
+}
+
+[data-theme="juniper"] {
+  --primary: #6fd695;
+  --primary-foreground: #06210f;
+  --ring: #6fd695;
+  --accent: rgba(111, 214, 149, 0.12);
+  --accent-foreground: #b2ecc7;
+  --brand-cyan: #6fd695;
+  --scene-tint: rgba(111, 214, 149, 0.13);
+  --scene-tint-deep: rgba(44, 122, 76, 0.26);
+}
+
+[data-theme="glacier"] {
+  --primary: #82c7ff;
+  --primary-foreground: #06192b;
+  --ring: #82c7ff;
+  --accent: rgba(130, 199, 255, 0.12);
+  --accent-foreground: #c2e2ff;
+  --brand-cyan: #82c7ff;
+  --scene-tint: rgba(130, 199, 255, 0.13);
+  --scene-tint-deep: rgba(52, 106, 158, 0.26);
+}
+
 * {
   border-color: var(--border);
 }
@@ -92,8 +169,8 @@ body {
   z-index: -10;
   overflow: hidden;
   background:
-    radial-gradient(1100px 720px at 22% 8%, rgba(60, 219, 200, 0.16), transparent 58%),
-    radial-gradient(1400px 900px at 55% 45%, rgba(24, 110, 100, 0.28), transparent 62%),
+    radial-gradient(1100px 720px at 22% 8%, var(--scene-tint), transparent 58%),
+    radial-gradient(1400px 900px at 55% 45%, var(--scene-tint-deep), transparent 62%),
     radial-gradient(800px 600px at 88% 88%, rgba(255, 170, 90, 0.08), transparent 55%),
     radial-gradient(900px 700px at 8% 92%, rgba(28, 84, 96, 0.25), transparent 60%),
     linear-gradient(175deg, #0c2023 0%, #0a191c 45%, #081215 100%);
@@ -149,12 +226,12 @@ body {
 }
 
 .ring-glow {
-  box-shadow: 0 0 0 4px rgba(60, 219, 200, 0.16);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 16%, transparent);
 }
 
-/* Cyan glow accents, echoing the monitoring-dashboard inspiration */
+/* Accent glow, echoing the monitoring-dashboard inspiration (follows theme) */
 .glow-cyan {
-  box-shadow: 0 8px 30px -8px rgba(60, 219, 200, 0.45);
+  box-shadow: 0 8px 30px -8px color-mix(in srgb, var(--primary) 45%, transparent);
 }
 
 /* Pulsing hotspot dot for the 3D house */

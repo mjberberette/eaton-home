@@ -7,13 +7,16 @@ import { usePathname } from "next/navigation";
 const subscribeNoop = () => () => {};
 import {
   CalendarCheck,
+  History,
   House,
   LayoutDashboard,
   ListTodo,
   LogOut,
   PiggyBank,
   Rotate3d,
+  Settings,
 } from "lucide-react";
+import { SettingsDialog, ThemeLoader } from "@/components/settings-dialog";
 import { cn } from "@/lib/utils";
 import { EatonLogo, EatonMark } from "@/components/logo";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -26,6 +29,7 @@ const NAV = [
   { href: "/house", label: "3D House", icon: Rotate3d },
   { href: "/tasks", label: "Home Care", icon: CalendarCheck },
   { href: "/budget", label: "Budget", icon: PiggyBank },
+  { href: "/changelog", label: "Change Log", icon: History },
 ] as const;
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -42,6 +46,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <TooltipProvider delayDuration={150}>
+      <ThemeLoader />
       <div className="mx-auto flex min-h-screen w-full max-w-[1560px] gap-5 p-3 sm:p-5">
         {/* Desktop sidebar */}
         <aside className="glass-deep sticky top-5 hidden h-[calc(100vh-2.5rem)] w-[86px] shrink-0 flex-col items-center justify-between rounded-[2rem] py-7 md:flex">
@@ -77,7 +82,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             })}
           </nav>
 
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-3">
             <div className="flex -space-x-2.5">
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-green text-[11px] font-medium text-white ring-2 ring-black/30">
                 M
@@ -86,6 +91,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 N
               </span>
             </div>
+            <SettingsDialog
+              trigger={
+                <button
+                  aria-label="Settings"
+                  className="flex h-11 w-11 items-center justify-center rounded-2xl text-white/40 transition-colors hover:bg-white/10 hover:text-white"
+                >
+                  <Settings className="h-4.5 w-4.5" strokeWidth={1.5} />
+                </button>
+              }
+            />
             <form action={signOut}>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -106,19 +121,31 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </aside>
 
         {/* Main column */}
-        <div className="flex min-w-0 flex-1 flex-col pb-24 md:pb-0">
+        <div className="flex min-w-0 flex-1 flex-col overflow-x-clip pb-24 md:pb-0">
           {/* Mobile top bar */}
           <header className="glass mb-4 flex items-center justify-between rounded-3xl px-5 py-3.5 md:hidden">
             <EatonLogo />
-            <form action={signOut}>
-              <button
-                type="submit"
-                aria-label="Sign out"
-                className="flex h-10 w-10 items-center justify-center rounded-xl text-muted-foreground"
-              >
-                <LogOut className="h-4.5 w-4.5" strokeWidth={1.5} />
-              </button>
-            </form>
+            <div className="flex items-center gap-1">
+              <SettingsDialog
+                trigger={
+                  <button
+                    aria-label="Settings"
+                    className="flex h-10 w-10 items-center justify-center rounded-xl text-muted-foreground"
+                  >
+                    <Settings className="h-4.5 w-4.5" strokeWidth={1.5} />
+                  </button>
+                }
+              />
+              <form action={signOut}>
+                <button
+                  type="submit"
+                  aria-label="Sign out"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl text-muted-foreground"
+                >
+                  <LogOut className="h-4.5 w-4.5" strokeWidth={1.5} />
+                </button>
+              </form>
+            </div>
           </header>
 
           {demoMode && (

@@ -84,3 +84,40 @@ alter publication supabase_realtime add table public.projects;
 alter publication supabase_realtime add table public.recurring_tasks;
 alter publication supabase_realtime add table public.budget;
 alter publication supabase_realtime add table public.categories;
+
+-- Household change log — who did what, when
+create table public.activity_log (
+  id text primary key,
+  actor text not null,
+  action text not null,
+  target_id text,
+  target_title text not null,
+  detail text,
+  created_at timestamptz not null default now()
+);
+
+create index activity_log_created_at_idx on public.activity_log (created_at desc);
+
+alter table public.activity_log enable row level security;
+
+create policy "household read activity" on public.activity_log
+  for select to authenticated using (true);
+create policy "household write activity" on public.activity_log
+  for all to authenticated using (true) with check (true);
+
+alter publication supabase_realtime add table public.activity_log;
+
+-- Home facts: square footage, rooms, and appliance install years
+create table public.home_info (
+  id integer primary key default 1 check (id = 1),
+  data jsonb not null default '{}'::jsonb
+);
+
+alter table public.home_info enable row level security;
+
+create policy "household read home_info" on public.home_info
+  for select to authenticated using (true);
+create policy "household write home_info" on public.home_info
+  for all to authenticated using (true) with check (true);
+
+alter publication supabase_realtime add table public.home_info;

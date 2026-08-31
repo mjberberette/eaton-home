@@ -98,11 +98,70 @@ export interface Budget {
   projectFund: number;
 }
 
+export type ActivityAction =
+  | "added_project"
+  | "updated_project"
+  | "changed_priority"
+  | "changed_status"
+  | "logged_price"
+  | "completed_task"
+  | "updated_budget"
+  | "updated_home"
+  | "added_note"
+  | "deleted_note";
+
+export interface ActivityEntry {
+  id: string;
+  actor: string;
+  action: ActivityAction;
+  /** Project id when the target is a project (for deep links) */
+  targetId?: string;
+  targetTitle: string;
+  detail?: string;
+  /** ISO timestamp */
+  createdAt: string;
+}
+
+export const ACTIVITY_VERB: Record<ActivityAction, string> = {
+  added_project: "added",
+  updated_project: "updated",
+  changed_priority: "re-prioritized",
+  changed_status: "changed the status of",
+  logged_price: "logged a price for",
+  completed_task: "completed",
+  updated_budget: "updated",
+  updated_home: "updated",
+  added_note: "left a note on",
+  deleted_note: "removed a note from",
+};
+
+export interface Appliance {
+  id: string;
+  name: string;
+  /** Make/model/spec, e.g. "Rheem Performance 50-gal gas tank" */
+  detail?: string;
+  installedYear: number;
+}
+
+export interface HomeInfo {
+  livableSqft: number;
+  totalSqft: number;
+  bedrooms: number;
+  bathrooms: number;
+  appliances: Appliance[];
+}
+
+export function applianceAge(installedYear: number, now = new Date()): number {
+  return Math.max(0, now.getFullYear() - installedYear);
+}
+
 export interface HomeDB {
   categories: Category[];
   projects: Project[];
   tasks: RecurringTask[];
   budget: Budget;
+  activity: ActivityEntry[];
+  homeInfo: HomeInfo;
 }
 
 export const STATUS_LABEL: Record<ProjectStatus, string> = {

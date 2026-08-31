@@ -200,8 +200,8 @@ export default function DashboardPage() {
                 <div className="mt-4 flex items-end justify-between gap-4">
                   <Sparkline
                     history={bestBuy.priceHistory}
-                    className="h-11 w-full"
-                    stroke="#3cdbc8"
+                    className="h-11 w-full text-brand-cyan"
+                    stroke="currentColor"
                   />
                   <span className="text-display text-2xl whitespace-nowrap">
                     {formatMoney(bestBuy.estimatedCost)}

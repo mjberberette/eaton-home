@@ -133,12 +133,12 @@ export function PriceChart({
       >
         <defs>
           <linearGradient id="price-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#3cdbc8" stopOpacity="0.28" />
-            <stop offset="100%" stopColor="#3cdbc8" stopOpacity="0.02" />
+            <stop offset="0%" style={{ stopColor: "var(--primary)" }} stopOpacity="0.28" />
+            <stop offset="100%" style={{ stopColor: "var(--primary)" }} stopOpacity="0.02" />
           </linearGradient>
           <linearGradient id="price-line" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#8fe8db" />
-            <stop offset="100%" stopColor="#3cdbc8" />
+            <stop offset="0%" style={{ stopColor: "var(--primary)" }} stopOpacity="0.75" />
+            <stop offset="100%" style={{ stopColor: "var(--primary)" }} />
           </linearGradient>
         </defs>
 
@@ -216,7 +216,7 @@ export function PriceChart({
               cy={p.y}
               r={hoverIdx === i ? 5.5 : 3.5}
               fill={i === lowestIdx ? "#2fbf8a" : "#0f2529"}
-              stroke={i === lowestIdx ? "#2fbf8a" : "#3cdbc8"}
+              stroke={i === lowestIdx ? "#2fbf8a" : "var(--primary)"}
               strokeWidth="2"
               className="transition-all duration-150"
             />

@@ -345,7 +345,11 @@ export default function HouseScene({
   const markers = useMemo(() => projects.filter((p) => p.hotspot), [projects]);
 
   return (
-    <div className={cn("h-full w-full", className)}>
+    // The canvas lives in an absolutely-positioned layer so its measured pixel
+    // size never becomes a min-width constraint on the page layout (r3f sets
+    // fixed px dimensions on the <canvas> element).
+    <div className={cn("relative h-full w-full", className)}>
+      <div className="absolute inset-0">
       <Canvas
         shadows
         dpr={[1, 2]}
@@ -413,6 +417,7 @@ export default function HouseScene({
           target={[0, 0.9, 0]}
         />
       </Canvas>
+      </div>
     </div>
   );
 }

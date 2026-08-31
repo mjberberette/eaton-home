@@ -2,6 +2,7 @@
 // so a fresh Supabase project starts with identical content.
 // Run: node scripts/generate-seed-sql.mjs
 
+
 import { writeFileSync } from "node:fs";
 
 const { SEED_DB } = await import("../src/lib/seed.ts");
@@ -37,6 +38,17 @@ sql += SEED_DB.tasks
 sql += "\non conflict (id) do nothing;\n\n";
 
 sql += `insert into public.budget (id, monthly_budget, project_fund) values (1, ${SEED_DB.budget.monthlyBudget}, ${SEED_DB.budget.projectFund})\non conflict (id) do nothing;\n`;
+
+sql += "insert into public.activity_log (id, actor, action, target_id, target_title, detail, created_at) values\n";
+sql += SEED_DB.activity
+  .map(
+    (a) =>
+      `  (${q(a.id)}, ${q(a.actor)}, ${q(a.action)}, ${q(a.targetId)}, ${q(a.targetTitle)}, ${q(a.detail)}, ${q(a.createdAt)})`
+  )
+  .join(",\n");
+sql += "\non conflict (id) do nothing;\n\n";
+
+sql += `insert into public.home_info (id, data) values (1, ${j(SEED_DB.homeInfo)})\non conflict (id) do nothing;\n\n`;
 
 writeFileSync(new URL("../supabase/seed.sql", import.meta.url), sql);
 console.log("Wrote supabase/seed.sql");

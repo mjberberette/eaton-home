@@ -12,6 +12,7 @@ import {
   X,
 } from "lucide-react";
 import { Reveal } from "@/components/anim";
+import { HomeFacts } from "@/components/home-facts";
 import { categoryMeta } from "@/lib/category-meta";
 import { StatusBadge } from "@/components/project-bits";
 import { Progress } from "@/components/ui/progress";
@@ -209,6 +210,9 @@ export default function HousePage() {
           </div>
         )}
       </section>
+
+      {/* Home facts: size, rooms, and appliance ages */}
+      <HomeFacts />
 
       {/* Mobile fallback: marker list below the scene */}
       <section data-reveal className="glass rounded-[2rem] p-5 lg:hidden">

@@ -446,6 +446,101 @@ export const SEED_TASKS: RecurringTask[] = [
   },
 ];
 
+export const SEED_ACTIVITY = [
+  {
+    id: "a-1",
+    actor: "Melanie",
+    action: "added_note" as const,
+    targetId: "p-deck",
+    targetTitle: "Composite deck extension",
+    detail: "cable railing over balusters",
+    createdAt: agoTime(6),
+  },
+  {
+    id: "a-2",
+    actor: "Nate",
+    action: "logged_price" as const,
+    targetId: "p-ev-charger",
+    targetTitle: "EV charger install",
+    detail: "$1,250 — lowest tracked",
+    createdAt: agoTime(30),
+  },
+  {
+    id: "a-3",
+    actor: "Melanie",
+    action: "updated_project" as const,
+    targetId: "p-countertops",
+    targetTitle: "Quartz kitchen countertops",
+    detail: "edited details",
+    createdAt: agoTime(26),
+  },
+  {
+    id: "a-4",
+    actor: "Nate",
+    action: "changed_status" as const,
+    targetId: "p-fireplace",
+    targetTitle: "Fireplace feature wall",
+    detail: "now In progress",
+    createdAt: agoTime(52),
+  },
+  {
+    id: "a-5",
+    actor: "Melanie",
+    action: "completed_task" as const,
+    targetTitle: "Water softener salt",
+    detail: "cycle restarted",
+    createdAt: agoTime(80),
+  },
+  {
+    id: "a-6",
+    actor: "Nate",
+    action: "changed_priority" as const,
+    targetId: "p-deck",
+    targetTitle: "Composite deck extension",
+    detail: "moved to #1",
+    createdAt: agoTime(96),
+  },
+];
+
+export const SEED_HOME_INFO = {
+  livableSqft: 2450,
+  totalSqft: 3180,
+  bedrooms: 4,
+  bathrooms: 2.5,
+  appliances: [
+    {
+      id: "ap-water-heater",
+      name: "Water heater",
+      detail: "Rheem Performance 50-gal gas tank",
+      installedYear: 2016,
+    },
+    {
+      id: "ap-furnace",
+      name: "Furnace",
+      detail: "Trane XR80 gas, 80k BTU",
+      installedYear: 2012,
+    },
+    {
+      id: "ap-ac",
+      name: "A/C condenser",
+      detail: "Lennox 13ACX, 3-ton",
+      installedYear: 2012,
+    },
+    {
+      id: "ap-softener",
+      name: "Water softener",
+      detail: "Whirlpool WHES40, 40k grain",
+      installedYear: 2019,
+    },
+    {
+      id: "ap-roof",
+      name: "Roof",
+      detail: "Architectural asphalt shingles",
+      installedYear: 2015,
+    },
+  ],
+};
+
 export const SEED_DB: HomeDB = {
   categories: SEED_CATEGORIES,
   projects: SEED_PROJECTS,
@@ -454,4 +549,6 @@ export const SEED_DB: HomeDB = {
     monthlyBudget: 1500,
     projectFund: 9200,
   },
+  activity: SEED_ACTIVITY,
+  homeInfo: SEED_HOME_INFO,
 };
