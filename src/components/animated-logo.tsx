@@ -51,9 +51,9 @@ export function AnimatedLogo({
       gsap
         .timeline({ delay, defaults: { ease: "power2.inOut" } })
         // Roof: left end → peak → down-right into the tail
-        .to(roof, { attr: { "stroke-dashoffset": 0 }, duration: 0.7 })
+        .to(roof, { attr: { "stroke-dashoffset": 0 }, duration: 0.85 })
         // Ring: up the right side, across the top, down the left, around the bottom
-        .to(ring, { attr: { "stroke-dashoffset": 0 }, duration: 1.25 }, "-=0.12")
+        .to(ring, { attr: { "stroke-dashoffset": 0 }, duration: 1.45 }, "-=0.15")
         // Windows 2 and 3 glow in
         .to(
           windows,

@@ -50,10 +50,12 @@ export default function DashboardPage() {
   return (
     <Reveal className="space-y-5">
       {/* Header */}
-      <div data-reveal className="flex flex-wrap items-end justify-between gap-4 px-1">
+      {/* The logo intentionally sits outside the fade-in targets so its
+          draw-on animation is fully visible while the header fades in. */}
+      <div className="flex flex-wrap items-end justify-between gap-4 px-1">
         <div className="flex items-center gap-4 sm:gap-5">
-          <AnimatedLogo className="h-14 shrink-0 sm:h-[72px]" />
-          <div>
+          <AnimatedLogo className="h-14 shrink-0 sm:h-[72px]" delay={0.35} />
+          <div data-reveal>
             <p className="text-xs font-light tracking-[0.3em] text-muted-foreground uppercase">
               {new Date().toLocaleDateString("en-US", {
                 weekday: "long",
@@ -66,7 +68,7 @@ export default function DashboardPage() {
             </h1>
           </div>
         </div>
-        <Button asChild className="h-11 rounded-2xl px-5 font-light">
+        <Button asChild data-reveal className="h-11 rounded-2xl px-5 font-light">
           <Link href="/projects">
             Open priority list
             <ArrowRight className="h-4 w-4" />
