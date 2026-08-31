@@ -1,24 +1,31 @@
 import { cn } from "@/lib/utils";
+import { LOGO_TRACED_PATH } from "./logo-path";
 
-/** Brand mark geometry — traced from the official Eaton Home SVG. */
+/**
+ * Brand mark — the official Eaton Home artwork (pixel-exact vector trace),
+ * plus centerline paths used only by the animated draw-on mask.
+ */
 export const LOGO = {
-  viewBox: "0 0 252 320",
-  // Starts at the roof junction: draws up the right side, across the top,
-  // down the left, around the bottom to the tail cut.
-  ring: "M236 166 L236 110 A95 95 0 0 0 141 15 L110 15 A95 95 0 0 0 15 110 L15 210 A95 95 0 0 0 110 305 L141 305 A95 95 0 0 0 235 222",
-  // Left end → peak → down-right through the ring edge.
-  roof: "M58 152 L120 104 L247 210",
-  ringWidth: 30,
-  roofWidth: 26,
+  viewBox: "0 0 678 900",
+  traced: LOGO_TRACED_PATH,
+  tracedTransform: "translate(0,900) scale(1,-1)",
+  // Mask centerlines follow the animation arrows:
+  // ring — junction → up the right side → top → left → bottom → tail cut
+  maskRing:
+    "M636 560 L636 249 A210 210 0 0 0 426 39 L249 39 A210 210 0 0 0 39 249 L39 648 A210 210 0 0 0 249 858 L426 858 A210 210 0 0 0 634 652",
+  // roof — left end → peak → down-right through the ring edge
+  maskRoof: "M180 455 L336 327 L668 660",
+  maskRingWidth: 115,
+  maskRoofWidth: 120,
   windows: [
-    { x: 88, y: 186, size: 26 },
-    { x: 140, y: 186, size: 26 },
+    { x: 232, y: 514, w: 76, h: 74 },
+    { x: 370, y: 514, w: 76, h: 74 },
   ],
   teal: "#3edbc8",
   yellow: "#ffdc26",
 };
 
-/** Eaton Home mark — a home tucked inside an "e", windows glowing. */
+/** Static Eaton Home mark — the exact uploaded artwork. */
 export function EatonMark({ className }: { className?: string }) {
   return (
     <svg
@@ -28,18 +35,11 @@ export function EatonMark({ className }: { className?: string }) {
       className={cn("h-10 w-auto", className)}
       aria-hidden
     >
-      <path d={LOGO.ring} stroke={LOGO.teal} strokeWidth={LOGO.ringWidth} />
-      <path d={LOGO.roof} stroke={LOGO.teal} strokeWidth={LOGO.roofWidth} />
+      <g transform={LOGO.tracedTransform} fill={LOGO.teal}>
+        <path d={LOGO.traced} />
+      </g>
       {LOGO.windows.map((win) => (
-        <rect
-          key={win.x}
-          x={win.x}
-          y={win.y}
-          width={win.size}
-          height={win.size}
-          rx="2"
-          fill={LOGO.yellow}
-        />
+        <rect key={win.x} x={win.x} y={win.y} width={win.w} height={win.h} fill={LOGO.yellow} />
       ))}
     </svg>
   );
