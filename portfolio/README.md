@@ -20,7 +20,25 @@ portfolio/
     01-sitemap             Information architecture
     02-user-flows          Buy-at-the-right-time · Saturday planning · care loop
     03-design-tokens       "Dusk Glass" design language sheet
+  screenshots/             12 hi-fi captures of the shipped product
+    login                  Dual-entry auth (pairs with WF-01)
+    dashboard              Household briefing (pairs with WF-02)
+    projects_master_list   Ranked truth (pairs with WF-03)
+    projects_by_category   Room projections (pairs with WF-03)
+    project_detail         Gallery + price header (pairs with WF-04)
+    project_detail_pricing Price history + market offers (pairs with WF-04)
+    house_3d               Dusk scene, default view (pairs with WF-05)
+    house_3d_selected      Hotspot → detail card (pairs with WF-05)
+    house_3d_back          Orbited to the deck side (pairs with WF-05)
+    home_care              Recurring cycles (pairs with WF-06)
+    budget                 Fund + runway (pairs with WF-07)
+    mobile_dashboard       430px companion (pairs with WF-08)
+    mobile_house           430px 3D scene (pairs with WF-08)
 ```
+
+Screenshots were captured headlessly at exact viewports (2x density for UI
+pages) — regenerate anytime with `node scripts/capture-screenshots.mjs`
+while the dev server is running.
 
 ## Publishing tips
 
