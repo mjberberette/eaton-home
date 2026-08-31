@@ -16,7 +16,8 @@ import {
 import { Reveal } from "@/components/anim";
 import { PriceCheck } from "@/components/price-check";
 import { ProjectFormDialog } from "@/components/project-form-dialog";
-import { Sparkline, StatusBadge, TrendChip } from "@/components/project-bits";
+import { StatusBadge, TrendChip } from "@/components/project-bits";
+import { PriceChart } from "@/components/price-chart";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -172,7 +173,7 @@ export default function ProjectDetailPage() {
             )}
           </div>
 
-          <Sparkline history={history} className="mt-6 h-24 w-full" stroke="#3cdbc8" />
+          <PriceChart history={history} className="mt-6" />
 
           <div className="mt-6 space-y-2">
             {history
