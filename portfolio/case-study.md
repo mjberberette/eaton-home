@@ -124,12 +124,21 @@ For a two-user product, the honest metrics are behavioral:
 - **Maintenance stopped being memory-dependent.** The overdue-escalation pattern (dashboard chip → red ring → alert on the house itself) has kept every filter cycle on schedule since launch.
 - **The demo entrance became the pitch.** Sharing the product requires zero onboarding — which is precisely the property I'd want in any client-facing MVP.
 
-## 11 · What I'd do next
+## 11 · Shipped since launch
 
-1. **Drag re-ranking with optimistic sync** now that the atomic-swap model is proven.
-2. **Scheduled price polling** (cron + the existing provider layer) so the "buy now" signal arrives instead of being checked.
-3. **Photo pipeline** — phone-upload for before/after shots straight into Supabase Storage.
-4. **A second household** — the schema is multi-tenant-ready; the interesting design problem is preserving the product's intimacy when it isn't *your* house on the screen.
+The roadmap didn't stay theoretical — v2 landed while the product was in daily use:
+
+- **Drag re-ranking** replaced the ▲▼ controls once the atomic-reindex model was proven (plus an exact priority-number field on create/edit).
+- **A household change log** — every add, edit, re-rank, price check, and completed chore attributed to the member who did it, grouped by day, synced live between us via Supabase Realtime.
+- **Per-member identity** — personalized greetings, "updated by" stamps, and shared project note threads.
+- **Home facts** — square footage, rooms, and an appliance registry with age-at-a-glance chips (the "is the furnace due?" conversation, pre-answered).
+- **Seven curated theme palettes**, saved per member — the design system's token discipline paid off: retheming the entire product is a handful of CSS variables.
+
+## 12 · What I'd do next
+
+1. **Scheduled price polling** (cron + the existing provider layer) so the "buy now" signal arrives instead of being checked.
+2. **Photo pipeline** — phone-upload for before/after shots straight into Supabase Storage.
+3. **A second household** — the schema is multi-tenant-ready; the interesting design problem is preserving the product's intimacy when it isn't *your* house on the screen.
 
 ---
 

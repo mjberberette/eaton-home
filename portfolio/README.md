@@ -32,6 +32,9 @@ portfolio/
     house_3d_back          Orbited to the deck side (pairs with WF-05)
     home_care              Recurring cycles (pairs with WF-06)
     budget                 Fund + runway (pairs with WF-07)
+    changelog              Household activity feed with attribution
+    settings_themes        Curated theme palettes (per-member)
+    home_facts             Sq footage, rooms, appliance ages
     mobile_dashboard       430px companion (pairs with WF-08)
     mobile_house           430px 3D scene (pairs with WF-08)
 ```
