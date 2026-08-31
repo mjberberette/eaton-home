@@ -12,7 +12,16 @@ export const metadata: Metadata = {
   title: "Eaton Home",
   description:
     "The Eaton family home dashboard — upgrade priorities, budgets, price tracking, and recurring home care.",
-  icons: { icon: "/logo.svg" },
+  icons: {
+    icon: "/logo.svg",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Eaton Home",
+  },
 };
 
 export default function RootLayout({

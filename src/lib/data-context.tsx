@@ -46,6 +46,9 @@ interface DataContextValue {
   addNote: (projectId: string, text: string) => void;
   deleteNote: (projectId: string, noteId: string) => void;
   updateHomeInfo: (info: HomeInfo) => void;
+  /** Set when a database write fails — surface it to the user. */
+  syncIssue: string | null;
+  clearSyncIssue: () => void;
 }
 
 const DataContext = createContext<DataContextValue | null>(null);
@@ -208,6 +211,22 @@ export function DataProvider({
   const [db, setDb] = useState<HomeDB>(SEED_DB);
   const [loading, setLoading] = useState(true);
   const [remote, setRemote] = useState<SupabaseClient | null>(null);
+  const [syncIssue, setSyncIssue] = useState<string | null>(null);
+
+  /** Surface failed database writes instead of losing them silently. */
+  const guard = useCallback((label: string, op: PromiseLike<{ error: unknown }>) => {
+    void Promise.resolve(op).then(({ error }) => {
+      if (error) {
+        console.error(`[eaton-home] ${label} failed:`, error);
+        const msg =
+          typeof error === "object" && error !== null && "message" in error
+            ? String((error as { message: unknown }).message)
+            : String(error);
+        setSyncIssue(`${label} didn't reach the database (${msg}). Your change may not persist — check your connection or sign-in, then retry.`);
+      }
+    });
+  }, []);
+
 
   useEffect(() => {
     let cancelled = false;
@@ -357,14 +376,14 @@ export function DataProvider({
           Date.now() - new Date(last.createdAt).getTime() < 60000;
         if (isRepeat) {
           const merged = { ...last, detail: entry.detail ?? last.detail, createdAt: now };
-          if (remote) void remote.from("activity_log").upsert(activityToRow(merged));
+          if (remote) guard("Updating the change log", remote.from("activity_log").upsert(activityToRow(merged)));
           return { ...prev, activity: [merged, ...list.slice(1)].slice(0, 200) };
         }
-        if (remote) void remote.from("activity_log").insert(activityToRow(entry));
+        if (remote) guard("Writing to the change log", remote.from("activity_log").insert(activityToRow(entry)));
         return { ...prev, activity: [entry, ...list].slice(0, 200) };
       });
     },
-    [apply, remote, userName]
+    [apply, remote, userName, guard]
   );
 
   const projectTitle = useCallback(
@@ -383,7 +402,7 @@ export function DataProvider({
       if (remote) {
         setDb((current) => {
           const p = current.projects.find((x) => x.id === id);
-          if (p) void remote.from("projects").upsert(projectToRow(p));
+          if (p) guard("Saving the project", remote.from("projects").upsert(projectToRow(p)));
           return current;
         });
       }
@@ -400,7 +419,7 @@ export function DataProvider({
         logActivity("updated_project", title, { targetId: id, detail: "edited details" });
       }
     },
-    [apply, remote, stamp, logActivity, projectTitle]
+    [apply, remote, stamp, logActivity, projectTitle, guard]
   );
 
   /** Reorders the full list so ranks are always a clean 1..n sequence. */
@@ -420,10 +439,10 @@ export function DataProvider({
         });
         return isMoved ? { ...p, rank, ...meta } : { ...p, rank };
       });
-      if (remote && changed.length) void remote.from("projects").upsert(changed);
+      if (remote && changed.length) guard("Saving the new priority order", remote.from("projects").upsert(changed));
       return { ...prev, projects };
     },
-    [remote, stamp]
+    [remote, stamp, guard]
   );
 
   const addProject = useCallback(
@@ -441,7 +460,7 @@ export function DataProvider({
           ...prev,
           projects: [...prev.projects, { ...stamped, rank: target }],
         };
-        if (remote) void remote.from("projects").insert(projectToRow({ ...stamped, rank: target }));
+        if (remote) guard("Adding the project", remote.from("projects").insert(projectToRow({ ...stamped, rank: target })));
         return applyOrder(withNew, ids);
       });
       const rank = Math.max(
@@ -453,7 +472,7 @@ export function DataProvider({
         detail: `priority #${rank} · ${formatMoney(project.estimatedCost)}`,
       });
     },
-    [apply, applyOrder, remote, stamp, logActivity]
+    [apply, applyOrder, remote, stamp, logActivity, guard]
   );
 
   const setRank = useCallback(
@@ -498,15 +517,15 @@ export function DataProvider({
           return p;
         });
         if (remote) {
-          void remote.from("projects").upsert([
+          guard("Saving the new priority order", remote.from("projects").upsert([
             { id: a.id, rank: b.rank },
             { id: b.id, rank: a.rank },
-          ]);
+          ]));
         }
         return { ...prev, projects };
       });
     },
-    [apply, remote]
+    [apply, remote, guard]
   );
 
   const completeTask = useCallback(
@@ -517,23 +536,26 @@ export function DataProvider({
         ...prev,
         tasks: prev.tasks.map((t): RecurringTask => (t.id === id ? { ...t, lastDone: today } : t)),
       }));
-      if (remote) void remote.from("recurring_tasks").update({ last_done: today }).eq("id", id);
+      if (remote) guard("Saving the completed task", remote.from("recurring_tasks").update({ last_done: today }).eq("id", id));
       logActivity("completed_task", name, { detail: "cycle restarted" });
     },
-    [apply, remote, logActivity]
+    [apply, remote, logActivity, guard]
   );
 
   const updateBudget = useCallback(
     (patch: Partial<Budget>) => {
       apply((prev) => ({ ...prev, budget: { ...prev.budget, ...patch } }));
       if (remote) {
-        void remote
-          .from("budget")
-          .update({
-            ...(patch.monthlyBudget !== undefined && { monthly_budget: patch.monthlyBudget }),
-            ...(patch.projectFund !== undefined && { project_fund: patch.projectFund }),
-          })
-          .eq("id", 1);
+        guard(
+          "Saving the budget",
+          remote
+            .from("budget")
+            .update({
+              ...(patch.monthlyBudget !== undefined && { monthly_budget: patch.monthlyBudget }),
+              ...(patch.projectFund !== undefined && { project_fund: patch.projectFund }),
+            })
+            .eq("id", 1)
+        );
       }
       const parts: string[] = [];
       if (patch.monthlyBudget !== undefined)
@@ -542,7 +564,7 @@ export function DataProvider({
         parts.push(`fund → ${formatMoney(patch.projectFund)}`);
       logActivity("updated_budget", "the budget", { detail: parts.join(" · ") || undefined });
     },
-    [apply, remote, logActivity]
+    [apply, remote, logActivity, guard]
   );
 
   const addPricePoint = useCallback(
@@ -559,7 +581,7 @@ export function DataProvider({
       if (remote) {
         setDb((current) => {
           const p = current.projects.find((x) => x.id === projectId);
-          if (p) void remote.from("projects").upsert(projectToRow(p));
+          if (p) guard("Saving the project", remote.from("projects").upsert(projectToRow(p)));
           return current;
         });
       }
@@ -568,7 +590,7 @@ export function DataProvider({
         detail: `${formatMoney(point.price)}${point.note ? ` · ${point.note}` : ""}`,
       });
     },
-    [apply, remote, stamp, logActivity, projectTitle]
+    [apply, remote, stamp, logActivity, projectTitle, guard]
   );
 
   const addNote = useCallback(
@@ -591,13 +613,13 @@ export function DataProvider({
       if (remote) {
         setDb((current) => {
           const p = current.projects.find((x) => x.id === projectId);
-          if (p) void remote.from("projects").upsert(projectToRow(p));
+          if (p) guard("Saving the project", remote.from("projects").upsert(projectToRow(p)));
           return current;
         });
       }
       logActivity("added_note", projectTitle(projectId), { targetId: projectId });
     },
-    [apply, remote, stamp, userName, logActivity, projectTitle]
+    [apply, remote, stamp, userName, logActivity, projectTitle, guard]
   );
 
   const deleteNote = useCallback(
@@ -613,22 +635,22 @@ export function DataProvider({
       if (remote) {
         setDb((current) => {
           const p = current.projects.find((x) => x.id === projectId);
-          if (p) void remote.from("projects").upsert(projectToRow(p));
+          if (p) guard("Saving the project", remote.from("projects").upsert(projectToRow(p)));
           return current;
         });
       }
       logActivity("deleted_note", projectTitle(projectId), { targetId: projectId });
     },
-    [apply, remote, logActivity, projectTitle]
+    [apply, remote, logActivity, projectTitle, guard]
   );
 
   const updateHomeInfo = useCallback(
     (info: HomeInfo) => {
       apply((prev) => ({ ...prev, homeInfo: info }));
-      if (remote) void remote.from("home_info").upsert({ id: 1, data: info });
+      if (remote) guard("Saving home facts", remote.from("home_info").upsert({ id: 1, data: info }));
       logActivity("updated_home", "the home facts");
     },
-    [apply, remote, logActivity]
+    [apply, remote, logActivity, guard]
   );
 
   const value = useMemo(
@@ -647,8 +669,10 @@ export function DataProvider({
       addNote,
       deleteNote,
       updateHomeInfo,
+      syncIssue,
+      clearSyncIssue: () => setSyncIssue(null),
     }),
-    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, completeTask, updateBudget, addPricePoint, addNote, deleteNote, updateHomeInfo]
+    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, completeTask, updateBudget, addPricePoint, addNote, deleteNote, updateHomeInfo, syncIssue]
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

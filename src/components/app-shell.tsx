@@ -15,6 +15,8 @@ import {
   PiggyBank,
   Rotate3d,
   Settings,
+  TriangleAlert,
+  X,
 } from "lucide-react";
 import { SettingsDialog, ThemeLoader } from "@/components/settings-dialog";
 import { cn } from "@/lib/utils";
@@ -34,7 +36,7 @@ const NAV = [
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { demoMode } = useHome();
+  const { demoMode, syncIssue, clearSyncIssue } = useHome();
   // All page content is time- and client-data-dependent (greetings, due-day
   // countdowns, localStorage/Supabase data), so it only renders after mount.
   // The server prerender ships this same skeleton, which keeps hydration clean.
@@ -152,6 +154,20 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <div className="glass-chip mb-4 hidden items-center gap-2 self-start rounded-full px-4 py-1.5 text-xs font-light text-muted-foreground md:inline-flex">
               <House className="h-3.5 w-3.5 text-brand-cyan" />
               Demo home — connect Supabase to sync your real data
+            </div>
+          )}
+
+          {syncIssue && (
+            <div className="mb-4 flex items-start gap-3 rounded-2xl border border-destructive/40 bg-destructive/10 px-4 py-3">
+              <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
+              <p className="min-w-0 flex-1 text-sm font-light text-destructive">{syncIssue}</p>
+              <button
+                onClick={clearSyncIssue}
+                aria-label="Dismiss"
+                className="shrink-0 rounded-lg p-1 text-destructive/70 transition-colors hover:bg-white/10 hover:text-destructive"
+              >
+                <X className="h-4 w-4" />
+              </button>
             </div>
           )}
 

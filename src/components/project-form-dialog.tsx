@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
+import { ImageInput } from "@/components/image-input";
 import {
   Dialog,
   DialogContent,
@@ -148,11 +149,10 @@ export function ProjectFormDialog({
               </Select>
             </div>
             <div className="space-y-1.5">
-              <Label className="font-light">Priority (1–{maxRank})</Label>
+              <Label className="font-light">Priority (1 = highest)</Label>
               <Input
                 type="number"
                 min={1}
-                max={maxRank}
                 value={rank}
                 onChange={(e) => setRankInput(e.target.value)}
                 className="glass-chip h-11 rounded-xl font-light"
@@ -192,38 +192,20 @@ export function ProjectFormDialog({
             />
           </div>
           <div className="space-y-1.5">
-            <Label className="font-light">Inspiration image URL</Label>
-            <Input
-              type="url"
-              value={inspiration}
-              onChange={(e) => setInspiration(e.target.value)}
-              placeholder="https://…"
-              className="glass-chip h-11 rounded-xl font-light"
-            />
+            <Label className="font-light">Inspiration photo</Label>
+            <ImageInput value={inspiration} onChange={setInspiration} />
           </div>
           {editing && (
-            <div className="grid grid-cols-2 gap-4">
+            <>
               <div className="space-y-1.5">
-                <Label className="font-light">Before photo URL</Label>
-                <Input
-                  type="url"
-                  value={beforeImage}
-                  onChange={(e) => setBeforeImage(e.target.value)}
-                  placeholder="https://…"
-                  className="glass-chip h-11 rounded-xl font-light"
-                />
+                <Label className="font-light">Before photo</Label>
+                <ImageInput value={beforeImage} onChange={setBeforeImage} />
               </div>
               <div className="space-y-1.5">
-                <Label className="font-light">After photo URL</Label>
-                <Input
-                  type="url"
-                  value={afterImage}
-                  onChange={(e) => setAfterImage(e.target.value)}
-                  placeholder="https://…"
-                  className="glass-chip h-11 rounded-xl font-light"
-                />
+                <Label className="font-light">After photo</Label>
+                <ImageInput value={afterImage} onChange={setAfterImage} />
               </div>
-            </div>
+            </>
           )}
           <div className="space-y-1.5">
             <Label className="font-light">Notes</Label>

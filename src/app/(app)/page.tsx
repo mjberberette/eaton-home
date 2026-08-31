@@ -9,11 +9,10 @@ import {
   Hammer,
   PiggyBank,
   Tag,
-  TrendingDown,
 } from "lucide-react";
 import { AnimatedLogo } from "@/components/AnimatedLogo";
 import { CountUp, Reveal } from "@/components/anim";
-import { Sparkline, StatusBadge, TrendChip, priceTrend } from "@/components/project-bits";
+import { StatusBadge, TrendChip } from "@/components/project-bits";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { useHome } from "@/lib/data-context";
@@ -36,9 +35,6 @@ export default function DashboardPage() {
     .filter((p) => p.status !== "done")
     .sort((a, b) => a.rank - b.rank)
     .slice(0, 6);
-  const bestBuy = [...projects]
-    .filter((p) => p.status !== "done" && p.priceHistory.length >= 2)
-    .sort((a, b) => priceTrend(a.priceHistory).pct - priceTrend(b.priceHistory).pct)[0];
   const spentThisSeason = projects.reduce((sum, p) => sum + p.spent, 0);
   const fundUsedPct = Math.min(100, Math.round((spentThisSeason / (budget.projectFund + spentThisSeason)) * 100));
 
@@ -189,33 +185,6 @@ export default function DashboardPage() {
               </span>
             </Link>
           </section>
-
-          {/* Price watch */}
-          {bestBuy && (
-            <section data-reveal className="glass rounded-[1.75rem] p-6">
-              <div className="mb-3 flex items-center gap-2 text-brand-cyan">
-                <TrendingDown className="h-4.5 w-4.5" />
-                <h2 className="text-sm font-normal tracking-wide uppercase">Price watch</h2>
-              </div>
-              <Link href={`/projects/${bestBuy.id}`} className="group block">
-                <p className="font-normal group-hover:underline">{bestBuy.title}</p>
-                <p className="mt-0.5 text-xs font-light text-muted-foreground">
-                  Down {Math.abs(priceTrend(bestBuy.priceHistory).pct).toFixed(1)}% since tracking
-                  began — good time to buy
-                </p>
-                <div className="mt-4 flex items-end justify-between gap-4">
-                  <Sparkline
-                    history={bestBuy.priceHistory}
-                    className="h-11 w-full text-brand-cyan"
-                    stroke="currentColor"
-                  />
-                  <span className="text-display text-2xl whitespace-nowrap">
-                    {formatMoney(bestBuy.estimatedCost)}
-                  </span>
-                </div>
-              </Link>
-            </section>
-          )}
 
           {/* Care due soon */}
           <section data-reveal className="glass rounded-[1.75rem] p-6">
