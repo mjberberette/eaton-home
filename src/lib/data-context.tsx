@@ -22,8 +22,9 @@ interface DataContextValue {
   loading: boolean;
   demoMode: boolean;
   updateProject: (id: string, patch: Partial<Project>) => void;
-  addProject: (project: Project) => void;
+  addProject: (project: Project, atRank?: number) => void;
   moveRank: (id: string, direction: -1 | 1) => void;
+  setRank: (id: string, rank: number) => void;
   completeTask: (id: string) => void;
   updateBudget: (patch: Partial<Budget>) => void;
   addPricePoint: (projectId: string, point: PricePoint) => void;
@@ -213,12 +214,59 @@ export function DataProvider({ children }: { children: ReactNode }) {
     [apply, remote]
   );
 
-  const addProject = useCallback(
-    (project: Project) => {
-      apply((prev) => ({ ...prev, projects: [...prev.projects, project] }));
-      if (remote) void remote.from("projects").insert(projectToRow(project));
+  /** Reorders the full list so ranks are always a clean 1..n sequence. */
+  const applyOrder = useCallback(
+    (prev: HomeDB, orderedIds: string[]) => {
+      const rankOf = new Map(orderedIds.map((id, i) => [id, i + 1]));
+      const changed: { id: string; rank: number }[] = [];
+      const projects = prev.projects.map((p) => {
+        const rank = rankOf.get(p.id);
+        if (rank === undefined || rank === p.rank) return p;
+        changed.push({ id: p.id, rank });
+        return { ...p, rank };
+      });
+      if (remote && changed.length) void remote.from("projects").upsert(changed);
+      return { ...prev, projects };
     },
-    [apply, remote]
+    [remote]
+  );
+
+  const addProject = useCallback(
+    (project: Project, atRank?: number) => {
+      apply((prev) => {
+        const sorted = [...prev.projects].sort((a, b) => a.rank - b.rank);
+        const target = Math.max(
+          1,
+          Math.min(sorted.length + 1, Math.round(atRank ?? sorted.length + 1))
+        );
+        const ids = sorted.map((p) => p.id);
+        ids.splice(target - 1, 0, project.id);
+        const withNew = {
+          ...prev,
+          projects: [...prev.projects, { ...project, rank: target }],
+        };
+        if (remote) void remote.from("projects").insert(projectToRow({ ...project, rank: target }));
+        return applyOrder(withNew, ids);
+      });
+    },
+    [apply, applyOrder, remote]
+  );
+
+  const setRank = useCallback(
+    (id: string, rank: number) => {
+      apply((prev) => {
+        const sorted = [...prev.projects].sort((a, b) => a.rank - b.rank);
+        const idx = sorted.findIndex((p) => p.id === id);
+        if (idx < 0) return prev;
+        const target = Math.max(1, Math.min(sorted.length, Math.round(rank)));
+        if (target === idx + 1) return prev;
+        const ids = sorted.map((p) => p.id);
+        ids.splice(idx, 1);
+        ids.splice(target - 1, 0, id);
+        return applyOrder(prev, ids);
+      });
+    },
+    [apply, applyOrder]
   );
 
   const moveRank = useCallback(
@@ -304,11 +352,12 @@ export function DataProvider({ children }: { children: ReactNode }) {
       updateProject,
       addProject,
       moveRank,
+      setRank,
       completeTask,
       updateBudget,
       addPricePoint,
     }),
-    [db, loading, remote, updateProject, addProject, moveRank, completeTask, updateBudget, addPricePoint]
+    [db, loading, remote, updateProject, addProject, moveRank, setRank, completeTask, updateBudget, addPricePoint]
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

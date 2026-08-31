@@ -9,11 +9,13 @@ import {
   ExternalLink,
   ImageIcon,
   LineChart,
+  Pencil,
   Plus,
   Sparkles,
 } from "lucide-react";
 import { Reveal } from "@/components/anim";
 import { PriceCheck } from "@/components/price-check";
+import { ProjectFormDialog } from "@/components/project-form-dialog";
 import { Sparkline, StatusBadge, TrendChip } from "@/components/project-bits";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -88,14 +90,25 @@ export default function ProjectDetailPage() {
             <TrendChip history={history} />
           </div>
         </div>
-        {project.storeUrl && (
-          <Button asChild className="h-11 rounded-2xl px-5 font-light">
-            <a href={project.storeUrl} target="_blank" rel="noopener noreferrer">
-              Shop at {project.storeName ?? "store"}
-              <ExternalLink className="h-4 w-4" />
-            </a>
-          </Button>
-        )}
+        <div className="flex items-center gap-2.5">
+          <ProjectFormDialog
+            project={project}
+            trigger={
+              <Button variant="outline" className="glass-chip h-11 rounded-2xl px-5 font-light">
+                <Pencil className="h-4 w-4" />
+                Edit
+              </Button>
+            }
+          />
+          {project.storeUrl && (
+            <Button asChild className="h-11 rounded-2xl px-5 font-light">
+              <a href={project.storeUrl} target="_blank" rel="noopener noreferrer">
+                Shop at {project.storeName ?? "store"}
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* Gallery */}

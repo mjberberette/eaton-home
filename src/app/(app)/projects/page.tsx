@@ -2,40 +2,52 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, ChevronDown, ChevronUp, ImageIcon, Plus } from "lucide-react";
+import {
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { ArrowUpRight, GripVertical, ImageIcon, Pencil, Plus } from "lucide-react";
 import { Reveal } from "@/components/anim";
+import { ProjectFormDialog } from "@/components/project-form-dialog";
 import { StatusBadge, TrendChip } from "@/components/project-bits";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
 import { useHome } from "@/lib/data-context";
-import { formatMoney, type Project } from "@/lib/types";
+import { formatMoney, type Category, type Project } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export default function ProjectsPage() {
-  const { db, moveRank, addProject } = useHome();
+  const { db, setRank } = useHome();
   const { projects, categories } = db;
   const [zone, setZone] = useState<"all" | "outdoor" | "indoor" | "repairs">("all");
 
   const ranked = useMemo(() => [...projects].sort((a, b) => a.rank - b.rank), [projects]);
   const filteredCategories = categories.filter((c) => zone === "all" || c.zone === zone);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+  );
+
+  function onDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    const overIndex = ranked.findIndex((p) => p.id === over.id);
+    if (overIndex >= 0) setRank(String(active.id), overIndex + 1);
+  }
 
   return (
     <Reveal className="space-y-5">
@@ -46,10 +58,13 @@ export default function ProjectsPage() {
           </p>
           <h1 className="text-display mt-1 text-4xl sm:text-5xl">Projects</h1>
         </div>
-        <AddProjectDialog
-          onAdd={addProject}
-          categories={categories}
-          nextRank={projects.length + 1}
+        <ProjectFormDialog
+          trigger={
+            <Button className="h-11 rounded-2xl px-5 font-light">
+              <Plus className="h-4 w-4" />
+              New project
+            </Button>
+          }
         />
       </div>
 
@@ -66,61 +81,31 @@ export default function ProjectsPage() {
         {/* ---- Master priority list ---- */}
         <TabsContent value="priority" className="mt-5">
           <div className="glass rounded-[1.75rem] p-4 sm:p-6">
-            <div className="space-y-2.5">
-              {ranked.map((p, i) => (
-                <div
-                  key={p.id}
-                  className={cn(
-                    "flex items-center gap-3 rounded-2xl border border-transparent bg-white/[0.05] px-3 py-3 transition-all hover:border-brand-cyan/25 hover:bg-white/[0.09] sm:gap-4 sm:px-4",
-                    p.status === "done" && "opacity-55"
-                  )}
-                >
-                  <div className="flex flex-col">
-                    <button
-                      onClick={() => moveRank(p.id, -1)}
-                      disabled={i === 0}
-                      aria-label={`Move ${p.title} up`}
-                      className="text-muted-foreground/60 transition-colors hover:text-foreground disabled:opacity-30"
-                    >
-                      <ChevronUp className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={() => moveRank(p.id, 1)}
-                      disabled={i === ranked.length - 1}
-                      aria-label={`Move ${p.title} down`}
-                      className="text-muted-foreground/60 transition-colors hover:text-foreground disabled:opacity-30"
-                    >
-                      <ChevronDown className="h-4 w-4" />
-                    </button>
-                  </div>
-                  <span
-                    className={cn(
-                      "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm",
-                      i === 0
-                        ? "bg-brand-yellow font-medium text-brand-ink"
-                        : "bg-secondary font-light"
-                    )}
-                  >
-                    {p.rank}
-                  </span>
-                  <Link href={`/projects/${p.id}`} className="group min-w-0 flex-1">
-                    <p className="truncate font-normal group-hover:underline">{p.title}</p>
-                    <p className="truncate text-xs font-light text-muted-foreground">
-                      {categories.find((c) => c.id === p.categoryId)?.name}
-                      {p.storeName ? ` · ${p.storeName}` : ""}
-                    </p>
-                  </Link>
-                  <div className="hidden w-28 lg:block">
-                    <Progress value={p.progress} className="h-1.5" />
-                  </div>
-                  <TrendChip history={p.priceHistory} className="hidden md:inline-flex" />
-                  <span className="w-20 text-right font-light tabular-nums">
-                    {formatMoney(p.estimatedCost)}
-                  </span>
-                  <StatusBadge status={p.status} className="hidden sm:inline-flex" />
+            <p className="mb-3 px-1 text-xs font-light text-muted-foreground">
+              Drag the handle to reorder — or edit any project to type an exact
+              priority number.
+            </p>
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={onDragEnd}
+            >
+              <SortableContext
+                items={ranked.map((p) => p.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                <div className="space-y-2.5">
+                  {ranked.map((p, i) => (
+                    <SortableRow
+                      key={p.id}
+                      project={p}
+                      first={i === 0}
+                      categories={categories}
+                    />
+                  ))}
                 </div>
-              ))}
-            </div>
+              </SortableContext>
+            </DndContext>
           </div>
         </TabsContent>
 
@@ -220,150 +205,71 @@ export default function ProjectsPage() {
   );
 }
 
-function AddProjectDialog({
-  onAdd,
+function SortableRow({
+  project: p,
+  first,
   categories,
-  nextRank,
 }: {
-  onAdd: (p: Project) => void;
-  categories: { id: string; name: string }[];
-  nextRank: number;
+  project: Project;
+  first: boolean;
+  categories: Category[];
 }) {
-  const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState("");
-  const [categoryId, setCategoryId] = useState("");
-  const [cost, setCost] = useState("");
-  const [storeName, setStoreName] = useState("");
-  const [storeUrl, setStoreUrl] = useState("");
-  const [inspiration, setInspiration] = useState("");
-  const [description, setDescription] = useState("");
-
-  function submit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!title.trim() || !categoryId) return;
-    const price = Number(cost) || 0;
-    onAdd({
-      id: `p-${Date.now().toString(36)}`,
-      title: title.trim(),
-      description: description.trim(),
-      categoryId,
-      rank: nextRank,
-      status: "idea",
-      estimatedCost: price,
-      spent: 0,
-      progress: 0,
-      storeName: storeName.trim() || undefined,
-      storeUrl: storeUrl.trim() || undefined,
-      inspirationImage: inspiration.trim() || undefined,
-      priceHistory: price ? [{ date: new Date().toISOString().slice(0, 10), price }] : [],
-      createdAt: new Date().toISOString().slice(0, 10),
-    });
-    setOpen(false);
-    setTitle("");
-    setCategoryId("");
-    setCost("");
-    setStoreName("");
-    setStoreUrl("");
-    setInspiration("");
-    setDescription("");
-  }
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
+    useSortable({ id: p.id });
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className="h-11 rounded-2xl px-5 font-light">
-          <Plus className="h-4 w-4" />
-          New project
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="glass max-w-lg rounded-3xl border-white/10">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-extralight">Add a project idea</DialogTitle>
-        </DialogHeader>
-        <form onSubmit={submit} className="space-y-4">
-          <div className="space-y-1.5">
-            <Label className="font-light">Title</Label>
-            <Input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Pergola over the patio"
-              className="glass-chip h-11 rounded-xl font-light"
-              required
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <Label className="font-light">Category</Label>
-              <Select value={categoryId} onValueChange={setCategoryId} required>
-                <SelectTrigger className="glass-chip h-11 w-full rounded-xl font-light">
-                  <SelectValue placeholder="Choose…" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((c) => (
-                    <SelectItem key={c.id} value={c.id}>
-                      {c.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-1.5">
-              <Label className="font-light">Estimated cost ($)</Label>
-              <Input
-                type="number"
-                min="0"
-                value={cost}
-                onChange={(e) => setCost(e.target.value)}
-                placeholder="1200"
-                className="glass-chip h-11 rounded-xl font-light"
-              />
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <Label className="font-light">Store</Label>
-              <Input
-                value={storeName}
-                onChange={(e) => setStoreName(e.target.value)}
-                placeholder="Home Depot"
-                className="glass-chip h-11 rounded-xl font-light"
-              />
-            </div>
-            <div className="space-y-1.5">
-              <Label className="font-light">Store link</Label>
-              <Input
-                type="url"
-                value={storeUrl}
-                onChange={(e) => setStoreUrl(e.target.value)}
-                placeholder="https://…"
-                className="glass-chip h-11 rounded-xl font-light"
-              />
-            </div>
-          </div>
-          <div className="space-y-1.5">
-            <Label className="font-light">Inspiration image URL</Label>
-            <Input
-              type="url"
-              value={inspiration}
-              onChange={(e) => setInspiration(e.target.value)}
-              placeholder="https://…"
-              className="glass-chip h-11 rounded-xl font-light"
-            />
-          </div>
-          <div className="space-y-1.5">
-            <Label className="font-light">Notes</Label>
-            <Textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="What does done look like?"
-              className="glass-chip min-h-20 rounded-xl font-light"
-            />
-          </div>
-          <Button type="submit" className="h-11 w-full rounded-xl font-light">
-            Add to the list
-          </Button>
-        </form>
-      </DialogContent>
-    </Dialog>
+    <div
+      ref={setNodeRef}
+      style={{ transform: CSS.Transform.toString(transform), transition }}
+      className={cn(
+        "flex items-center gap-3 rounded-2xl border border-transparent bg-white/[0.05] px-3 py-3 transition-colors hover:border-brand-cyan/25 hover:bg-white/[0.09] sm:gap-4 sm:px-4",
+        p.status === "done" && "opacity-55",
+        isDragging &&
+          "relative z-10 border-brand-cyan/50 bg-white/[0.12] opacity-100 shadow-2xl backdrop-blur"
+      )}
+    >
+      <button
+        {...attributes}
+        {...listeners}
+        aria-label={`Reorder ${p.title}`}
+        className="-m-1 cursor-grab touch-none rounded-lg p-1 text-muted-foreground/50 transition-colors hover:bg-white/10 hover:text-foreground active:cursor-grabbing"
+      >
+        <GripVertical className="h-4.5 w-4.5" />
+      </button>
+      <span
+        className={cn(
+          "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm",
+          first ? "bg-brand-yellow font-medium text-brand-ink" : "bg-secondary font-light"
+        )}
+      >
+        {p.rank}
+      </span>
+      <Link href={`/projects/${p.id}`} className="group min-w-0 flex-1">
+        <p className="truncate font-normal group-hover:underline">{p.title}</p>
+        <p className="truncate text-xs font-light text-muted-foreground">
+          {categories.find((c) => c.id === p.categoryId)?.name}
+          {p.storeName ? ` · ${p.storeName}` : ""}
+        </p>
+      </Link>
+      <div className="hidden w-28 lg:block">
+        <Progress value={p.progress} className="h-1.5" />
+      </div>
+      <TrendChip history={p.priceHistory} className="hidden md:inline-flex" />
+      <span className="w-20 text-right font-light tabular-nums">
+        {formatMoney(p.estimatedCost)}
+      </span>
+      <StatusBadge status={p.status} className="hidden sm:inline-flex" />
+      <ProjectFormDialog
+        project={p}
+        trigger={
+          <button
+            aria-label={`Edit ${p.title}`}
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-muted-foreground/60 transition-colors hover:bg-white/10 hover:text-foreground"
+          >
+            <Pencil className="h-4 w-4" />
+          </button>
+        }
+      />
+    </div>
   );
 }
