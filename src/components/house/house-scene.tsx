@@ -12,7 +12,7 @@ import {
   SoftShadows,
   Sparkles,
 } from "@react-three/drei";
-import { Bloom, EffectComposer, N8AO, Vignette } from "@react-three/postprocessing";
+import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
 import { ACESFilmicToneMapping, type Group } from "three";
 import { cn } from "@/lib/utils";
 import { formatMoney, type Project, type ProjectStatus } from "@/lib/types";
@@ -536,7 +536,7 @@ export default function HouseScene({
         {/* Dusk key light — low warm sun */}
         <directionalLight
           position={[7, 6.5, -4]}
-          intensity={2.1}
+          intensity={2.35}
           color="#ffcf9a"
           castShadow
           shadow-mapSize={[2048, 2048]}
@@ -547,8 +547,8 @@ export default function HouseScene({
           shadow-camera-bottom={-6}
         />
         {/* Cool ambient bounce */}
-        <ambientLight intensity={0.22} color="#bcd8d2" />
-        <hemisphereLight args={["#5f8e87", "#1c2a24", 0.55]} />
+        <ambientLight intensity={0.32} color="#bcd8d2" />
+        <hemisphereLight args={["#5f8e87", "#233129", 0.7]} />
         {/* Teal rim from the front-left */}
         <directionalLight position={[-6, 3, 5]} intensity={0.5} color="#63c9bc" />
 
@@ -570,11 +570,10 @@ export default function HouseScene({
 
           {highQuality && (
             <EffectComposer multisampling={4}>
-              <N8AO aoRadius={0.5} intensity={3.2} distanceFalloff={0.6} quality="medium" />
               <Bloom
                 mipmapBlur
-                intensity={0.55}
-                luminanceThreshold={0.85}
+                intensity={0.7}
+                luminanceThreshold={0.82}
                 luminanceSmoothing={0.2}
               />
               <Vignette eskil={false} offset={0.18} darkness={0.72} />
