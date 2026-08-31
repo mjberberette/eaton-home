@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -28,6 +29,11 @@ const NAV = [
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { demoMode } = useHome();
+  // All page content is time- and client-data-dependent (greetings, due-day
+  // countdowns, localStorage/Supabase data), so it only renders after mount.
+  // The server prerender ships this same skeleton, which keeps hydration clean.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   return (
     <TooltipProvider delayDuration={150}>
@@ -117,7 +123,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </div>
           )}
 
-          <main className="min-w-0 flex-1">{children}</main>
+          <main className="min-w-0 flex-1">
+            {mounted ? children : <ShellSkeleton />}
+          </main>
         </div>
 
         {/* Mobile bottom nav */}
@@ -141,5 +149,32 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </nav>
       </div>
     </TooltipProvider>
+  );
+}
+
+function ShellSkeleton() {
+  return (
+    <div className="space-y-5" aria-hidden>
+      <div className="space-y-3 px-1 pt-2">
+        <div className="h-3 w-40 animate-pulse rounded-full bg-white/10" />
+        <div className="h-10 w-80 max-w-full animate-pulse rounded-2xl bg-white/10" />
+      </div>
+      <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
+        {[0, 1, 2, 3].map((i) => (
+          <div
+            key={i}
+            className="glass h-[130px] animate-pulse rounded-[1.75rem]"
+            style={{ animationDelay: `${i * 120}ms` }}
+          />
+        ))}
+      </div>
+      <div className="grid gap-5 xl:grid-cols-[1.6fr_1fr]">
+        <div className="glass h-[420px] animate-pulse rounded-[1.75rem]" />
+        <div className="flex flex-col gap-5">
+          <div className="glass h-[200px] animate-pulse rounded-[1.75rem]" />
+          <div className="glass h-[200px] animate-pulse rounded-[1.75rem]" />
+        </div>
+      </div>
+    </div>
   );
 }
