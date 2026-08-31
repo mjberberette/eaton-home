@@ -70,7 +70,7 @@ export default function ProjectsPage() {
       </div>
 
       <Tabs defaultValue="priority" data-reveal>
-        <TabsList className="glass-chip h-12 rounded-2xl p-1.5">
+        <TabsList className="glass-chip h-12 gap-2 rounded-2xl p-1.5">
           <TabsTrigger value="priority" className="rounded-xl px-5 font-light">
             Master priority list
           </TabsTrigger>

@@ -316,6 +316,23 @@ body {
   animation: logo-appear 0.5s ease-out 3.7s forwards;
 }
 
+/*
+ * Short viewports (landscape phones): the vertical sidebar rail doesn't fit,
+ * so hide it and let the mobile top/bottom navigation take over.
+ */
+@media (max-height: 600px) {
+  .sidebar-rail {
+    display: none !important;
+  }
+  .nav-mobile-top,
+  .nav-mobile-bottom {
+    display: flex !important;
+  }
+  .main-col {
+    padding-bottom: 6rem !important;
+  }
+}
+
 ::selection {
   background: rgba(60, 219, 200, 0.3);
 }

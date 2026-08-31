@@ -50,9 +50,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <TooltipProvider delayDuration={150}>
       <ThemeLoader />
       <div className="mx-auto flex min-h-screen w-full max-w-[1560px] gap-5 p-3 sm:p-5">
-        {/* Desktop sidebar */}
-        <aside className="glass-deep sticky top-5 hidden h-[calc(100vh-2.5rem)] w-[86px] shrink-0 flex-col items-center justify-between rounded-[2rem] py-7 md:flex">
-          <Link href="/" aria-label="Eaton Home dashboard">
+        {/* Desktop sidebar — hidden on short (landscape phone) viewports,
+            where the mobile top/bottom nav takes over instead */}
+        <aside className="sidebar-rail glass-deep sticky top-5 hidden h-[calc(100vh-2.5rem)] w-[86px] shrink-0 flex-col items-center justify-between gap-4 overflow-y-auto rounded-[2rem] py-7 md:flex">
+          <Link href="/" aria-label="Eaton Home dashboard" className="shrink-0">
             <EatonMark className="h-11 w-11 transition-transform hover:scale-105" />
           </Link>
 
@@ -123,9 +124,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </aside>
 
         {/* Main column */}
-        <div className="flex min-w-0 flex-1 flex-col overflow-x-clip pb-24 md:pb-0">
+        <div className="main-col flex min-w-0 flex-1 flex-col overflow-x-clip pb-24 md:pb-0">
           {/* Mobile top bar */}
-          <header className="glass mb-4 flex items-center justify-between rounded-3xl px-5 py-3.5 md:hidden">
+          <header className="nav-mobile-top glass mb-4 flex items-center justify-between rounded-3xl px-5 py-3.5 md:hidden">
             <EatonLogo />
             <div className="flex items-center gap-1">
               <SettingsDialog
@@ -177,7 +178,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
 
         {/* Mobile bottom nav */}
-        <nav className="glass-deep fixed inset-x-3 bottom-3 z-50 flex items-center justify-around rounded-3xl px-2 py-2.5 md:hidden">
+        <nav className="nav-mobile-bottom glass-deep fixed inset-x-3 bottom-3 z-50 flex items-center justify-around rounded-3xl px-2 py-2.5 md:hidden">
           {NAV.map(({ href, label, icon: Icon }) => {
             const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
             return (
