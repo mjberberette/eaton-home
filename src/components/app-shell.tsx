@@ -216,7 +216,7 @@ function ShellSkeleton() {
           />
         ))}
       </div>
-      <div className="grid gap-5 xl:grid-cols-[1.6fr_1fr]">
+      <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.6fr_1fr]">
         <div className="glass h-[420px] animate-pulse rounded-[1.75rem]" />
         <div className="flex flex-col gap-5">
           <div className="glass h-[200px] animate-pulse rounded-[1.75rem]" />

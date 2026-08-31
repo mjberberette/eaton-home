@@ -100,7 +100,7 @@ export default function DashboardPage() {
         />
       </div>
 
-      <div className="grid gap-5 xl:grid-cols-[1.6fr_1fr]">
+      <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.6fr_1fr]">
         {/* Priority list */}
         <section data-reveal className="glass rounded-[1.75rem] p-6">
           <div className="mb-5 flex items-center justify-between">

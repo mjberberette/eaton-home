@@ -105,7 +105,7 @@ export function HomeFacts() {
           <Wrench className="h-3.5 w-3.5" />
           Systems &amp; appliances — age at a glance
         </p>
-        <div className="grid gap-2.5 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 xl:grid-cols-3">
           {info.appliances.map((ap) => {
             const age = applianceAge(ap.installedYear);
             return (

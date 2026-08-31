@@ -149,7 +149,7 @@ export default function ProjectDetailPage() {
         />
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.4fr_1fr]">
         {/* Price tracking + market check */}
         <div className="flex flex-col gap-5">
         <section data-reveal className="glass rounded-[1.75rem] p-6">

@@ -107,7 +107,7 @@ export default function BudgetPage() {
         </div>
       </div>
 
-      <div className="grid gap-5 xl:grid-cols-[1.5fr_1fr]">
+      <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.5fr_1fr]">
         {/* Category breakdown */}
         <section data-reveal className="glass rounded-[1.75rem] p-6">
           <h2 className="mb-1 text-xl font-light">Wishlist by category</h2>
