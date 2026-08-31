@@ -13,6 +13,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Reveal } from "@/components/anim";
+import { PriceCheck } from "@/components/price-check";
 import { Sparkline, StatusBadge, TrendChip } from "@/components/project-bits";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -127,7 +128,8 @@ export default function ProjectDetailPage() {
       </div>
 
       <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
-        {/* Price tracking */}
+        {/* Price tracking + market check */}
+        <div className="flex flex-col gap-5">
         <section data-reveal className="glass rounded-[1.75rem] p-6">
           <div className="mb-1 flex items-center gap-2 text-muted-foreground">
             <LineChart className="h-4.5 w-4.5" />
@@ -191,6 +193,9 @@ export default function ProjectDetailPage() {
             </Button>
           </form>
         </section>
+
+        <PriceCheck project={project} />
+        </div>
 
         {/* Progress & details */}
         <div className="flex flex-col gap-5">
