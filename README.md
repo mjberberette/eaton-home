@@ -9,17 +9,23 @@ Built with **Next.js 16**, **Tailwind CSS 4**, **shadcn/ui**, **GSAP**,
 
 ## Features
 
-- **Login** — Supabase email/password auth, plus a demo entrance that works
-  without any configuration.
-- **Master priority list** — one ranked list for the whole house, with
-  up/down reordering, progress, status, and cost.
+- **Login** — Supabase email/password auth, plus per-member demo entrances
+  (Melanie / Nate) that work without any configuration.
+- **Two-person household** — personalized greetings, "updated by" attribution
+  on every project, and live sync: either member's changes appear on the
+  other's screen within moments (Supabase Realtime).
+- **Master priority list** — one ranked list for the whole house with
+  drag-and-drop reordering, an exact priority number on create/edit,
+  progress, status, and cost.
 - **By-category view** — Yard, Outside, Kitchen, Bathrooms, Living Room,
   Office (Mel), Office (Nate), Entry Room, Garage, Master Bedroom, and
   House Repairs.
 - **Project pages** — inspiration / before / after photos, store link,
-  progress slider, spend tracking.
-- **Price tracking** — log price checks per project, see the trend line, and
-  get a "best time to buy" signal at the lowest tracked price.
+  progress slider, spend tracking, and a shared notes thread with author
+  and timestamps.
+- **Price tracking** — a full line graph per project (axes, hover tooltips,
+  lowest-price marker) and a "best time to buy" signal at the lowest
+  tracked price.
 - **Shop the market** — per-project price comparison across Home Depot,
   Lowe's, Amazon, Ace, Menards, Walmart, and more, priced near Parker, CO
   80134, with one-tap logging of the best offer into the price history.
@@ -27,8 +33,16 @@ Built with **Next.js 16**, **Tailwind CSS 4**, **shadcn/ui**, **GSAP**,
   funding runway that recalculates live.
 - **Home care** — recurring tasks (air filters, water filters, gutters…) with
   intervals, due countdowns, and one-tap completion.
-- **3D house** — a stylized model of the house you can drag to orbit, with
-  pulsing dots marking where each upgrade or repair lives.
+- **3D house** — a clean architectural concept model you can drag to orbit,
+  with pastel category-icon markers (kitchen, garage, yard…) and status dots
+  showing where every upgrade lives.
+- **Home facts** — square footage (livable/total), bedrooms, bathrooms, and
+  a systems & appliances registry with install years and age-at-a-glance
+  chips (amber 10+, orange 15+ years).
+- **Change log** — a household activity feed: who added, edited, re-ranked,
+  priced, or completed what, grouped by day and filterable by member.
+- **Theme palettes** — seven curated color themes (Dusk Teal, Ember,
+  Lavender Haze, Rosé, Golden Hour, Juniper, Glacier), saved per member.
 
 ## Run it locally
 

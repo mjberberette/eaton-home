@@ -1,6 +1,7 @@
 "use client";
 
-import { Suspense, useMemo, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef } from "react";
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
   ContactShadows,
@@ -48,7 +49,7 @@ function Window({
       <RoundedBox args={[w + 0.05, h + 0.05, 0.04]} radius={0.008} smoothness={2} castShadow>
         <meshStandardMaterial color={SLAB} roughness={0.4} metalness={0.35} />
       </RoundedBox>
-      <mesh position={[0, 0, 0.018]}>
+      <mesh position={[0, 0, 0.03]}>
         <boxGeometry args={[w, h, 0.02]} />
         <meshPhysicalMaterial
           color={GLASS}
@@ -62,7 +63,7 @@ function Window({
         />
       </mesh>
       {/* Single slim mullion */}
-      <mesh position={[0, 0, 0.03]}>
+      <mesh position={[0, 0, 0.046]}>
         <boxGeometry args={[0.012, h, 0.008]} />
         <meshStandardMaterial color={SLAB} roughness={0.4} />
       </mesh>
@@ -174,7 +175,7 @@ function HouseModel() {
         <meshStandardMaterial color="#2b3236" roughness={0.45} metalness={0.3} />
       </mesh>
       {[0.24, 0.42, 0.6].map((y) => (
-        <mesh key={y} position={[1.6, y, 1.222]}>
+        <mesh key={y} position={[1.6, y, 1.232]}>
           <boxGeometry args={[0.98, 0.008, 0.008]} />
           <meshStandardMaterial color="#454d52" roughness={0.4} metalness={0.4} />
         </mesh>
@@ -188,12 +189,12 @@ function HouseModel() {
         <meshStandardMaterial color={WOOD} roughness={0.5} />
       </RoundedBox>
       {[-0.47, -0.35, -0.23].map((x) => (
-        <mesh key={x} position={[x, 0.5, 1.24]}>
+        <mesh key={x} position={[x, 0.5, 1.248]}>
           <boxGeometry args={[0.09, 0.82, 0.006]} />
           <meshStandardMaterial color="#a4744a" roughness={0.55} />
         </mesh>
       ))}
-      <mesh position={[-0.16, 0.5, 1.245]}>
+      <mesh position={[-0.16, 0.5, 1.258]}>
         <boxGeometry args={[0.012, 0.22, 0.012]} />
         <meshStandardMaterial color="#e6d8b8" roughness={0.25} metalness={0.9} />
       </mesh>
@@ -325,6 +326,11 @@ function StudioEnvironment() {
   );
 }
 
+export interface HouseSceneHandle {
+  zoomIn: () => void;
+  zoomOut: () => void;
+}
+
 export default function HouseScene({
   projects,
   selectedId,
@@ -332,6 +338,7 @@ export default function HouseScene({
   autoRotate = false,
   interactive = true,
   className,
+  apiRef,
 }: {
   projects: Project[];
   selectedId?: string | null;
@@ -339,7 +346,30 @@ export default function HouseScene({
   autoRotate?: boolean;
   interactive?: boolean;
   className?: string;
+  /** Receives imperative zoom controls once the scene is ready */
+  apiRef?: React.RefObject<HouseSceneHandle | null>;
 }) {
+  const controlsRef = useRef<OrbitControlsImpl>(null);
+
+  useEffect(() => {
+    if (!apiRef) return;
+    const dolly = (factor: number) => {
+      const controls = controlsRef.current;
+      if (!controls) return;
+      const cam = controls.object;
+      const offset = cam.position.clone().sub(controls.target);
+      offset.setLength(Math.min(11, Math.max(4.5, offset.length() * factor)));
+      cam.position.copy(controls.target).add(offset);
+      controls.update();
+    };
+    apiRef.current = {
+      zoomIn: () => dolly(0.78),
+      zoomOut: () => dolly(1.28),
+    };
+    return () => {
+      apiRef.current = null;
+    };
+  }, [apiRef]);
   // Post-processing only on the full-page scene; the dashboard teaser stays lightweight
   const highQuality = interactive;
   const markers = useMemo(() => projects.filter((p) => p.hotspot), [projects]);
@@ -354,8 +384,16 @@ export default function HouseScene({
         shadows
         dpr={[1, 2]}
         camera={{ position: [5.4, 3.4, 6.2], fov: 42 }}
-        gl={{ antialias: true, alpha: true, toneMapping: ACESFilmicToneMapping }}
+        gl={{
+          antialias: true,
+          // Opaque canvas: compositing post-processing over a transparent
+          // buffer is what caused flicker while orbiting.
+          alpha: false,
+          toneMapping: ACESFilmicToneMapping,
+          powerPreference: "high-performance",
+        }}
       >
+        <color attach="background" args={["#0a191c"]} />
         <fog attach="fog" args={["#0a191c", 14, 32]} />
 
         {/* Neutral studio key */}
@@ -406,6 +444,7 @@ export default function HouseScene({
         </Suspense>
 
         <OrbitControls
+          ref={controlsRef}
           enablePan={false}
           enabled={interactive}
           minDistance={4.5}

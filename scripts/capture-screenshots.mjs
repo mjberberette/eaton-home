@@ -92,6 +92,19 @@ async function main() {
     await settle(page);
     await page.screenshot({ path: `${OUT}budget.png`, ...SHOT });
   });
+
+  await step("changelog", async () => {
+    await page.goto(`${BASE}/changelog`, { waitUntil: "networkidle" });
+    await settle(page);
+    await page.screenshot({ path: `${OUT}changelog.png`, ...SHOT });
+  });
+
+  await step("settings_themes", async () => {
+    await page.getByLabel("Settings").first().click();
+    await settle(page, 900);
+    await page.screenshot({ path: `${OUT}settings_themes.png`, ...SHOT });
+    await page.keyboard.press("Escape");
+  });
   await ctx.close();
 
   // ---------- 3D house (1x — post-processing is heavy under swiftshader) ----------
@@ -134,6 +147,12 @@ async function main() {
     await hpage.mouse.up();
     await settle(hpage, 2000);
     await hpage.screenshot({ path: `${OUT}house_3d_back.png`, ...SHOT });
+  });
+
+  await step("home_facts", async () => {
+    await hpage.evaluate(() => window.scrollBy(0, window.innerHeight));
+    await settle(hpage, 1200);
+    await hpage.screenshot({ path: `${OUT}home_facts.png`, ...SHOT });
   });
   await ctx3d.close();
 

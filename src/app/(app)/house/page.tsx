@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import {
@@ -8,9 +8,14 @@ import {
   ArrowUpRight,
   BellRing,
   CalendarClock,
+  Maximize2,
+  Minimize2,
   Move3d,
   X,
+  ZoomIn,
+  ZoomOut,
 } from "lucide-react";
+import type { HouseSceneHandle } from "@/components/house/house-scene";
 import { Reveal } from "@/components/anim";
 import { HomeFacts } from "@/components/home-facts";
 import { categoryMeta } from "@/lib/category-meta";
@@ -45,6 +50,48 @@ const LEGEND: { status: ProjectStatus; color: string }[] = [
 export default function HousePage() {
   const { db } = useHome();
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const sceneApi = useRef<HouseSceneHandle | null>(null);
+  const [fullscreen, setFullscreen] = useState(false);
+  // True while using the CSS fallback (browsers without element fullscreen, e.g. iPhone)
+  const cssFallback = useRef(false);
+
+  async function toggleFullscreen() {
+    const el = heroRef.current;
+    if (!fullscreen) {
+      try {
+        if (!el?.requestFullscreen) throw new Error("unsupported");
+        await el.requestFullscreen();
+        cssFallback.current = false;
+      } catch {
+        cssFallback.current = true;
+        setFullscreen(true);
+        document.body.style.overflow = "hidden";
+      }
+    } else if (document.fullscreenElement) {
+      void document.exitFullscreen();
+    } else {
+      setFullscreen(false);
+      document.body.style.overflow = "";
+    }
+  }
+
+  useEffect(() => {
+    const onChange = () => setFullscreen(Boolean(document.fullscreenElement));
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && cssFallback.current) {
+        setFullscreen(false);
+        document.body.style.overflow = "";
+      }
+    };
+    document.addEventListener("fullscreenchange", onChange);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("fullscreenchange", onChange);
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   const marked = useMemo(() => db.projects.filter((p) => p.hotspot), [db.projects]);
   const selected = marked.find((p) => p.id === selectedId) ?? null;
@@ -67,13 +114,18 @@ export default function HousePage() {
     <Reveal className="space-y-5">
       {/* Immersive hero */}
       <section
+        ref={heroRef}
         data-reveal
-        className="glass-deep relative h-[calc(100dvh-7.5rem)] min-h-[560px] overflow-hidden rounded-[2rem]"
+        className={cn(
+          "glass-deep relative h-[calc(100dvh-7.5rem)] min-h-[560px] overflow-hidden rounded-[2rem]",
+          fullscreen && "fixed inset-0 z-[100] h-dvh min-h-0 rounded-none bg-[#0a191c]"
+        )}
       >
         <HouseScene
           projects={marked}
           selectedId={selectedId}
           onSelect={(id) => setSelectedId((cur) => (cur === id ? null : id))}
+          apiRef={sceneApi}
         />
 
         {/* Title block */}
@@ -104,6 +156,35 @@ export default function HousePage() {
         <div className="glass-chip absolute right-6 top-6 hidden items-center gap-2 rounded-full px-4 py-2 text-xs font-light text-white/70 sm:flex">
           <Move3d className="h-4 w-4 text-brand-cyan" />
           Drag to orbit · scroll to zoom · tap a dot
+        </div>
+
+        {/* Scene controls: zoom + fullscreen */}
+        <div className="absolute right-4 top-4 flex flex-col gap-2 sm:right-6 sm:top-[68px]">
+          <button
+            onClick={() => sceneApi.current?.zoomIn()}
+            aria-label="Zoom in"
+            className="glass-chip flex h-11 w-11 items-center justify-center rounded-2xl text-white/70 transition-colors hover:bg-white/15 hover:text-white"
+          >
+            <ZoomIn className="h-4.5 w-4.5" strokeWidth={1.5} />
+          </button>
+          <button
+            onClick={() => sceneApi.current?.zoomOut()}
+            aria-label="Zoom out"
+            className="glass-chip flex h-11 w-11 items-center justify-center rounded-2xl text-white/70 transition-colors hover:bg-white/15 hover:text-white"
+          >
+            <ZoomOut className="h-4.5 w-4.5" strokeWidth={1.5} />
+          </button>
+          <button
+            onClick={toggleFullscreen}
+            aria-label={fullscreen ? "Exit full screen" : "Full screen"}
+            className="glass-chip flex h-11 w-11 items-center justify-center rounded-2xl text-white/70 transition-colors hover:bg-white/15 hover:text-white"
+          >
+            {fullscreen ? (
+              <Minimize2 className="h-4.5 w-4.5" strokeWidth={1.5} />
+            ) : (
+              <Maximize2 className="h-4.5 w-4.5" strokeWidth={1.5} />
+            )}
+          </button>
         </div>
 
         {/* Left floating panel — marker index */}
