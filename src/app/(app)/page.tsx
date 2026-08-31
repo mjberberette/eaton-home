@@ -11,7 +11,7 @@ import {
   Tag,
   TrendingDown,
 } from "lucide-react";
-import { AnimatedLogo } from "@/components/animated-logo";
+import { AnimatedLogo } from "@/components/AnimatedLogo";
 import { CountUp, Reveal } from "@/components/anim";
 import { Sparkline, StatusBadge, TrendChip, priceTrend } from "@/components/project-bits";
 import { Progress } from "@/components/ui/progress";
@@ -54,7 +54,7 @@ export default function DashboardPage() {
           draw-on animation is fully visible while the header fades in. */}
       <div className="flex flex-wrap items-end justify-between gap-4 px-1">
         <div className="flex items-center gap-4 sm:gap-5">
-          <AnimatedLogo className="h-14 shrink-0 sm:h-[72px]" delay={0.35} />
+          <AnimatedLogo width={58} className="shrink-0" />
           <div data-reveal>
             <p className="text-xs font-light tracking-[0.3em] text-muted-foreground uppercase">
               {new Date().toLocaleDateString("en-US", {
