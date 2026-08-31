@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="1080" viewBox="0 0 1720 1080"><rect width="1720" height="1080" fill="#f3f4f6"/><rect x="0.5" y="0.5" width="1719" height="1079" fill="#ffffff" stroke="#d5dae0"/><rect x="0" y="0" width="1720" height="74" rx="0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<line x1="0" y1="74" x2="1720" y2="74" stroke="#d5dae0" stroke-width="1"/>
+<rect x="36" y="22" width="30" height="30" rx="8" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<line x1="43" y1="40" x2="51" y2="31" stroke="#6b7280" stroke-width="2"/>
+<line x1="51" y1="31" x2="59" y2="40" stroke="#6b7280" stroke-width="2"/>
+<text x="80" y="36" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#374151" font-weight="600" text-anchor="start" letter-spacing="0.18em">EATON HOME</text>
+<text x="80" y="54" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="start">Household OS — UX documentation</text>
+<text x="860.0" y="45" font-family="Helvetica Neue, Arial, sans-serif" font-size="19" fill="#374151" font-weight="500" text-anchor="middle">Home care — recurring maintenance rhythm</text>
+<text x="1684" y="36" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#6b7280" font-weight="400" text-anchor="end">WF-06 · Lo-fi wireframe · v2</text>
+<text x="1684" y="54" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="end">M. Eaton · Parker, CO · 2026</text>
+<rect x="60" y="130" width="64" height="860" rx="18" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="76" y="148" width="32" height="32" rx="9" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="77" y="220" width="30" height="30" rx="9" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="266" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="312" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="358" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="404" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<circle cx="86" cy="916" r="8" fill="#c9ced5" stroke="none"/>
+<circle cx="100" cy="916" r="8" fill="#eceef1" stroke="none"/>
+<rect x="79" y="942" width="26" height="26" rx="8" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="152" y="150" width="280" height="22" rx="11.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="152" y="190" width="480" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="152" y="206" width="288.0" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="152" y="250" width="358" height="310" rx="20" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="172" y="270" width="40" height="40" rx="12" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="402" y="276" width="88" height="24" rx="12.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<text x="446.0" y="292.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">OVERDUE</text>
+<rect x="172" y="338" width="180" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="172" y="360" width="240" height="7" rx="3.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="172" y="410" width="318" height="7" rx="3.5" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="172" y="410" width="127.2" height="7" rx="3.5" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="172" y="432" width="200" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="172" y="486" width="318" height="42" rx="21.0" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="331.0" y="511.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#374151" font-weight="500" text-anchor="middle">MARK DONE TODAY</text>
+<circle cx="482" cy="288" r="11" fill="#3d5afe"/>
+<text x="482" y="292" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">1</text>
+<rect x="530" y="250" width="358" height="310" rx="20" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="550" y="270" width="40" height="40" rx="12" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="780" y="276" width="88" height="24" rx="12.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<text x="824.0" y="292.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">DUE IN 6D</text>
+<rect x="550" y="338" width="180" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="550" y="360" width="240" height="7" rx="3.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="550" y="410" width="318" height="7" rx="3.5" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="550" y="410" width="159.0" height="7" rx="3.5" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="550" y="432" width="200" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="550" y="486" width="318" height="42" rx="21.0" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="709.0" y="511.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#374151" font-weight="500" text-anchor="middle">MARK DONE TODAY</text>
+<circle cx="860" cy="422" r="11" fill="#3d5afe"/>
+<text x="860" y="426" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">2</text>
+<rect x="908" y="250" width="358" height="310" rx="20" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="928" y="270" width="40" height="40" rx="12" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="1158" y="276" width="88" height="24" rx="12.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<text x="1202.0" y="292.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">DUE IN 6D</text>
+<rect x="928" y="338" width="180" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="928" y="360" width="240" height="7" rx="3.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="928" y="410" width="318" height="7" rx="3.5" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="928" y="410" width="190.80000000000004" height="7" rx="3.5" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="928" y="432" width="200" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="928" y="486" width="318" height="42" rx="21.0" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="1087.0" y="511.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#374151" font-weight="500" text-anchor="middle">MARK DONE TODAY</text>
+<circle cx="1238" cy="507" r="11" fill="#3d5afe"/>
+<text x="1238" y="511" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">3</text>
+<rect x="152" y="580" width="358" height="310" rx="20" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="172" y="600" width="40" height="40" rx="12" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="402" y="606" width="88" height="24" rx="12.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<text x="446.0" y="622.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">DUE IN 6D</text>
+<rect x="172" y="668" width="180" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="172" y="690" width="240" height="7" rx="3.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="172" y="740" width="318" height="7" rx="3.5" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="172" y="740" width="222.60000000000002" height="7" rx="3.5" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="172" y="762" width="200" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="172" y="816" width="318" height="42" rx="21.0" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="331.0" y="841.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#374151" font-weight="500" text-anchor="middle">MARK DONE TODAY</text>
+<rect x="530" y="580" width="358" height="310" rx="20" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="550" y="600" width="40" height="40" rx="12" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="780" y="606" width="88" height="24" rx="12.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<text x="824.0" y="622.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">DUE IN 6D</text>
+<rect x="550" y="668" width="180" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="550" y="690" width="240" height="7" rx="3.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="550" y="740" width="318" height="7" rx="3.5" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="550" y="740" width="254.4" height="7" rx="3.5" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="550" y="762" width="200" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="550" y="816" width="318" height="42" rx="21.0" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="709.0" y="841.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#374151" font-weight="500" text-anchor="middle">MARK DONE TODAY</text>
+<rect x="908" y="580" width="358" height="310" rx="20" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="928" y="600" width="40" height="40" rx="12" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="1158" y="606" width="88" height="24" rx="12.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<text x="1202.0" y="622.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">DUE IN 6D</text>
+<rect x="928" y="668" width="180" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="928" y="690" width="240" height="7" rx="3.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="928" y="740" width="318" height="7" rx="3.5" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="928" y="740" width="286.2" height="7" rx="3.5" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="928" y="762" width="200" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="928" y="816" width="318" height="42" rx="21.0" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="1087.0" y="841.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#374151" font-weight="500" text-anchor="middle">MARK DONE TODAY</text>
+<text x="1300" y="170" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#374151" font-weight="600" text-anchor="start" letter-spacing="0.14em">ANNOTATIONS</text>
+<circle cx="1311" cy="197" r="11" fill="#3d5afe"/>
+<text x="1311" y="201" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">1</text>
+<text x="1332" y="201" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Urgency escalates visually</text>
+<text x="1332" y="220" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Neutral → amber (≤7d) → red ring (overdue).</text>
+<text x="1332" y="236" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Overdue count surfaces in the page intro</text>
+<text x="1332" y="252" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">with a gentle, human voice.</text>
+<circle cx="1311" cy="283" r="11" fill="#3d5afe"/>
+<text x="1311" y="287" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">2</text>
+<text x="1332" y="287" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Cycle, not deadline</text>
+<text x="1332" y="306" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Progress bar shows how much of the</text>
+<text x="1332" y="322" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">interval has elapsed — you feel a chore</text>
+<text x="1332" y="338" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">&#x27;filling up&#x27; before it&#x27;s due.</text>
+<circle cx="1311" cy="369" r="11" fill="#3d5afe"/>
+<text x="1311" y="373" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">3</text>
+<text x="1332" y="373" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">One-tap reset</text>
+<text x="1332" y="392" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">&#x27;Mark done today&#x27; restamps the cycle.</text>
+<text x="1332" y="408" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">No forms, no confirmation friction —</text>
+<text x="1332" y="424" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">chores are logged in one second.</text></svg>

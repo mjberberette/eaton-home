@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="1080" viewBox="0 0 1720 1080"><rect width="1720" height="1080" fill="#f3f4f6"/><rect x="0.5" y="0.5" width="1719" height="1079" fill="#ffffff" stroke="#d5dae0"/><rect x="0" y="0" width="1720" height="74" rx="0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<line x1="0" y1="74" x2="1720" y2="74" stroke="#d5dae0" stroke-width="1"/>
+<rect x="36" y="22" width="30" height="30" rx="8" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<line x1="43" y1="40" x2="51" y2="31" stroke="#6b7280" stroke-width="2"/>
+<line x1="51" y1="31" x2="59" y2="40" stroke="#6b7280" stroke-width="2"/>
+<text x="80" y="36" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#374151" font-weight="600" text-anchor="start" letter-spacing="0.18em">EATON HOME</text>
+<text x="80" y="54" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="start">Household OS — UX documentation</text>
+<text x="860.0" y="45" font-family="Helvetica Neue, Arial, sans-serif" font-size="19" fill="#374151" font-weight="500" text-anchor="middle">Budget — fund, runway, and where money flows</text>
+<text x="1684" y="36" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#6b7280" font-weight="400" text-anchor="end">WF-07 · Lo-fi wireframe · v2</text>
+<text x="1684" y="54" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="end">M. Eaton · Parker, CO · 2026</text>
+<rect x="60" y="130" width="64" height="860" rx="18" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="76" y="148" width="32" height="32" rx="9" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="77" y="220" width="30" height="30" rx="9" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="266" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="312" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="358" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="404" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<circle cx="86" cy="916" r="8" fill="#c9ced5" stroke="none"/>
+<circle cx="100" cy="916" r="8" fill="#eceef1" stroke="none"/>
+<rect x="79" y="942" width="26" height="26" rx="8" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="152" y="150" width="220" height="22" rx="11.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="152" y="200" width="258" height="104" rx="16" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="166" y="214" width="26" height="26" rx="8" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="200" y="231" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#9aa0a8" font-weight="400" text-anchor="start" letter-spacing="0.08em">PROJECT FUND</text>
+<rect x="166" y="256" width="108.36" height="16" rx="8.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="166" y="282" width="141.9" height="7" rx="3.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="430" y="200" width="258" height="104" rx="16" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="444" y="214" width="26" height="26" rx="8" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="478" y="231" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#9aa0a8" font-weight="400" text-anchor="start" letter-spacing="0.08em">MONTHLY BUDGET</text>
+<rect x="444" y="256" width="108.36" height="16" rx="8.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="444" y="282" width="141.9" height="7" rx="3.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="708" y="200" width="258" height="104" rx="16" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="722" y="214" width="26" height="26" rx="8" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="756" y="231" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#9aa0a8" font-weight="400" text-anchor="start" letter-spacing="0.08em">STILL COMMITTED</text>
+<rect x="722" y="256" width="108.36" height="16" rx="8.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="722" y="282" width="141.9" height="7" rx="3.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="986" y="200" width="258" height="104" rx="16" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="1000" y="214" width="26" height="26" rx="8" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="1034" y="231" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#9aa0a8" font-weight="400" text-anchor="start" letter-spacing="0.08em">INVESTED SO FAR</text>
+<rect x="1000" y="256" width="108.36" height="16" rx="8.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="1000" y="282" width="141.9" height="7" rx="3.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<circle cx="1242" cy="252" r="11" fill="#3d5afe"/>
+<text x="1242" y="256" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">1</text>
+<rect x="152" y="340" width="700" height="520" rx="22" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="176" y="374" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#9aa0a8" font-weight="400" text-anchor="start" letter-spacing="0.14em">OPEN COST BY CATEGORY</text>
+<rect x="176" y="410" width="110" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="312" y="404" width="480" height="22" rx="11" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="312" y="404" width="432.0" height="22" rx="11" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="804" y="410" width="40" height="10" rx="5.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="176" y="472" width="110" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="312" y="466" width="480" height="22" rx="11" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="312" y="466" width="345.59999999999997" height="22" rx="11" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="804" y="472" width="40" height="10" rx="5.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="176" y="534" width="110" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="312" y="528" width="480" height="22" rx="11" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="312" y="528" width="288.0" height="22" rx="11" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="804" y="534" width="40" height="10" rx="5.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="176" y="596" width="110" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="312" y="590" width="480" height="22" rx="11" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="312" y="590" width="216.0" height="22" rx="11" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="804" y="596" width="40" height="10" rx="5.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="176" y="658" width="110" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="312" y="652" width="480" height="22" rx="11" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="312" y="652" width="163.20000000000002" height="22" rx="11" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="804" y="658" width="40" height="10" rx="5.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="176" y="720" width="110" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="312" y="714" width="480" height="22" rx="11" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="312" y="714" width="105.6" height="22" rx="11" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="804" y="720" width="40" height="10" rx="5.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="176" y="782" width="110" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="312" y="776" width="480" height="22" rx="11" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="312" y="776" width="67.2" height="22" rx="11" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="804" y="782" width="40" height="10" rx="5.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<circle cx="872" cy="440" r="11" fill="#3d5afe"/>
+<text x="872" y="444" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">2</text>
+<rect x="882" y="340" width="380" height="300" rx="22" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="902" y="372" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#9aa0a8" font-weight="400" text-anchor="start" letter-spacing="0.14em">FUNDING RUNWAY</text>
+<rect x="902" y="394" width="150" height="26" rx="13.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="902" y="444" width="320" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="902" y="460" width="320" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="902" y="476" width="192.0" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="902" y="520" width="340" height="10" rx="5" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="902" y="520" width="210" height="10" rx="5" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="902" y="556" font-family="Helvetica Neue, Arial, sans-serif" font-size="9.5" fill="#9aa0a8" font-weight="400" text-anchor="start" letter-spacing="0.1em">FUND VS COMMITTED</text>
+<circle cx="1232" cy="400" r="11" fill="#3d5afe"/>
+<text x="1232" y="404" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">3</text>
+<rect x="882" y="660" width="380" height="200" rx="22" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="902" y="692" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#9aa0a8" font-weight="400" text-anchor="start" letter-spacing="0.14em">SETTINGS</text>
+<rect x="902" y="708" width="340" height="44" rx="13" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="918" y="724" width="120" height="8" rx="4.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="902" y="770" width="340" height="44" rx="13" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="918" y="786" width="120" height="8" rx="4.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<circle cx="1232" cy="730" r="11" fill="#3d5afe"/>
+<text x="1232" y="734" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">4</text>
+<text x="1300" y="170" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#374151" font-weight="600" text-anchor="start" letter-spacing="0.14em">ANNOTATIONS</text>
+<circle cx="1311" cy="197" r="11" fill="#3d5afe"/>
+<text x="1311" y="201" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">1</text>
+<text x="1332" y="201" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Four honest numbers</text>
+<text x="1332" y="220" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Fund, monthly deposit, open commitment,</text>
+<text x="1332" y="236" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">already invested. No vanity totals.</text>
+<circle cx="1311" cy="267" r="11" fill="#3d5afe"/>
+<text x="1311" y="271" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">2</text>
+<text x="1332" y="271" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Category weight at a glance</text>
+<text x="1332" y="290" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Horizontal bars rank rooms by remaining</text>
+<text x="1332" y="306" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">cost — kitchen dwarfing the mudroom is</text>
+<text x="1332" y="322" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">exactly the conversation to trigger.</text>
+<circle cx="1311" cy="353" r="11" fill="#3d5afe"/>
+<text x="1311" y="357" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">3</text>
+<text x="1332" y="357" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Runway, not guilt</text>
+<text x="1332" y="376" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">&#x27;≈ N months until the wishlist is funded&#x27;</text>
+<text x="1332" y="392" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">recalculates live as the couple edits</text>
+<text x="1332" y="408" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">the monthly figure. Planning, not shame.</text>
+<circle cx="1311" cy="439" r="11" fill="#3d5afe"/>
+<text x="1311" y="443" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">4</text>
+<text x="1332" y="443" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Inline settings</text>
+<text x="1332" y="462" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Budget inputs live on the page, no</text>
+<text x="1332" y="478" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">settings maze. Edits persist instantly.</text></svg>

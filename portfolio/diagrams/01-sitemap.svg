@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="900" viewBox="0 0 1720 900"><rect width="1720" height="900" fill="#f3f4f6"/><rect x="0.5" y="0.5" width="1719" height="899" fill="#ffffff" stroke="#d5dae0"/><rect x="0" y="0" width="1720" height="74" rx="0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<line x1="0" y1="74" x2="1720" y2="74" stroke="#d5dae0" stroke-width="1"/>
+<rect x="36" y="22" width="30" height="30" rx="8" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<line x1="43" y1="40" x2="51" y2="31" stroke="#6b7280" stroke-width="2"/>
+<line x1="51" y1="31" x2="59" y2="40" stroke="#6b7280" stroke-width="2"/>
+<text x="80" y="36" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#374151" font-weight="600" text-anchor="start" letter-spacing="0.18em">EATON HOME</text>
+<text x="80" y="54" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="start">Household OS — UX documentation</text>
+<text x="860.0" y="45" font-family="Helvetica Neue, Arial, sans-serif" font-size="19" fill="#374151" font-weight="500" text-anchor="middle">Information architecture — sitemap</text>
+<text x="1684" y="36" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#6b7280" font-weight="400" text-anchor="end">IA-01 · IA diagram · v1</text>
+<text x="1684" y="54" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="end">M. Eaton · Parker, CO · 2026</text>
+<rect x="140" y="200" width="200" height="70" rx="14" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="240.0" y="235.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#374151" font-weight="600" text-anchor="middle">Login</text>
+<text x="240.0" y="255.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">Supabase auth · demo entrance</text>
+<rect x="430" y="150" width="150" height="620" rx="16" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="505" y="180" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#9aa0a8" font-weight="400" text-anchor="middle" letter-spacing="0.16em">AUTH GATE</text>
+<text x="505" y="196" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#9aa0a8" font-weight="400" text-anchor="middle">middleware</text>
+<line x1="340" y1="235" x2="430" y2="235" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="430" y1="235" x2="422.2880012196795" y2="239.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="430" y1="235" x2="422.2880012196795" y2="230.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="620" y="200" width="220" height="70" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="730.0" y="235.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#374151" font-weight="600" text-anchor="middle">Dashboard</text>
+<text x="730.0" y="255.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">briefing · KPIs · digests</text>
+<rect x="620" y="330" width="220" height="66" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="730.0" y="363.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#374151" font-weight="600" text-anchor="middle">Projects</text>
+<text x="730.0" y="383.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">master rank + 11 categories</text>
+<line x1="580" y1="235" x2="600" y2="363" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="600" y1="363" x2="594.225551658647" y2="356.0966858427966" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="600" y1="363" x2="603.3933397165935" y2="354.6642189587424" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="620" y="440" width="220" height="66" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="730.0" y="473.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#374151" font-weight="600" text-anchor="middle">3D House</text>
+<text x="730.0" y="493.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">orbit · hotspots · alerts</text>
+<line x1="580" y1="235" x2="600" y2="473" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="600" y1="473" x2="594.7309917423531" y2="465.70359321440685" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="600" y1="473" x2="603.9774263348335" y2="464.9265819041144" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="620" y="550" width="220" height="66" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="730.0" y="583.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#374151" font-weight="600" text-anchor="middle">Home care</text>
+<text x="730.0" y="603.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">recurring cycles</text>
+<line x1="580" y1="235" x2="600" y2="583" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="600" y1="583" x2="594.9256425893293" y2="575.5669052966633" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="600" y1="583" x2="604.1893810790357" y2="575.0345065328871" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="620" y="660" width="220" height="66" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="730.0" y="693.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#374151" font-weight="600" text-anchor="middle">Budget</text>
+<text x="730.0" y="713.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">fund · runway · categories</text>
+<line x1="580" y1="235" x2="600" y2="693" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="600" y1="693" x2="595.0284570201648" y2="685.4977496442966" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="600" y1="693" x2="604.2986472369852" y2="685.0929378444355" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="840" y1="363" x2="900" y2="453" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="900" y1="453" x2="891.861845149867" y2="449.15676755383487" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="900" y1="453" x2="899.582460376668" y2="444.0096907359675" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="900" y="420" width="220" height="66" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="1010.0" y="453.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#374151" font-weight="600" text-anchor="middle">Project detail</text>
+<text x="1010.0" y="473.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">shared by list, category, 3D dot</text>
+<line x1="840" y1="473" x2="900" y2="465" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="900" y1="465" x2="892.9688268500233" y2="470.618060531451" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="900" y1="465" x2="891.7424764278084" y2="461.42043236483806" stroke="#9aa0a8" stroke-width="1.6"/>
+<text x="1180" y="300" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#6b7280" font-weight="400" text-anchor="start">Every surface deep-links into the same</text>
+<text x="1180" y="318" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#6b7280" font-weight="400" text-anchor="start">project entity — list rank, room card and</text>
+<text x="1180" y="336" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#6b7280" font-weight="400" text-anchor="start">3D hotspot are three doors to one record.</text>
+<text x="1180" y="380" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#6b7280" font-weight="400" text-anchor="start">Flat IA (5 sections, 1 detail level) keeps</text>
+<text x="1180" y="398" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#6b7280" font-weight="400" text-anchor="start">the mental model shallow for a 2-person</text>
+<text x="1180" y="416" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#6b7280" font-weight="400" text-anchor="start">household product.</text></svg>

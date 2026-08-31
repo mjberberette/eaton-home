@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="1080" viewBox="0 0 1720 1080"><rect width="1720" height="1080" fill="#f3f4f6"/><rect x="0.5" y="0.5" width="1719" height="1079" fill="#ffffff" stroke="#d5dae0"/><rect x="0" y="0" width="1720" height="74" rx="0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<line x1="0" y1="74" x2="1720" y2="74" stroke="#d5dae0" stroke-width="1"/>
+<rect x="36" y="22" width="30" height="30" rx="8" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<line x1="43" y1="40" x2="51" y2="31" stroke="#6b7280" stroke-width="2"/>
+<line x1="51" y1="31" x2="59" y2="40" stroke="#6b7280" stroke-width="2"/>
+<text x="80" y="36" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#374151" font-weight="600" text-anchor="start" letter-spacing="0.18em">EATON HOME</text>
+<text x="80" y="54" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="start">Household OS — UX documentation</text>
+<text x="860.0" y="45" font-family="Helvetica Neue, Arial, sans-serif" font-size="19" fill="#374151" font-weight="500" text-anchor="middle">Projects — one ranked truth, two mental models</text>
+<text x="1684" y="36" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#6b7280" font-weight="400" text-anchor="end">WF-03 · Lo-fi wireframe · v2</text>
+<text x="1684" y="54" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="end">M. Eaton · Parker, CO · 2026</text>
+<rect x="60" y="130" width="64" height="860" rx="18" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="76" y="148" width="32" height="32" rx="9" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="77" y="220" width="30" height="30" rx="9" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="266" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="312" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="358" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="404" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<circle cx="86" cy="916" r="8" fill="#c9ced5" stroke="none"/>
+<circle cx="100" cy="916" r="8" fill="#eceef1" stroke="none"/>
+<rect x="79" y="942" width="26" height="26" rx="8" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="152" y="150" width="260" height="22" rx="11.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="1102" y="142" width="150" height="40" rx="20.0" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="1177.0" y="166.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#374151" font-weight="500" text-anchor="middle">+ NEW PROJECT</text>
+<circle cx="1272" cy="162" r="11" fill="#3d5afe"/>
+<text x="1272" y="166" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">1</text>
+<rect x="152" y="200" width="380" height="44" rx="22" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="158" y="206" width="180" height="32" rx="16.0" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.2"/>
+<text x="248.0" y="226.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">MASTER PRIORITY LIST</text>
+<rect x="344" y="206" width="150" height="32" rx="16.0" fill="none" stroke="none" stroke-width="1.2"/>
+<text x="419.0" y="226.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">BY CATEGORY</text>
+<circle cx="552" cy="222" r="11" fill="#3d5afe"/>
+<text x="552" y="226" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">2</text>
+<rect x="152" y="270" width="1110" height="420" rx="22" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="172" y="290" width="1070" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="192" y="318" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#9aa0a8" font-weight="400" text-anchor="middle">▲</text>
+<text x="192" y="334" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#9aa0a8" font-weight="400" text-anchor="middle">▼</text>
+<rect x="210" y="304" width="36" height="36" rx="10" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="228" y="327" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#374151" font-weight="600" text-anchor="middle">1</text>
+<rect x="264" y="308" width="230" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="264" y="328" width="150" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="572" y="318" width="110" height="6" rx="3" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="572" y="318" width="88.0" height="6" rx="3" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="712" y="310" width="64" height="22" rx="11.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<text x="744.0" y="325.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">▾ 4.2%</text>
+<rect x="812" y="314" width="70" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="912" y="310" width="110" height="22" rx="11.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<circle cx="1072" cy="322" r="4" fill="#c9ced5" stroke="none"/>
+<rect x="172" y="368" width="1070" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="192" y="396" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#9aa0a8" font-weight="400" text-anchor="middle">▲</text>
+<text x="192" y="412" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#9aa0a8" font-weight="400" text-anchor="middle">▼</text>
+<rect x="210" y="382" width="36" height="36" rx="10" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="228" y="405" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#374151" font-weight="600" text-anchor="middle">2</text>
+<rect x="264" y="386" width="230" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="264" y="406" width="150" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="572" y="396" width="110" height="6" rx="3" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="572" y="396" width="74.80000000000001" height="6" rx="3" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="712" y="388" width="64" height="22" rx="11.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<text x="744.0" y="403.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">▾ 4.2%</text>
+<rect x="812" y="392" width="70" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="912" y="388" width="110" height="22" rx="11.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<circle cx="1072" cy="400" r="4" fill="#c9ced5" stroke="none"/>
+<rect x="172" y="446" width="1070" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="192" y="474" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#9aa0a8" font-weight="400" text-anchor="middle">▲</text>
+<text x="192" y="490" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#9aa0a8" font-weight="400" text-anchor="middle">▼</text>
+<rect x="210" y="460" width="36" height="36" rx="10" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="228" y="483" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#374151" font-weight="600" text-anchor="middle">3</text>
+<rect x="264" y="464" width="230" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="264" y="484" width="150" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="572" y="474" width="110" height="6" rx="3" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="572" y="474" width="61.60000000000001" height="6" rx="3" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="712" y="466" width="64" height="22" rx="11.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<text x="744.0" y="481.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">▾ 4.2%</text>
+<rect x="812" y="470" width="70" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="912" y="466" width="110" height="22" rx="11.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<circle cx="1072" cy="478" r="4" fill="#c9ced5" stroke="none"/>
+<rect x="172" y="524" width="1070" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="192" y="552" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#9aa0a8" font-weight="400" text-anchor="middle">▲</text>
+<text x="192" y="568" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#9aa0a8" font-weight="400" text-anchor="middle">▼</text>
+<rect x="210" y="538" width="36" height="36" rx="10" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="228" y="561" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#374151" font-weight="600" text-anchor="middle">4</text>
+<rect x="264" y="542" width="230" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="264" y="562" width="150" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="572" y="552" width="110" height="6" rx="3" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="572" y="552" width="48.400000000000006" height="6" rx="3" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="712" y="544" width="64" height="22" rx="11.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<text x="744.0" y="559.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">▾ 4.2%</text>
+<rect x="812" y="548" width="70" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="912" y="544" width="110" height="22" rx="11.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<circle cx="1072" cy="556" r="4" fill="#c9ced5" stroke="none"/>
+<rect x="172" y="602" width="1070" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="192" y="630" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#9aa0a8" font-weight="400" text-anchor="middle">▲</text>
+<text x="192" y="646" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#9aa0a8" font-weight="400" text-anchor="middle">▼</text>
+<rect x="210" y="616" width="36" height="36" rx="10" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="228" y="639" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#374151" font-weight="600" text-anchor="middle">5</text>
+<rect x="264" y="620" width="230" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="264" y="640" width="150" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="572" y="630" width="110" height="6" rx="3" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="572" y="630" width="35.20000000000001" height="6" rx="3" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="712" y="622" width="64" height="22" rx="11.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<text x="744.0" y="637.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">▾ 4.2%</text>
+<rect x="812" y="626" width="70" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="912" y="622" width="110" height="22" rx="11.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<circle cx="1072" cy="634" r="4" fill="#c9ced5" stroke="none"/>
+<circle cx="182" cy="322" r="11" fill="#3d5afe"/>
+<text x="182" y="326" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">3</text>
+<circle cx="742" cy="301" r="11" fill="#3d5afe"/>
+<text x="742" y="305" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">4</text>
+<text x="152" y="726" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="start" letter-spacing="0.06em">BY CATEGORY (TAB 2) — 11 rooms/zones as image cards</text>
+<rect x="152" y="738" width="264" height="150" rx="16" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="162" y="748" width="244" height="84" rx="10" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<line x1="168" y1="754" x2="400" y2="826" stroke="#b9bfc7" stroke-width="1"/>
+<line x1="400" y1="754" x2="168" y2="826" stroke="#b9bfc7" stroke-width="1"/>
+<rect x="170" y="756" width="78" height="20" rx="10.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="166" y="844" width="130" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="166" y="862" width="80" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="352" y="850" width="48" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="436" y="738" width="264" height="150" rx="16" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="446" y="748" width="244" height="84" rx="10" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<line x1="452" y1="754" x2="684" y2="826" stroke="#b9bfc7" stroke-width="1"/>
+<line x1="684" y1="754" x2="452" y2="826" stroke="#b9bfc7" stroke-width="1"/>
+<rect x="454" y="756" width="78" height="20" rx="10.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="450" y="844" width="130" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="450" y="862" width="80" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="636" y="850" width="48" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="720" y="738" width="264" height="150" rx="16" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="730" y="748" width="244" height="84" rx="10" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<line x1="736" y1="754" x2="968" y2="826" stroke="#b9bfc7" stroke-width="1"/>
+<line x1="968" y1="754" x2="736" y2="826" stroke="#b9bfc7" stroke-width="1"/>
+<rect x="738" y="756" width="78" height="20" rx="10.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="734" y="844" width="130" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="734" y="862" width="80" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="920" y="850" width="48" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="1004" y="738" width="264" height="150" rx="16" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="1014" y="748" width="244" height="84" rx="10" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<line x1="1020" y1="754" x2="1252" y2="826" stroke="#b9bfc7" stroke-width="1"/>
+<line x1="1252" y1="754" x2="1020" y2="826" stroke="#b9bfc7" stroke-width="1"/>
+<rect x="1022" y="756" width="78" height="20" rx="10.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="1018" y="844" width="130" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="1018" y="862" width="80" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="1204" y="850" width="48" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<circle cx="1262" cy="810" r="11" fill="#3d5afe"/>
+<text x="1262" y="814" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">5</text>
+<text x="1300" y="170" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#374151" font-weight="600" text-anchor="start" letter-spacing="0.14em">ANNOTATIONS</text>
+<circle cx="1311" cy="197" r="11" fill="#3d5afe"/>
+<text x="1311" y="201" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">1</text>
+<text x="1332" y="201" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Capture is cheap</text>
+<text x="1332" y="220" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">New ideas take 20 seconds: title, room,</text>
+<text x="1332" y="236" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">cost, store link. Everything else can</text>
+<text x="1332" y="252" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">be layered on later.</text>
+<circle cx="1311" cy="283" r="11" fill="#3d5afe"/>
+<text x="1311" y="287" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">2</text>
+<text x="1332" y="287" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Two views, one dataset</text>
+<text x="1332" y="306" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Tabs switch mental model — &#x27;what&#x27;s next</text>
+<text x="1332" y="322" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">for the house&#x27; vs &#x27;what&#x27;s left in this room&#x27;</text>
+<text x="1332" y="338" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">— without forking the source of truth.</text>
+<circle cx="1311" cy="369" r="11" fill="#3d5afe"/>
+<text x="1311" y="373" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">3</text>
+<text x="1332" y="373" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Explicit re-ranking</text>
+<text x="1332" y="392" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Up/down controls instead of drag on v1:</text>
+<text x="1332" y="408" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">predictable, keyboard-friendly, and</text>
+<text x="1332" y="424" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">syncs a single rank swap to the DB.</text>
+<circle cx="1311" cy="455" r="11" fill="#3d5afe"/>
+<text x="1311" y="459" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">4</text>
+<text x="1332" y="459" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Price trend inline</text>
+<text x="1332" y="478" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Trend chip shows % change since tracking</text>
+<text x="1332" y="494" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">began; green = falling = wait paying off.</text>
+<circle cx="1311" cy="525" r="11" fill="#3d5afe"/>
+<text x="1311" y="529" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">5</text>
+<text x="1332" y="529" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Rooms as cards</text>
+<text x="1332" y="548" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Inspiration imagery keeps the by-room</text>
+<text x="1332" y="564" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">view emotional, not administrative.</text>
+<text x="1332" y="580" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Empty rooms get an inviting prompt.</text></svg>

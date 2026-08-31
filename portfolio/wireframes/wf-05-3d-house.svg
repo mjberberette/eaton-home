@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="1080" viewBox="0 0 1720 1080"><rect width="1720" height="1080" fill="#f3f4f6"/><rect x="0.5" y="0.5" width="1719" height="1079" fill="#ffffff" stroke="#d5dae0"/><rect x="0" y="0" width="1720" height="74" rx="0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<line x1="0" y1="74" x2="1720" y2="74" stroke="#d5dae0" stroke-width="1"/>
+<rect x="36" y="22" width="30" height="30" rx="8" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<line x1="43" y1="40" x2="51" y2="31" stroke="#6b7280" stroke-width="2"/>
+<line x1="51" y1="31" x2="59" y2="40" stroke="#6b7280" stroke-width="2"/>
+<text x="80" y="36" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#374151" font-weight="600" text-anchor="start" letter-spacing="0.18em">EATON HOME</text>
+<text x="80" y="54" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="start">Household OS — UX documentation</text>
+<text x="860.0" y="45" font-family="Helvetica Neue, Arial, sans-serif" font-size="19" fill="#374151" font-weight="500" text-anchor="middle">3D House — the home as navigation</text>
+<text x="1684" y="36" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#6b7280" font-weight="400" text-anchor="end">WF-05 · Lo-fi wireframe · v2</text>
+<text x="1684" y="54" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="end">M. Eaton · Parker, CO · 2026</text>
+<rect x="60" y="130" width="64" height="860" rx="18" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="76" y="148" width="32" height="32" rx="9" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="77" y="220" width="30" height="30" rx="9" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="266" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="312" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="358" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="77" y="404" width="30" height="30" rx="9" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<circle cx="86" cy="916" r="8" fill="#c9ced5" stroke="none"/>
+<circle cx="100" cy="916" r="8" fill="#eceef1" stroke="none"/>
+<rect x="79" y="942" width="26" height="26" rx="8" fill="none" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="152" y="130" width="1110" height="860" rx="26" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="180" y="170" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="start" letter-spacing="0.2em">THE EATON RESIDENCE</text>
+<rect x="180" y="186" width="240" height="20" rx="10.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<circle cx="186" cy="230" r="4" fill="#c9ced5" stroke="none"/>
+<rect x="196" y="226" width="56" height="7" rx="3.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<circle cx="278" cy="230" r="4" fill="#c9ced5" stroke="none"/>
+<rect x="288" y="226" width="56" height="7" rx="3.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<circle cx="370" cy="230" r="4" fill="#c9ced5" stroke="none"/>
+<rect x="380" y="226" width="56" height="7" rx="3.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<circle cx="462" cy="230" r="4" fill="#c9ced5" stroke="none"/>
+<rect x="472" y="226" width="56" height="7" rx="3.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="982" y="158" width="250" height="30" rx="15.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<text x="1107.0" y="177.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">DRAG TO ORBIT · TAP A DOT</text>
+<line x1="572" y1="560" x2="702" y2="460" stroke="#6b7280" stroke-width="2.4"/>
+<line x1="702" y1="460" x2="832" y2="560" stroke="#6b7280" stroke-width="2.4"/>
+<rect x="592" y="560" width="220" height="150" rx="0" fill="none" stroke="#6b7280" stroke-width="2.4"/>
+<rect x="822" y="610" width="130" height="100" rx="0" fill="none" stroke="#6b7280" stroke-width="2.4"/>
+<rect x="632" y="600" width="40" height="40" rx="0" fill="none" stroke="#6b7280" stroke-width="1.6"/>
+<rect x="722" y="600" width="40" height="40" rx="0" fill="none" stroke="#6b7280" stroke-width="1.6"/>
+<line x1="512" y1="710" x2="1012" y2="710" stroke="#6b7280" stroke-width="2"/>
+<circle cx="642" cy="550" r="6" fill="#3d5afe" stroke="none"/>
+<circle cx="642" cy="550" r="11" fill="none" stroke="#3d5afe" stroke-width="1.2" opacity="0.5"/>
+<circle cx="822" cy="520" r="6" fill="#3d5afe" stroke="none"/>
+<circle cx="822" cy="520" r="11" fill="none" stroke="#3d5afe" stroke-width="1.2" opacity="0.5"/>
+<circle cx="902" cy="640" r="6" fill="#3d5afe" stroke="none"/>
+<circle cx="902" cy="640" r="11" fill="none" stroke="#3d5afe" stroke-width="1.2" opacity="0.5"/>
+<circle cx="582" cy="660" r="6" fill="#3d5afe" stroke="none"/>
+<circle cx="582" cy="660" r="11" fill="none" stroke="#3d5afe" stroke-width="1.2" opacity="0.5"/>
+<circle cx="772" cy="715" r="6" fill="#3d5afe" stroke="none"/>
+<circle cx="772" cy="715" r="11" fill="none" stroke="#3d5afe" stroke-width="1.2" opacity="0.5"/>
+<circle cx="872" cy="490" r="11" fill="#3d5afe"/>
+<text x="872" y="494" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">2</text>
+<rect x="176" y="270" width="270" height="560" rx="20" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="196" y="302" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#9aa0a8" font-weight="400" text-anchor="start" letter-spacing="0.14em">UPGRADE MARKERS</text>
+<rect x="192" y="320" width="238" height="50" rx="12" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<circle cx="208" cy="345" r="4" fill="#c9ced5" stroke="none"/>
+<rect x="220" y="334" width="120" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="220" y="352" width="70" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="364" y="340" width="50" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="192" y="382" width="238" height="50" rx="12" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<circle cx="208" cy="407" r="4" fill="#c9ced5" stroke="none"/>
+<rect x="220" y="396" width="120" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="220" y="414" width="70" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="364" y="402" width="50" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="192" y="444" width="238" height="50" rx="12" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<circle cx="208" cy="469" r="4" fill="#c9ced5" stroke="none"/>
+<rect x="220" y="458" width="120" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="220" y="476" width="70" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="364" y="464" width="50" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="192" y="506" width="238" height="50" rx="12" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<circle cx="208" cy="531" r="4" fill="#c9ced5" stroke="none"/>
+<rect x="220" y="520" width="120" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="220" y="538" width="70" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="364" y="526" width="50" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="192" y="568" width="238" height="50" rx="12" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<circle cx="208" cy="593" r="4" fill="#c9ced5" stroke="none"/>
+<rect x="220" y="582" width="120" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="220" y="600" width="70" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="364" y="588" width="50" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="192" y="630" width="238" height="50" rx="12" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<circle cx="208" cy="655" r="4" fill="#c9ced5" stroke="none"/>
+<rect x="220" y="644" width="120" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="220" y="662" width="70" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="364" y="650" width="50" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<circle cx="458" cy="298" r="11" fill="#3d5afe"/>
+<text x="458" y="302" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">1</text>
+<rect x="982" y="750" width="250" height="54" rx="16" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="996" y="761" width="32" height="32" rx="10" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="1038" y="766" width="120" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="1038" y="784" width="70" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="982" y="816" width="250" height="54" rx="16" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="996" y="827" width="32" height="32" rx="10" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="1038" y="832" width="120" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="1038" y="850" width="70" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="982" y="882" width="250" height="54" rx="16" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="996" y="893" width="32" height="32" rx="10" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="1038" y="898" width="120" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="1038" y="916" width="70" height="6" rx="3.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<circle cx="1247" cy="775" r="11" fill="#3d5afe"/>
+<text x="1247" y="779" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">3</text>
+<rect x="532" y="830" width="330" height="130" rx="18" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="548" y="846" width="90" height="20" rx="10.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<rect x="548" y="880" width="200" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="548" y="904" width="190" height="6" rx="3" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="548" y="904" width="120" height="6" rx="3" fill="#c9ced5" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="752" y="900" width="70" height="11" rx="5.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<text x="548" y="938" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#3d5afe" font-weight="400" text-anchor="start" letter-spacing="0.06em">OPEN PROJECT ↗</text>
+<circle cx="882" cy="895" r="11" fill="#3d5afe"/>
+<text x="882" y="899" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">4</text>
+<text x="1300" y="170" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#374151" font-weight="600" text-anchor="start" letter-spacing="0.14em">ANNOTATIONS</text>
+<circle cx="1311" cy="197" r="11" fill="#3d5afe"/>
+<text x="1311" y="201" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">1</text>
+<text x="1332" y="201" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Docked marker index</text>
+<text x="1332" y="220" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Every hotspot, ranked. Hover/press syncs</text>
+<text x="1332" y="236" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">with the model — list and space are the</text>
+<text x="1332" y="252" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">same dataset, two projections.</text>
+<circle cx="1311" cy="283" r="11" fill="#3d5afe"/>
+<text x="1311" y="287" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">2</text>
+<text x="1332" y="287" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Status-coloured hotspots</text>
+<text x="1332" y="306" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Dot colour = project status; pulse ring</text>
+<text x="1332" y="322" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">draws the eye. Tooltip carries title + cost.</text>
+<circle cx="1311" cy="353" r="11" fill="#3d5afe"/>
+<text x="1311" y="357" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">3</text>
+<text x="1332" y="357" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Ambient care alerts</text>
+<text x="1332" y="376" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Due/overdue chores float at the edge —</text>
+<text x="1332" y="392" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">the house &#x27;tells you&#x27; what it needs,</text>
+<text x="1332" y="408" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">echoing smart-home dashboards.</text>
+<circle cx="1311" cy="439" r="11" fill="#3d5afe"/>
+<text x="1311" y="443" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">4</text>
+<text x="1332" y="443" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Detail on demand</text>
+<text x="1332" y="462" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Selection opens a compact card, never a</text>
+<text x="1332" y="478" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">modal — the scene stays explorable.</text>
+<text x="1332" y="494" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Full page one click deeper.</text></svg>

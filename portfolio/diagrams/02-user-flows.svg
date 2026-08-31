@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="980" viewBox="0 0 1720 980"><rect width="1720" height="980" fill="#f3f4f6"/><rect x="0.5" y="0.5" width="1719" height="979" fill="#ffffff" stroke="#d5dae0"/><rect x="0" y="0" width="1720" height="74" rx="0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<line x1="0" y1="74" x2="1720" y2="74" stroke="#d5dae0" stroke-width="1"/>
+<rect x="36" y="22" width="30" height="30" rx="8" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<line x1="43" y1="40" x2="51" y2="31" stroke="#6b7280" stroke-width="2"/>
+<line x1="51" y1="31" x2="59" y2="40" stroke="#6b7280" stroke-width="2"/>
+<text x="80" y="36" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#374151" font-weight="600" text-anchor="start" letter-spacing="0.18em">EATON HOME</text>
+<text x="80" y="54" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="start">Household OS — UX documentation</text>
+<text x="860.0" y="45" font-family="Helvetica Neue, Arial, sans-serif" font-size="19" fill="#374151" font-weight="500" text-anchor="middle">Primary user flows</text>
+<text x="1684" y="36" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#6b7280" font-weight="400" text-anchor="end">UX-02 · Flow diagram · v2</text>
+<text x="1684" y="54" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="end">M. Eaton · Parker, CO · 2026</text>
+<text x="100" y="150" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#374151" font-weight="700" text-anchor="start" letter-spacing="0.1em">FLOW A — BUY AT THE RIGHT TIME</text>
+<rect x="100" y="190" width="170" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="185.0" y="218" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Capture idea</text>
+<text x="185.0" y="236" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">title · room · cost</text>
+<line x1="270" y1="222" x2="310" y2="222" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="310" y1="222" x2="302.2880012196795" y2="226.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="310" y1="222" x2="302.2880012196795" y2="217.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="310" y="190" width="170" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="395.0" y="218" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Rank on master list</text>
+<text x="395.0" y="236" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">explicit ▲▼</text>
+<line x1="480" y1="222" x2="520" y2="222" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="520" y1="222" x2="512.2880012196795" y2="226.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="520" y1="222" x2="512.2880012196795" y2="217.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="520" y="190" width="190" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="615.0" y="218" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Check the market</text>
+<text x="615.0" y="236" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">6 retailers · zip-scoped</text>
+<line x1="710" y1="222" x2="750" y2="222" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="750" y1="222" x2="742.2880012196795" y2="226.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="750" y1="222" x2="742.2880012196795" y2="217.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="750" y="190" width="150" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="825.0" y="218" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Log offers</text>
+<text x="825.0" y="236" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">history grows</text>
+<line x1="900" y1="222" x2="946" y2="222" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="946" y1="222" x2="938.2880012196795" y2="226.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="946" y1="222" x2="938.2880012196795" y2="217.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<path d="M 1010 182 L 1072 222 L 1010 262 L 948 222 Z" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="1010" y="226" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#374151" font-weight="600" text-anchor="middle">tracked low?</text>
+<line x1="1072" y1="222" x2="1112" y2="222" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="1112" y1="222" x2="1104.2880012196795" y2="226.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="1112" y1="222" x2="1104.2880012196795" y2="217.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<text x="1030" y="170" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#9aa0a8" font-weight="400" text-anchor="start">no → keep watching (loop)</text>
+<path d="M 1010 182 C 1010 120, 340 120, 340 186" fill="none" stroke="#9aa0a8" stroke-width="1.4" stroke-dasharray="5 4"/>
+<rect x="1112" y="190" width="170" height="64" rx="14" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="1197.0" y="218" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Buy · log spend</text>
+<text x="1197.0" y="236" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">&#x27;best time&#x27; signal</text>
+<line x1="1282" y1="222" x2="1322" y2="222" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="1322" y1="222" x2="1314.2880012196795" y2="226.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="1322" y1="222" x2="1314.2880012196795" y2="217.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="1322" y="190" width="190" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="1417.0" y="218" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Progress → After photo</text>
+<text x="1417.0" y="236" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">done state</text>
+<text x="100" y="420" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#374151" font-weight="700" text-anchor="start" letter-spacing="0.1em">FLOW B — SATURDAY MORNING PLANNING</text>
+<rect x="100" y="460" width="170" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="185.0" y="488" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Open dashboard</text>
+<text x="185.0" y="506" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">30-sec briefing</text>
+<line x1="270" y1="492" x2="310" y2="492" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="310" y1="492" x2="302.2880012196795" y2="496.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="310" y1="492" x2="302.2880012196795" y2="487.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="310" y="460" width="190" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="405.0" y="488" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Scan care alerts</text>
+<text x="405.0" y="506" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">overdue escalation</text>
+<line x1="500" y1="492" x2="540" y2="492" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="540" y1="492" x2="532.2880012196795" y2="496.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="540" y1="492" x2="532.2880012196795" y2="487.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="540" y="460" width="170" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="625.0" y="488" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Orbit 3D house</text>
+<text x="625.0" y="506" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">spatial recall</text>
+<line x1="710" y1="492" x2="750" y2="492" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="750" y1="492" x2="742.2880012196795" y2="496.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="750" y1="492" x2="742.2880012196795" y2="487.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="750" y="460" width="160" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="830.0" y="488" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Tap hotspot</text>
+<text x="830.0" y="506" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">status colour</text>
+<line x1="910" y1="492" x2="950" y2="492" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="950" y1="492" x2="942.2880012196795" y2="496.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="950" y1="492" x2="942.2880012196795" y2="487.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="950" y="460" width="170" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="1035.0" y="488" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Open project</text>
+<text x="1035.0" y="506" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">plan + budget fit</text>
+<line x1="1120" y1="492" x2="1160" y2="492" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="1160" y1="492" x2="1152.2880012196795" y2="496.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="1160" y1="492" x2="1152.2880012196795" y2="487.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="1160" y="460" width="190" height="64" rx="14" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="1255.0" y="488" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Agree on the weekend</text>
+<text x="1255.0" y="506" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">shared decision</text>
+<text x="100" y="690" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#374151" font-weight="700" text-anchor="start" letter-spacing="0.1em">FLOW C — RECURRING CARE</text>
+<rect x="100" y="730" width="190" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="195.0" y="758" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Cycle fills up</text>
+<text x="195.0" y="776" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">interval elapsed %</text>
+<line x1="290" y1="762" x2="330" y2="762" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="330" y1="762" x2="322.2880012196795" y2="766.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="330" y1="762" x2="322.2880012196795" y2="757.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="330" y="730" width="200" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="430.0" y="758" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Surfaces on dashboard</text>
+<text x="430.0" y="776" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">≤14 days out</text>
+<line x1="530" y1="762" x2="570" y2="762" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="570" y1="762" x2="562.2880012196795" y2="766.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="570" y1="762" x2="562.2880012196795" y2="757.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="570" y="730" width="190" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="665.0" y="758" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Escalates on house</text>
+<text x="665.0" y="776" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">alert chip at edge</text>
+<line x1="760" y1="762" x2="800" y2="762" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="800" y1="762" x2="792.2880012196795" y2="766.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="800" y1="762" x2="792.2880012196795" y2="757.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="800" y="730" width="180" height="64" rx="14" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="890.0" y="758" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Mark done today</text>
+<text x="890.0" y="776" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">one tap</text>
+<line x1="980" y1="762" x2="1020" y2="762" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="1020" y1="762" x2="1012.2880012196795" y2="766.6395123463932" stroke="#9aa0a8" stroke-width="1.6"/>
+<line x1="1020" y1="762" x2="1012.2880012196795" y2="757.3604876536068" stroke="#9aa0a8" stroke-width="1.6"/>
+<rect x="1020" y="730" width="170" height="64" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="1105.0" y="758" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="middle">Cycle restarts</text>
+<text x="1105.0" y="776" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#6b7280" font-weight="400" text-anchor="middle">next due computed</text>
+<text x="1180" y="762" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#6b7280" font-weight="400" text-anchor="start">Design goal: chores ask politely,</text>
+<text x="1180" y="780" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#6b7280" font-weight="400" text-anchor="start">then insist — never nag by default.</text></svg>

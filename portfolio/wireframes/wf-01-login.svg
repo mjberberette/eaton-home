@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="1080" viewBox="0 0 1720 1080"><rect width="1720" height="1080" fill="#f3f4f6"/><rect x="0.5" y="0.5" width="1719" height="1079" fill="#ffffff" stroke="#d5dae0"/><rect x="0" y="0" width="1720" height="74" rx="0" fill="#ffffff" stroke="none" stroke-width="0"/>
+<line x1="0" y1="74" x2="1720" y2="74" stroke="#d5dae0" stroke-width="1"/>
+<rect x="36" y="22" width="30" height="30" rx="8" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<line x1="43" y1="40" x2="51" y2="31" stroke="#6b7280" stroke-width="2"/>
+<line x1="51" y1="31" x2="59" y2="40" stroke="#6b7280" stroke-width="2"/>
+<text x="80" y="36" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="#374151" font-weight="600" text-anchor="start" letter-spacing="0.18em">EATON HOME</text>
+<text x="80" y="54" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="start">Household OS — UX documentation</text>
+<text x="860.0" y="45" font-family="Helvetica Neue, Arial, sans-serif" font-size="19" fill="#374151" font-weight="500" text-anchor="middle">Login — dual-entry authentication</text>
+<text x="1684" y="36" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#6b7280" font-weight="400" text-anchor="end">WF-01 · Lo-fi wireframe · v2</text>
+<text x="1684" y="54" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#9aa0a8" font-weight="400" text-anchor="end">M. Eaton · Parker, CO · 2026</text>
+<rect x="60" y="130" width="1180" height="860" rx="28" fill="#f3f4f6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="88" y="158" width="620" height="804" rx="22" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<rect x="120" y="194" width="40" height="40" rx="11" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="172" y="206" width="90" height="12" rx="6.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="120" y="550" width="260" height="24" rx="12.0" fill="#eceef1" stroke="#b9bfc7" stroke-width="1.2"/>
+<text x="250.0" y="566.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#6b7280" font-weight="400" text-anchor="middle">TAGLINE / POSITIONING PILL</text>
+<rect x="120" y="600" width="380" height="26" rx="13.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="120" y="638" width="320" height="26" rx="13.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="120" y="676" width="220" height="26" rx="13.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="120" y="736" width="330" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<rect x="120" y="752" width="198.0" height="9" rx="4.5" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<text x="120" y="914" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#9aa0a8" font-weight="400" text-anchor="start" letter-spacing="0.14em">PRIORITIES · BUDGET · 3D HOUSE · CARE</text>
+<circle cx="400" cy="230" r="11" fill="#3d5afe"/>
+<text x="400" y="234" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">2</text>
+<text x="750" y="226" font-family="Helvetica Neue, Arial, sans-serif" font-size="24" fill="#374151" font-weight="300" text-anchor="start">Welcome home</text>
+<rect x="750" y="246" width="260" height="8" rx="4.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<text x="750" y="300" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#9aa0a8" font-weight="400" text-anchor="start" letter-spacing="0.1em">EMAIL</text>
+<rect x="750" y="312" width="420" height="44" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<circle cx="772" cy="334" r="7" fill="#dde1e6" stroke="none"/>
+<text x="750" y="392" font-family="Helvetica Neue, Arial, sans-serif" font-size="10.5" fill="#9aa0a8" font-weight="400" text-anchor="start" letter-spacing="0.1em">PASSWORD</text>
+<rect x="750" y="404" width="420" height="44" rx="14" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<circle cx="772" cy="426" r="7" fill="#dde1e6" stroke="none"/>
+<rect x="750" y="510" width="420" height="46" rx="23.0" fill="#dde1e6" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="960.0" y="537.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#374151" font-weight="500" text-anchor="middle">SIGN IN</text>
+<circle cx="1200" cy="533" r="11" fill="#3d5afe"/>
+<text x="1200" y="537" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">1</text>
+<line x1="750" y1="600" x2="930" y2="600" stroke="#d5dae0" stroke-width="1.5"/>
+<text x="960" y="604" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#9aa0a8" font-weight="400" text-anchor="start">OR</text>
+<line x1="990" y1="600" x2="1170" y2="600" stroke="#d5dae0" stroke-width="1.5"/>
+<rect x="750" y="630" width="420" height="46" rx="23.0" fill="#ffffff" stroke="#b9bfc7" stroke-width="1.5"/>
+<text x="960.0" y="657.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#374151" font-weight="500" text-anchor="middle">STEP INSIDE THE DEMO HOME</text>
+<circle cx="1200" cy="653" r="11" fill="#3d5afe"/>
+<text x="1200" y="657" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">3</text>
+<rect x="810" y="710" width="300" height="8" rx="4.0" fill="#c9ced5" stroke="none" stroke-width="0"/>
+<text x="1300" y="170" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#374151" font-weight="600" text-anchor="start" letter-spacing="0.14em">ANNOTATIONS</text>
+<circle cx="1311" cy="197" r="11" fill="#3d5afe"/>
+<text x="1311" y="201" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">1</text>
+<text x="1332" y="201" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Primary auth</text>
+<text x="1332" y="220" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Supabase email + password. Errors inline,</text>
+<text x="1332" y="236" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">never a modal. Enter submits.</text>
+<circle cx="1311" cy="267" r="11" fill="#3d5afe"/>
+<text x="1311" y="271" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">2</text>
+<text x="1332" y="271" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Brand panel earns its width</text>
+<text x="1332" y="290" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Positioning copy sells the product to the</text>
+<text x="1332" y="306" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">second user (Nate) before first sign-in.</text>
+<text x="1332" y="322" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Collapses entirely on mobile.</text>
+<circle cx="1311" cy="353" r="11" fill="#3d5afe"/>
+<text x="1311" y="357" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="600" text-anchor="middle">3</text>
+<text x="1332" y="357" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#374151" font-weight="600" text-anchor="start">Zero-config demo path</text>
+<text x="1332" y="376" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">A guest entrance seeded with realistic data.</text>
+<text x="1332" y="392" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">Removes the empty-state cold start and</text>
+<text x="1332" y="408" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" fill="#6b7280" font-weight="400" text-anchor="start">doubles as the stakeholder demo.</text></svg>
