@@ -50,6 +50,20 @@ export const SEED_PROJECTS: Project[] = [
       { date: ago(40), price: 4950, note: "Spring sale" },
       { date: ago(10), price: 4800, note: "Memorial Day pricing" },
     ],
+    notes: [
+      {
+        id: "n-deck-1",
+        author: "Nate",
+        text: "Measured the run this weekend — 12'4\" to the fence line, so we're good on setback. Footings need to clear the sprinkler main on the east side.",
+        createdAt: agoTime(50),
+      },
+      {
+        id: "n-deck-2",
+        author: "Melanie",
+        text: "I like the cable railing in the inspiration pic way more than balusters. Adds ~$600 but worth it for the view.",
+        createdAt: agoTime(6),
+      },
+    ],
     createdAt: ago(140),
     updatedBy: "Nate",
     updatedAt: agoTime(2),
@@ -74,6 +88,14 @@ export const SEED_PROJECTS: Project[] = [
       { date: ago(90), price: 6900, note: "Showroom quote" },
       { date: ago(55), price: 6550 },
       { date: ago(20), price: 6200, note: "Contractor referral discount" },
+    ],
+    notes: [
+      {
+        id: "n-counter-1",
+        author: "Melanie",
+        text: "Showroom visit booked for Saturday 10am. Bring the cabinet door for color matching!",
+        createdAt: agoTime(28),
+      },
     ],
     createdAt: ago(95),
     updatedBy: "Melanie",
@@ -147,6 +169,14 @@ export const SEED_PROJECTS: Project[] = [
       { date: ago(95), price: 1480 },
       { date: ago(50), price: 1340 },
       { date: ago(7), price: 1250, note: "Lowest tracked — good time to buy" },
+    ],
+    notes: [
+      {
+        id: "n-ev-1",
+        author: "Nate",
+        text: "Panel has room for a 60A breaker — confirmed with the electrician. Install quote was $420 on top of the unit.",
+        createdAt: agoTime(31),
+      },
     ],
     createdAt: ago(160),
     updatedBy: "Nate",

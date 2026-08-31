@@ -21,6 +21,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { ArrowUpRight, GripVertical, ImageIcon, Pencil, Plus } from "lucide-react";
 import { Reveal } from "@/components/anim";
 import { ProjectFormDialog } from "@/components/project-form-dialog";
+import { SafeImage } from "@/components/safe-image";
 import { StatusBadge, TrendChip } from "@/components/project-bits";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -163,11 +164,9 @@ export default function ProjectsPage() {
                       >
                         <div className="relative h-32 overflow-hidden bg-gradient-to-br from-secondary to-muted">
                           {p.inspirationImage ? (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img
+                            <SafeImage
                               src={p.inspirationImage}
                               alt=""
-                              loading="lazy"
                               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                             />
                           ) : (

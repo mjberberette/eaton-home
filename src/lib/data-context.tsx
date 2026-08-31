@@ -13,7 +13,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { createClient } from "./supabase/client";
 import { isSupabaseConfigured } from "./supabase/config";
 import { SEED_DB } from "./seed";
-import type { Budget, HomeDB, PricePoint, Project, RecurringTask } from "./types";
+import type { Budget, HomeDB, PricePoint, Project, ProjectNote, RecurringTask } from "./types";
 
 const STORAGE_KEY = "eaton-home-db-v1";
 
@@ -30,6 +30,8 @@ interface DataContextValue {
   completeTask: (id: string) => void;
   updateBudget: (patch: Partial<Budget>) => void;
   addPricePoint: (projectId: string, point: PricePoint) => void;
+  addNote: (projectId: string, text: string) => void;
+  deleteNote: (projectId: string, noteId: string) => void;
 }
 
 const DataContext = createContext<DataContextValue | null>(null);
@@ -53,6 +55,7 @@ type ProjectRow = {
   after_image: string | null;
   hotspot: Project["hotspot"] | null;
   price_history: PricePoint[] | null;
+  notes: ProjectNote[] | null;
   created_at: string;
   updated_by: string | null;
   updated_at: string | null;
@@ -76,6 +79,7 @@ function rowToProject(r: ProjectRow): Project {
     afterImage: r.after_image ?? undefined,
     hotspot: r.hotspot ?? undefined,
     priceHistory: r.price_history ?? [],
+    notes: r.notes ?? [],
     createdAt: r.created_at,
     updatedBy: r.updated_by ?? undefined,
     updatedAt: r.updated_at ?? undefined,
@@ -100,6 +104,7 @@ function projectToRow(p: Project): ProjectRow {
     after_image: p.afterImage ?? null,
     hotspot: p.hotspot ?? null,
     price_history: p.priceHistory,
+    notes: p.notes ?? [],
     created_at: p.createdAt,
     updated_by: p.updatedBy ?? null,
     updated_at: p.updatedAt ?? null,
@@ -413,6 +418,55 @@ export function DataProvider({
     [apply, remote, stamp]
   );
 
+  const addNote = useCallback(
+    (projectId: string, text: string) => {
+      const trimmed = text.trim();
+      if (!trimmed) return;
+      const note: ProjectNote = {
+        id: `n-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`,
+        author: userName,
+        text: trimmed,
+        createdAt: new Date().toISOString(),
+      };
+      const meta = stamp();
+      apply((prev) => ({
+        ...prev,
+        projects: prev.projects.map((p) =>
+          p.id === projectId ? { ...p, notes: [...(p.notes ?? []), note], ...meta } : p
+        ),
+      }));
+      if (remote) {
+        setDb((current) => {
+          const p = current.projects.find((x) => x.id === projectId);
+          if (p) void remote.from("projects").upsert(projectToRow(p));
+          return current;
+        });
+      }
+    },
+    [apply, remote, stamp, userName]
+  );
+
+  const deleteNote = useCallback(
+    (projectId: string, noteId: string) => {
+      apply((prev) => ({
+        ...prev,
+        projects: prev.projects.map((p) =>
+          p.id === projectId
+            ? { ...p, notes: (p.notes ?? []).filter((n) => n.id !== noteId) }
+            : p
+        ),
+      }));
+      if (remote) {
+        setDb((current) => {
+          const p = current.projects.find((x) => x.id === projectId);
+          if (p) void remote.from("projects").upsert(projectToRow(p));
+          return current;
+        });
+      }
+    },
+    [apply, remote]
+  );
+
   const value = useMemo(
     () => ({
       db,
@@ -426,8 +480,10 @@ export function DataProvider({
       completeTask,
       updateBudget,
       addPricePoint,
+      addNote,
+      deleteNote,
     }),
-    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, completeTask, updateBudget, addPricePoint]
+    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, completeTask, updateBudget, addPricePoint, addNote, deleteNote]
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

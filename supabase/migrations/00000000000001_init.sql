@@ -28,6 +28,8 @@ create table public.projects (
   hotspot jsonb,
   -- array of {date, price, note?} points for best-time-to-buy tracking
   price_history jsonb not null default '[]'::jsonb,
+  -- array of {id, author, text, createdAt} household notes
+  notes jsonb not null default '[]'::jsonb,
   created_at date not null default current_date,
   -- household member attribution ("changed by Nate")
   updated_by text,

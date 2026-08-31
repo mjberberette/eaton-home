@@ -23,6 +23,14 @@ export interface Hotspot {
   z: number;
 }
 
+export interface ProjectNote {
+  id: string;
+  author: string;
+  text: string;
+  /** ISO timestamp */
+  createdAt: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -42,6 +50,8 @@ export interface Project {
   afterImage?: string;
   hotspot?: Hotspot;
   priceHistory: PricePoint[];
+  /** Running conversation between household members about this project */
+  notes?: ProjectNote[];
   createdAt: string;
   /** Household member who last changed this project */
   updatedBy?: string;

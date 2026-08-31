@@ -16,6 +16,8 @@ import {
 import { Reveal } from "@/components/anim";
 import { PriceCheck } from "@/components/price-check";
 import { ProjectFormDialog } from "@/components/project-form-dialog";
+import { ProjectNotes } from "@/components/project-notes";
+import { SafeImage } from "@/components/safe-image";
 import { StatusBadge, TrendChip } from "@/components/project-bits";
 import { PriceChart } from "@/components/price-chart";
 import { Button } from "@/components/ui/button";
@@ -275,9 +277,11 @@ export default function ProjectDetailPage() {
               The plan
             </h2>
             <p className="text-sm font-light leading-relaxed text-foreground/85">
-              {project.description || "No notes yet — add the vision."}
+              {project.description || "No plan written yet — add the vision."}
             </p>
           </section>
+
+          <ProjectNotes project={project} />
         </div>
       </div>
     </Reveal>
@@ -300,11 +304,9 @@ function GalleryTile({
   return (
     <figure className="glass group relative h-56 overflow-hidden rounded-[1.75rem]">
       {src ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <SafeImage
           src={src}
           alt={label}
-          loading="lazy"
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
       ) : (
