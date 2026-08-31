@@ -1,0 +1,13 @@
+<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="48" height="48" rx="14" fill="url(#eaton-bg)" />
+  <path d="M12 22.5 24 12l12 10.5" stroke="#3CDBC8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M17 24.5h14" stroke="#FFDC26" stroke-width="2.6" stroke-linecap="round" />
+  <path d="M17 30h11" stroke="#EAF4F1" stroke-width="2.6" stroke-linecap="round" />
+  <path d="M17 35.5h14" stroke="#EAF4F1" stroke-width="2.6" stroke-linecap="round" />
+  <defs>
+    <linearGradient id="eaton-bg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14453F" />
+      <stop offset="1" stop-color="#071E1C" />
+    </linearGradient>
+  </defs>
+</svg>
