@@ -117,6 +117,9 @@ export type ActivityAction =
   | "changed_status"
   | "logged_price"
   | "completed_task"
+  | "added_task"
+  | "updated_task"
+  | "deleted_task"
   | "updated_budget"
   | "updated_home"
   | "added_note"
@@ -142,6 +145,9 @@ export const ACTIVITY_VERB: Record<ActivityAction, string> = {
   changed_status: "changed the status of",
   logged_price: "logged a price for",
   completed_task: "completed",
+  added_task: "added the task",
+  updated_task: "updated the task",
+  deleted_task: "removed the task",
   updated_budget: "updated",
   updated_home: "updated",
   added_note: "left a note on",

@@ -42,6 +42,9 @@ interface DataContextValue {
   moveRank: (id: string, direction: -1 | 1) => void;
   setRank: (id: string, rank: number) => void;
   completeTask: (id: string) => void;
+  addTask: (task: Omit<RecurringTask, "id">) => void;
+  updateTask: (id: string, patch: Partial<RecurringTask>) => void;
+  deleteTask: (id: string) => void;
   updateBudget: (patch: Partial<Budget>) => void;
   addPricePoint: (projectId: string, point: PricePoint) => void;
   addNote: (projectId: string, text: string) => void;
@@ -551,6 +554,61 @@ export function DataProvider({
     [apply, remote, logActivity, guard]
   );
 
+  const taskToRow = (t: RecurringTask) => ({
+    id: t.id,
+    name: t.name,
+    detail: t.detail ?? null,
+    interval_days: t.intervalDays,
+    last_done: t.lastDone,
+    icon: t.icon,
+  });
+
+  const addTask = useCallback(
+    (task: Omit<RecurringTask, "id">) => {
+      const full: RecurringTask = {
+        ...task,
+        id: `t-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`,
+      };
+      apply((prev) => ({ ...prev, tasks: [...prev.tasks, full] }));
+      if (remote) guard("Adding the task", remote.from("recurring_tasks").insert(taskToRow(full)));
+      logActivity("added_task", full.name, { detail: `every ${full.intervalDays} days` });
+    },
+    [apply, remote, logActivity, guard]
+  );
+
+  const updateTask = useCallback(
+    (id: string, patch: Partial<RecurringTask>) => {
+      let name = "a task";
+      apply((prev) => ({
+        ...prev,
+        tasks: prev.tasks.map((t) => {
+          if (t.id !== id) return t;
+          name = patch.name ?? t.name;
+          return { ...t, ...patch };
+        }),
+      }));
+      if (remote) {
+        setDb((current) => {
+          const t = current.tasks.find((x) => x.id === id);
+          if (t) guard("Saving the task", remote.from("recurring_tasks").upsert(taskToRow(t)));
+          return current;
+        });
+      }
+      logActivity("updated_task", name);
+    },
+    [apply, remote, logActivity, guard]
+  );
+
+  const deleteTask = useCallback(
+    (id: string) => {
+      const name = dbRef.current.tasks.find((t) => t.id === id)?.name ?? "a task";
+      apply((prev) => ({ ...prev, tasks: prev.tasks.filter((t) => t.id !== id) }));
+      if (remote) guard("Deleting the task", remote.from("recurring_tasks").delete().eq("id", id));
+      logActivity("deleted_task", name);
+    },
+    [apply, remote, logActivity, guard]
+  );
+
   const updateBudget = useCallback(
     (patch: Partial<Budget>) => {
       apply((prev) => ({ ...prev, budget: { ...prev.budget, ...patch } }));
@@ -770,6 +828,9 @@ export function DataProvider({
       moveRank,
       setRank,
       completeTask,
+      addTask,
+      updateTask,
+      deleteTask,
       updateBudget,
       addPricePoint,
       addNote,
@@ -782,7 +843,7 @@ export function DataProvider({
       syncIssue,
       clearSyncIssue: () => setSyncIssue(null),
     }),
-    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, completeTask, updateBudget, addPricePoint, addNote, deleteNote, addItem, updateItem, deleteItem, deleteProject, updateHomeInfo, syncIssue]
+    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, completeTask, addTask, updateTask, deleteTask, updateBudget, addPricePoint, addNote, deleteNote, addItem, updateItem, deleteItem, deleteProject, updateHomeInfo, syncIssue]
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
