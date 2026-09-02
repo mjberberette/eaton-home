@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import {
   ArrowLeft,
   Camera,
@@ -12,10 +12,18 @@ import {
   Pencil,
   Plus,
   Sparkles,
+  Trash2,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Reveal } from "@/components/anim";
-import { PriceCheck } from "@/components/price-check";
 import { ProjectFormDialog } from "@/components/project-form-dialog";
+import { ProjectItems } from "@/components/project-items";
 import { ProjectNotes } from "@/components/project-notes";
 import { SafeImage } from "@/components/safe-image";
 import { StatusBadge, TrendChip } from "@/components/project-bits";
@@ -43,9 +51,11 @@ import { cn } from "@/lib/utils";
 
 export default function ProjectDetailPage() {
   const params = useParams<{ id: string }>();
-  const { db, updateProject, addPricePoint } = useHome();
+  const router = useRouter();
+  const { db, updateProject, addPricePoint, deleteProject } = useHome();
   const project = db.projects.find((p) => p.id === params.id);
   const [newPrice, setNewPrice] = useState("");
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   if (!project) {
     return (
@@ -100,6 +110,46 @@ export default function ProjectDetailPage() {
           </div>
         </div>
         <div className="flex items-center gap-2.5">
+          <Dialog open={confirmDelete} onOpenChange={setConfirmDelete}>
+            <DialogTrigger asChild>
+              <Button
+                variant="outline"
+                aria-label="Delete project"
+                className="glass-chip h-11 rounded-2xl px-4 font-light text-muted-foreground hover:text-destructive"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="glass max-w-sm rounded-3xl border-white/10">
+              <DialogHeader>
+                <DialogTitle className="text-xl font-extralight">
+                  Delete “{project.title}”?
+                </DialogTitle>
+              </DialogHeader>
+              <p className="text-sm font-light text-muted-foreground">
+                This removes the project, its items, notes, and price history for
+                both of you. There&apos;s no undo.
+              </p>
+              <div className="mt-2 flex gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setConfirmDelete(false)}
+                  className="glass-chip h-11 flex-1 rounded-xl font-light"
+                >
+                  Keep it
+                </Button>
+                <Button
+                  onClick={() => {
+                    deleteProject(project.id);
+                    router.push("/projects");
+                  }}
+                  className="h-11 flex-1 rounded-xl bg-destructive font-light text-white hover:bg-destructive/85"
+                >
+                  Delete project
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
           <ProjectFormDialog
             project={project}
             trigger={
@@ -216,7 +266,7 @@ export default function ProjectDetailPage() {
           </form>
         </section>
 
-        <PriceCheck project={project} />
+        <ProjectItems project={project} />
         </div>
 
         {/* Progress & details */}

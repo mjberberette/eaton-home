@@ -24,6 +24,7 @@ import {
   type HomeInfo,
   type PricePoint,
   type Project,
+  type ProjectItem,
   type ProjectNote,
   type RecurringTask,
 } from "./types";
@@ -45,6 +46,10 @@ interface DataContextValue {
   addPricePoint: (projectId: string, point: PricePoint) => void;
   addNote: (projectId: string, text: string) => void;
   deleteNote: (projectId: string, noteId: string) => void;
+  addItem: (projectId: string, item: Omit<ProjectItem, "id">) => void;
+  updateItem: (projectId: string, itemId: string, patch: Partial<ProjectItem>) => void;
+  deleteItem: (projectId: string, itemId: string) => void;
+  deleteProject: (id: string) => void;
   updateHomeInfo: (info: HomeInfo) => void;
   /** Set when a database write fails — surface it to the user. */
   syncIssue: string | null;
@@ -73,6 +78,7 @@ type ProjectRow = {
   hotspot: Project["hotspot"] | null;
   price_history: PricePoint[] | null;
   notes: ProjectNote[] | null;
+  items: ProjectItem[] | null;
   created_at: string;
   updated_by: string | null;
   updated_at: string | null;
@@ -97,6 +103,7 @@ function rowToProject(r: ProjectRow): Project {
     hotspot: r.hotspot ?? undefined,
     priceHistory: r.price_history ?? [],
     notes: r.notes ?? [],
+    items: r.items ?? [],
     createdAt: r.created_at,
     updatedBy: r.updated_by ?? undefined,
     updatedAt: r.updated_at ?? undefined,
@@ -122,6 +129,7 @@ function projectToRow(p: Project): ProjectRow {
     hotspot: p.hotspot ?? null,
     price_history: p.priceHistory,
     notes: p.notes ?? [],
+    items: p.items ?? [],
     created_at: p.createdAt,
     updated_by: p.updatedBy ?? null,
     updated_at: p.updatedAt ?? null,
@@ -644,6 +652,103 @@ export function DataProvider({
     [apply, remote, logActivity, projectTitle, guard]
   );
 
+  /** Shared helper: patch one project's items array and persist it. */
+  const patchItems = useCallback(
+    (projectId: string, fn: (items: ProjectItem[]) => ProjectItem[]) => {
+      const meta = stamp();
+      apply((prev) => ({
+        ...prev,
+        projects: prev.projects.map((p) =>
+          p.id === projectId ? { ...p, items: fn(p.items ?? []), ...meta } : p
+        ),
+      }));
+      if (remote) {
+        setDb((current) => {
+          const p = current.projects.find((x) => x.id === projectId);
+          if (p) guard("Saving the project items", remote.from("projects").upsert(projectToRow(p)));
+          return current;
+        });
+      }
+    },
+    [apply, remote, stamp, guard]
+  );
+
+  const addItem = useCallback(
+    (projectId: string, item: Omit<ProjectItem, "id">) => {
+      const id = `i-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+      patchItems(projectId, (items) => [...items, { ...item, id }]);
+      logActivity("updated_project", projectTitle(projectId), {
+        targetId: projectId,
+        detail: `added item "${item.name}" · ${formatMoney(item.price)}`,
+      });
+    },
+    [patchItems, logActivity, projectTitle]
+  );
+
+  const updateItem = useCallback(
+    (projectId: string, itemId: string, patch: Partial<ProjectItem>) => {
+      let itemName = "an item";
+      patchItems(projectId, (items) =>
+        items.map((it) => {
+          if (it.id !== itemId) return it;
+          itemName = it.name;
+          return { ...it, ...patch };
+        })
+      );
+      if (patch.purchased !== undefined) {
+        logActivity("updated_project", projectTitle(projectId), {
+          targetId: projectId,
+          detail: patch.purchased ? `purchased "${itemName}"` : `unmarked "${itemName}"`,
+        });
+      }
+    },
+    [patchItems, logActivity, projectTitle]
+  );
+
+  const deleteItem = useCallback(
+    (projectId: string, itemId: string) => {
+      let itemName = "an item";
+      patchItems(projectId, (items) =>
+        items.filter((it) => {
+          if (it.id === itemId) {
+            itemName = it.name;
+            return false;
+          }
+          return true;
+        })
+      );
+      logActivity("updated_project", projectTitle(projectId), {
+        targetId: projectId,
+        detail: `removed item "${itemName}"`,
+      });
+    },
+    [patchItems, logActivity, projectTitle]
+  );
+
+  const deleteProject = useCallback(
+    (id: string) => {
+      const title = projectTitle(id);
+      apply((prev) => {
+        const remaining = prev.projects
+          .filter((p) => p.id !== id)
+          .sort((a, b) => a.rank - b.rank)
+          .map((p, i) => (p.rank === i + 1 ? p : { ...p, rank: i + 1 }));
+        return { ...prev, projects: remaining };
+      });
+      if (remote) {
+        guard("Deleting the project", remote.from("projects").delete().eq("id", id));
+        // Re-sync the compacted ranks
+        setDb((current) => {
+          const ranks = current.projects.map((p) => ({ id: p.id, rank: p.rank }));
+          if (ranks.length) guard("Saving the new priority order", remote.from("projects").upsert(ranks));
+          return current;
+        });
+      }
+      logActivity("deleted_project", title, { detail: "removed from the list" });
+    },
+    [apply, remote, guard, logActivity, projectTitle]
+  );
+
   const updateHomeInfo = useCallback(
     (info: HomeInfo) => {
       apply((prev) => ({ ...prev, homeInfo: info }));
@@ -668,11 +773,15 @@ export function DataProvider({
       addPricePoint,
       addNote,
       deleteNote,
+      addItem,
+      updateItem,
+      deleteItem,
+      deleteProject,
       updateHomeInfo,
       syncIssue,
       clearSyncIssue: () => setSyncIssue(null),
     }),
-    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, completeTask, updateBudget, addPricePoint, addNote, deleteNote, updateHomeInfo, syncIssue]
+    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, completeTask, updateBudget, addPricePoint, addNote, deleteNote, addItem, updateItem, deleteItem, deleteProject, updateHomeInfo, syncIssue]
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

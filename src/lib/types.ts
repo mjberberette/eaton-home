@@ -31,6 +31,16 @@ export interface ProjectNote {
   createdAt: string;
 }
 
+/** A material/part needed to complete a project. */
+export interface ProjectItem {
+  id: string;
+  name: string;
+  price: number;
+  /** Link to where to buy it */
+  url?: string;
+  purchased: boolean;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -52,6 +62,8 @@ export interface Project {
   priceHistory: PricePoint[];
   /** Running conversation between household members about this project */
   notes?: ProjectNote[];
+  /** Everything needed to complete the project, with per-item links and prices */
+  items?: ProjectItem[];
   createdAt: string;
   /** Household member who last changed this project */
   updatedBy?: string;
@@ -108,7 +120,8 @@ export type ActivityAction =
   | "updated_budget"
   | "updated_home"
   | "added_note"
-  | "deleted_note";
+  | "deleted_note"
+  | "deleted_project";
 
 export interface ActivityEntry {
   id: string;
@@ -133,6 +146,7 @@ export const ACTIVITY_VERB: Record<ActivityAction, string> = {
   updated_home: "updated",
   added_note: "left a note on",
   deleted_note: "removed a note from",
+  deleted_project: "removed",
 };
 
 export interface Appliance {

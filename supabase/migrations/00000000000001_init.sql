@@ -30,6 +30,8 @@ create table public.projects (
   price_history jsonb not null default '[]'::jsonb,
   -- array of {id, author, text, createdAt} household notes
   notes jsonb not null default '[]'::jsonb,
+  -- array of {id, name, price, url?, purchased} materials for the project
+  items jsonb not null default '[]'::jsonb,
   created_at date not null default current_date,
   -- household member attribution ("changed by Nate")
   updated_by text,

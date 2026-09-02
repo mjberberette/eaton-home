@@ -26,9 +26,8 @@ Built with **Next.js 16**, **Tailwind CSS 4**, **shadcn/ui**, **GSAP**,
 - **Price tracking** — a full line graph per project (axes, hover tooltips,
   lowest-price marker) and a "best time to buy" signal at the lowest
   tracked price.
-- **Shop the market** — per-project price comparison across Home Depot,
-  Lowe's, Amazon, Ace, Menards, Walmart, and more, priced near Parker, CO
-  80134, with one-tap logging of the best offer into the price history.
+- **Items per project** — break a project into the materials it needs, each
+  with its own price and buy link, a purchased checklist, and a running total.
 - **Budgeting** — project fund, monthly budget, category breakdown, and a
   funding runway that recalculates live.
 - **Home care** — recurring tasks (air filters, water filters, gutters…) with
@@ -72,24 +71,6 @@ Demo mode stores data in your browser (localStorage) — no backend needed.
 
 The seed SQL is generated from the same data demo mode uses:
 `node scripts/generate-seed-sql.mjs` regenerates `supabase/seed.sql`.
-
-## Live store prices (optional)
-
-"Shop the market" on each project page compares prices across major hardware
-and home retailers. Out of the box it uses a built-in estimator (stable,
-plausible prices with real store search links), so the flow works with zero
-configuration.
-
-For **live prices near Parker, CO 80134**, add one key:
-
-1. Create an account at [serpapi.com](https://serpapi.com) (Google Shopping
-   engine; free tier available) and copy your API key.
-2. Set `SERPAPI_KEY` in `.env.local` (and in Vercel for production).
-3. Price checks now return real offers from Home Depot, Lowe's, Amazon,
-   Ace Hardware, Menards, Walmart, and any other store carrying the item,
-   location-scoped to Parker, Colorado. The key stays server-side (the lookup
-   runs in a Route Handler), and if a live lookup ever fails the app falls
-   back to the estimator automatically.
 
 ## Deploy to Vercel
 

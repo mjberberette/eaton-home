@@ -38,6 +38,7 @@ const ACTION_ICON: Record<ActivityAction, LucideIcon> = {
   updated_home: House,
   added_note: MessageSquare,
   deleted_note: Trash2,
+  deleted_project: Trash2,
 };
 
 const ACTION_TINT: Partial<Record<ActivityAction, string>> = {

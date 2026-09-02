@@ -19,11 +19,11 @@ sql += SEED_DB.categories
 sql += "\non conflict (id) do nothing;\n\n";
 
 sql +=
-  "insert into public.projects (id, title, description, category_id, rank, status, estimated_cost, spent, progress, store_name, store_url, inspiration_image, before_image, after_image, hotspot, price_history, notes, created_at, updated_by, updated_at) values\n";
+  "insert into public.projects (id, title, description, category_id, rank, status, estimated_cost, spent, progress, store_name, store_url, inspiration_image, before_image, after_image, hotspot, price_history, notes, items, created_at, updated_by, updated_at) values\n";
 sql += SEED_DB.projects
   .map(
     (p) =>
-      `  (${q(p.id)}, ${q(p.title)}, ${q(p.description)}, ${q(p.categoryId)}, ${p.rank}, ${q(p.status)}, ${p.estimatedCost}, ${p.spent}, ${p.progress}, ${q(p.storeName)}, ${q(p.storeUrl)}, ${q(p.inspirationImage)}, ${q(p.beforeImage)}, ${q(p.afterImage)}, ${j(p.hotspot)}, ${j(p.priceHistory)}, ${j(p.notes ?? [])}, ${q(p.createdAt)}, ${q(p.updatedBy)}, ${q(p.updatedAt)})`
+      `  (${q(p.id)}, ${q(p.title)}, ${q(p.description)}, ${q(p.categoryId)}, ${p.rank}, ${q(p.status)}, ${p.estimatedCost}, ${p.spent}, ${p.progress}, ${q(p.storeName)}, ${q(p.storeUrl)}, ${q(p.inspirationImage)}, ${q(p.beforeImage)}, ${q(p.afterImage)}, ${j(p.hotspot)}, ${j(p.priceHistory)}, ${j(p.notes ?? [])}, ${j(p.items ?? [])}, ${q(p.createdAt)}, ${q(p.updatedBy)}, ${q(p.updatedAt)})`
   )
   .join(",\n");
 sql += "\non conflict (id) do nothing;\n\n";
