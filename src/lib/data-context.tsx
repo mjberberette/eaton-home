@@ -483,7 +483,7 @@ export function DataProvider({
         detail: `priority #${rank} · ${formatMoney(project.estimatedCost)}`,
       });
     },
-    [apply, applyOrder, remote, stamp, logActivity, guard]
+    [apply, applyOrder, stamp, logActivity]
   );
 
   const setRank = useCallback(
