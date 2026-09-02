@@ -435,19 +435,21 @@ export function DataProvider({
     (prev: HomeDB, orderedIds: string[], stampId?: string) => {
       const rankOf = new Map(orderedIds.map((id, i) => [id, i + 1]));
       const meta = stamp();
-      const changed: { id: string; rank: number; updated_by?: string; updated_at?: string }[] = [];
+      const changedIds = new Set<string>();
       const projects = prev.projects.map((p) => {
         const rank = rankOf.get(p.id);
         const isMoved = p.id === stampId;
         if (rank === undefined || (rank === p.rank && !isMoved)) return p;
-        changed.push({
-          id: p.id,
-          rank,
-          ...(isMoved && { updated_by: meta.updatedBy, updated_at: meta.updatedAt }),
-        });
+        changedIds.add(p.id);
         return isMoved ? { ...p, rank, ...meta } : { ...p, rank };
       });
-      if (remote && changed.length) guard("Saving the new priority order", remote.from("projects").upsert(changed));
+      if (remote && changedIds.size) {
+        // Sync FULL rows, not just {id, rank}: if a row is somehow missing in
+        // the database (e.g. an earlier failed insert), this recreates it
+        // instead of violating not-null constraints.
+        const rows = projects.filter((p) => changedIds.has(p.id)).map(projectToRow);
+        guard("Saving the new priority order", remote.from("projects").upsert(rows));
+      }
       return { ...prev, projects };
     },
     [remote, stamp, guard]
@@ -464,11 +466,12 @@ export function DataProvider({
         );
         const ids = sorted.map((p) => p.id);
         ids.splice(target - 1, 0, stamped.id);
+        // rank 0 placeholder guarantees applyOrder sees the new project as
+        // changed and upserts its full row (which also creates it remotely).
         const withNew = {
           ...prev,
-          projects: [...prev.projects, { ...stamped, rank: target }],
+          projects: [...prev.projects, { ...stamped, rank: 0 }],
         };
-        if (remote) guard("Adding the project", remote.from("projects").insert(projectToRow({ ...stamped, rank: target })));
         return applyOrder(withNew, ids);
       });
       const rank = Math.max(
@@ -525,10 +528,8 @@ export function DataProvider({
           return p;
         });
         if (remote) {
-          guard("Saving the new priority order", remote.from("projects").upsert([
-            { id: a.id, rank: b.rank },
-            { id: b.id, rank: a.rank },
-          ]));
+          const rows = projects.filter((p) => p.id === a.id || p.id === b.id).map(projectToRow);
+          guard("Saving the new priority order", remote.from("projects").upsert(rows));
         }
         return { ...prev, projects };
       });
@@ -737,10 +738,10 @@ export function DataProvider({
       });
       if (remote) {
         guard("Deleting the project", remote.from("projects").delete().eq("id", id));
-        // Re-sync the compacted ranks
+        // Re-sync the compacted ranks (full rows — see applyOrder)
         setDb((current) => {
-          const ranks = current.projects.map((p) => ({ id: p.id, rank: p.rank }));
-          if (ranks.length) guard("Saving the new priority order", remote.from("projects").upsert(ranks));
+          const rows = current.projects.map(projectToRow);
+          if (rows.length) guard("Saving the new priority order", remote.from("projects").upsert(rows));
           return current;
         });
       }
