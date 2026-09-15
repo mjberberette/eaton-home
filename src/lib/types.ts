@@ -69,6 +69,15 @@ export interface Project {
   updatedBy?: string;
   /** ISO timestamp of the last change */
   updatedAt?: string;
+  /** ISO timestamp set when the project is checked off as complete */
+  completedAt?: string;
+}
+
+/** Purchased-items ratio (0–100), or null when a project has no items yet. */
+export function itemProgress(p: Project): number | null {
+  const items = p.items ?? [];
+  if (items.length === 0) return null;
+  return Math.round((items.filter((i) => i.purchased).length / items.length) * 100);
 }
 
 export const HOUSEHOLD_MEMBERS = ["Melanie", "Nate"] as const;

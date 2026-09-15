@@ -18,7 +18,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { ArrowUpRight, GripVertical, ImageIcon, Pencil, Plus } from "lucide-react";
+import { ArrowUpRight, Check, GripVertical, ImageIcon, Pencil, Plus } from "lucide-react";
 import { Reveal } from "@/components/anim";
 import { ProjectFormDialog } from "@/components/project-form-dialog";
 import { SafeImage } from "@/components/safe-image";
@@ -27,15 +27,23 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useHome } from "@/lib/data-context";
-import { formatMoney, timeAgo, type Category, type Project } from "@/lib/types";
+import { formatMoney, itemProgress, timeAgo, type Category, type Project } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export default function ProjectsPage() {
-  const { db, setRank } = useHome();
+  const { db, setRank, setCompleted } = useHome();
   const { projects, categories } = db;
   const [zone, setZone] = useState<"all" | "outdoor" | "indoor" | "repairs">("all");
 
-  const ranked = useMemo(() => [...projects].sort((a, b) => a.rank - b.rank), [projects]);
+  const rankedAll = useMemo(() => [...projects].sort((a, b) => a.rank - b.rank), [projects]);
+  const ranked = useMemo(() => rankedAll.filter((p) => p.status !== "done"), [rankedAll]);
+  const completed = useMemo(
+    () =>
+      rankedAll
+        .filter((p) => p.status === "done")
+        .sort((a, b) => (b.completedAt ?? b.updatedAt ?? "").localeCompare(a.completedAt ?? a.updatedAt ?? "")),
+    [rankedAll]
+  );
   const filteredCategories = categories.filter((c) => zone === "all" || c.zone === zone);
 
   const sensors = useSensors(
@@ -77,6 +85,14 @@ export default function ProjectsPage() {
           <TabsTrigger value="category" className="rounded-xl px-5 font-light">
             By category
           </TabsTrigger>
+          <TabsTrigger value="completed" className="rounded-xl px-5 font-light">
+            Completed
+            {completed.length > 0 && (
+              <span className="ml-1.5 rounded-full bg-brand-green/20 px-1.5 py-0.5 text-[10px] font-normal text-brand-green">
+                {completed.length}
+              </span>
+            )}
+          </TabsTrigger>
         </TabsList>
 
         {/* ---- Master priority list ---- */}
@@ -96,6 +112,11 @@ export default function ProjectsPage() {
                 strategy={verticalListSortingStrategy}
               >
                 <div className="space-y-2.5">
+                  {ranked.length === 0 && (
+                    <p className="rounded-2xl border border-dashed border-border bg-white/[0.03] px-5 py-8 text-center text-sm font-light text-muted-foreground">
+                      Everything&apos;s done — add the next idea to get the list going again.
+                    </p>
+                  )}
                   {ranked.map((p, i) => (
                     <SortableRow
                       key={p.id}
@@ -199,6 +220,52 @@ export default function ProjectsPage() {
             );
           })}
         </TabsContent>
+
+        {/* ---- Completed ---- */}
+        <TabsContent value="completed" className="mt-5">
+          <div className="glass rounded-[1.75rem] p-4 sm:p-6">
+            {completed.length === 0 ? (
+              <p className="rounded-2xl border border-dashed border-border bg-white/[0.03] px-5 py-8 text-center text-sm font-light text-muted-foreground">
+                Nothing checked off yet. Open a project and tick “Mark complete” when it&apos;s done.
+              </p>
+            ) : (
+              <div className="space-y-2.5">
+                {completed.map((p) => {
+                  const when = p.completedAt ?? p.updatedAt;
+                  return (
+                    <div
+                      key={p.id}
+                      className="flex items-center gap-3 rounded-2xl border border-transparent bg-white/[0.05] px-3 py-3 transition-colors hover:bg-white/[0.08] sm:gap-4 sm:px-4"
+                    >
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-green/15 text-brand-green">
+                        <Check className="h-4.5 w-4.5" strokeWidth={2.5} />
+                      </span>
+                      <Link href={`/projects/${p.id}`} className="group min-w-0 flex-1">
+                        <p className="truncate font-normal group-hover:underline">{p.title}</p>
+                        <p className="truncate text-xs font-light text-muted-foreground">
+                          {categories.find((c) => c.id === p.categoryId)?.name}
+                          {when
+                            ? ` · completed ${new Date(when).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`
+                            : ""}
+                          {p.updatedBy ? ` · by ${p.updatedBy}` : ""}
+                        </p>
+                      </Link>
+                      <span className="shrink-0 text-right text-sm font-light tabular-nums sm:text-base">
+                        {formatMoney(p.spent || p.estimatedCost)}
+                      </span>
+                      <button
+                        onClick={() => setCompleted(p.id, false)}
+                        className="hidden shrink-0 rounded-xl px-3 py-1.5 text-xs font-light text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground sm:inline-flex"
+                      >
+                        Reopen
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </TabsContent>
       </Tabs>
     </Reveal>
   );
@@ -254,7 +321,9 @@ function SortableRow({
         </p>
       </Link>
       <div className="hidden w-28 lg:block">
-        <Progress value={p.progress} className="h-1.5" />
+        {itemProgress(p) !== null && (
+          <Progress value={itemProgress(p) ?? 0} className="h-1.5" />
+        )}
       </div>
       <TrendChip history={p.priceHistory} className="hidden md:inline-flex" />
       <span className="shrink-0 text-right text-sm font-light tabular-nums sm:w-20 sm:text-base">

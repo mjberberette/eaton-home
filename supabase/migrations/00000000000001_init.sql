@@ -35,7 +35,9 @@ create table public.projects (
   created_at date not null default current_date,
   -- household member attribution ("changed by Nate")
   updated_by text,
-  updated_at timestamptz
+  updated_at timestamptz,
+  -- set when the project is checked off as complete
+  completed_at timestamptz
 );
 
 create table public.recurring_tasks (

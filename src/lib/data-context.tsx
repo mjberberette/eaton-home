@@ -41,6 +41,8 @@ interface DataContextValue {
   addProject: (project: Project, atRank?: number) => void;
   moveRank: (id: string, direction: -1 | 1) => void;
   setRank: (id: string, rank: number) => void;
+  /** Check a project off (or reopen it); completed projects move to the end of the rank order. */
+  setCompleted: (id: string, done: boolean) => void;
   completeTask: (id: string) => void;
   addTask: (task: Omit<RecurringTask, "id">) => void;
   updateTask: (id: string, patch: Partial<RecurringTask>) => void;
@@ -85,6 +87,7 @@ type ProjectRow = {
   created_at: string;
   updated_by: string | null;
   updated_at: string | null;
+  completed_at: string | null;
 };
 
 function rowToProject(r: ProjectRow): Project {
@@ -110,6 +113,7 @@ function rowToProject(r: ProjectRow): Project {
     createdAt: r.created_at,
     updatedBy: r.updated_by ?? undefined,
     updatedAt: r.updated_at ?? undefined,
+    completedAt: r.completed_at ?? undefined,
   };
 }
 
@@ -136,6 +140,7 @@ function projectToRow(p: Project): ProjectRow {
     created_at: p.createdAt,
     updated_by: p.updatedBy ?? null,
     updated_at: p.updatedAt ?? null,
+    completed_at: p.completedAt ?? null,
   };
 }
 
@@ -210,6 +215,27 @@ async function loadFromSupabase(supabase: SupabaseClient): Promise<HomeDB | null
   };
 }
 
+/**
+ * Active projects occupy ranks 1..n and completed ones follow, so the
+ * priority list stays contiguous. Returns the normalized projects plus the
+ * rows whose rank changed (for syncing).
+ */
+function normalizeRanks(projects: Project[]): { projects: Project[]; changed: Project[] } {
+  const ordered = [...projects].sort((a, b) => {
+    const da = a.status === "done" ? 1 : 0;
+    const db = b.status === "done" ? 1 : 0;
+    return da - db || a.rank - b.rank;
+  });
+  const changed: Project[] = [];
+  const next = ordered.map((p, i) => {
+    if (p.rank === i + 1) return p;
+    const fixed = { ...p, rank: i + 1 };
+    changed.push(fixed);
+    return fixed;
+  });
+  return { projects: next, changed };
+}
+
 /* ---------- Provider ---------- */
 
 export function DataProvider({
@@ -248,8 +274,12 @@ export function DataProvider({
         if (supabase) {
           const data = await loadFromSupabase(supabase);
           if (!cancelled && data) {
+            const norm = normalizeRanks(data.projects);
+            if (norm.changed.length) {
+              void supabase.from("projects").upsert(norm.changed.map(projectToRow));
+            }
             setRemote(supabase);
-            setDb(data);
+            setDb({ ...data, projects: norm.projects });
             setLoading(false);
             return;
           }
@@ -263,6 +293,7 @@ export function DataProvider({
           if (parsed.projects?.length) {
             setDb({
               ...parsed,
+              projects: normalizeRanks(parsed.projects).projects,
               activity: parsed.activity ?? SEED_DB.activity,
               homeInfo: parsed.homeInfo ?? SEED_DB.homeInfo,
             });
@@ -271,7 +302,11 @@ export function DataProvider({
       } catch {
         // Corrupt storage — fall back to seed
       }
-      if (!cancelled) setLoading(false);
+      if (!cancelled) {
+        // Fresh demo (nothing stored) still needs contiguous active ranks
+        setDb((prev) => ({ ...prev, projects: normalizeRanks(prev.projects).projects }));
+        setLoading(false);
+      }
     }
 
     init();
@@ -514,6 +549,36 @@ export function DataProvider({
       });
     },
     [apply, applyOrder, logActivity, projectTitle]
+  );
+
+  const setCompleted = useCallback(
+    (id: string, done: boolean) => {
+      const title = projectTitle(id);
+      const meta = stamp();
+      apply((prev) => {
+        const projects = prev.projects.map((p) =>
+          p.id === id
+            ? {
+                ...p,
+                status: done ? ("done" as const) : ("planned" as const),
+                progress: done ? 100 : 0,
+                completedAt: done ? new Date().toISOString() : undefined,
+                ...meta,
+              }
+            : p
+        );
+        // Completed projects drop to the end so the active list stays 1..n
+        const sorted = [...projects].sort((a, b) => a.rank - b.rank);
+        const ids = sorted.map((p) => p.id).filter((x) => x !== id);
+        ids.push(id);
+        return applyOrder({ ...prev, projects }, ids, id);
+      });
+      logActivity("changed_status", title, {
+        targetId: id,
+        detail: done ? "checked off as complete" : "reopened",
+      });
+    },
+    [apply, applyOrder, stamp, logActivity, projectTitle]
   );
 
   const moveRank = useCallback(
@@ -827,6 +892,7 @@ export function DataProvider({
       addProject,
       moveRank,
       setRank,
+      setCompleted,
       completeTask,
       addTask,
       updateTask,
@@ -843,7 +909,7 @@ export function DataProvider({
       syncIssue,
       clearSyncIssue: () => setSyncIssue(null),
     }),
-    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, completeTask, addTask, updateTask, deleteTask, updateBudget, addPricePoint, addNote, deleteNote, addItem, updateItem, deleteItem, deleteProject, updateHomeInfo, syncIssue]
+    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, setCompleted, completeTask, addTask, updateTask, deleteTask, updateBudget, addPricePoint, addNote, deleteNote, addItem, updateItem, deleteItem, deleteProject, updateHomeInfo, syncIssue]
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

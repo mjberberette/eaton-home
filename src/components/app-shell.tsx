@@ -19,6 +19,7 @@ import {
   X,
 } from "lucide-react";
 import { SettingsDialog, ThemeLoader } from "@/components/settings-dialog";
+import { FEATURES } from "@/lib/features";
 import { cn } from "@/lib/utils";
 import { EatonLogo, EatonMark } from "@/components/logo";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -28,11 +29,11 @@ import { useHome } from "@/lib/data-context";
 const NAV = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/projects", label: "Projects", icon: ListTodo },
-  { href: "/house", label: "3D House", icon: Rotate3d },
+  ...(FEATURES.house3d ? [{ href: "/house", label: "3D House", icon: Rotate3d }] : []),
   { href: "/tasks", label: "Home Care", icon: CalendarCheck },
   { href: "/budget", label: "Budget", icon: PiggyBank },
   { href: "/changelog", label: "Change Log", icon: History },
-] as const;
+];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

@@ -16,7 +16,9 @@ import { StatusBadge, TrendChip } from "@/components/project-bits";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { useHome } from "@/lib/data-context";
-import { daysUntilDue, formatMoney } from "@/lib/types";
+import { daysUntilDue, formatMoney, itemProgress } from "@/lib/types";
+import { FEATURES } from "@/lib/features";
+import { HomeFacts } from "@/components/home-facts";
 
 const HouseScene = dynamic(() => import("@/components/house/house-scene"), { ssr: false });
 
@@ -143,7 +145,9 @@ export default function DashboardPage() {
                   </p>
                 </div>
                 <div className="hidden w-28 sm:block">
-                  <Progress value={p.progress} className="h-1.5" />
+                  {itemProgress(p) !== null && (
+                    <Progress value={itemProgress(p) ?? 0} className="h-1.5" />
+                  )}
                 </div>
                 <TrendChip history={p.priceHistory} className="hidden md:inline-flex" />
                 <span className="w-20 text-right font-light tabular-nums">
@@ -157,7 +161,8 @@ export default function DashboardPage() {
 
         {/* Right rail */}
         <div className="flex flex-col gap-5">
-          {/* 3D house teaser */}
+          {/* 3D house teaser (feature-flagged) */}
+          {FEATURES.house3d && (
           <section
             data-reveal
             className="glass-deep group relative h-[260px] overflow-hidden rounded-[1.75rem]"
@@ -185,6 +190,7 @@ export default function DashboardPage() {
               </span>
             </Link>
           </section>
+          )}
 
           {/* Care due soon */}
           <section data-reveal className="glass rounded-[1.75rem] p-6">
@@ -231,6 +237,7 @@ export default function DashboardPage() {
           </section>
         </div>
       </div>
+      {!FEATURES.house3d && <HomeFacts />}
     </Reveal>
   );
 }

@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FEATURES } from "@/lib/features";
 import {
   AlertTriangle,
   ArrowUpRight,
@@ -49,7 +51,13 @@ const LEGEND: { status: ProjectStatus; color: string }[] = [
 
 export default function HousePage() {
   const { db } = useHome();
+  const router = useRouter();
   const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  // The 3D house is hidden behind a feature flag — send visitors home.
+  useEffect(() => {
+    if (!FEATURES.house3d) router.replace("/");
+  }, [router]);
   const heroRef = useRef<HTMLElement>(null);
   const sceneApi = useRef<HouseSceneHandle | null>(null);
   const [fullscreen, setFullscreen] = useState(false);

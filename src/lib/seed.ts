@@ -328,6 +328,7 @@ export const SEED_PROJECTS: Project[] = [
     createdAt: ago(220),
     updatedBy: "Nate",
     updatedAt: agoTime(700),
+    completedAt: agoTime(700),
   },
   {
     id: "p-bedroom-wall",

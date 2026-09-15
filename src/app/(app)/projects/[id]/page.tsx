@@ -6,6 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import {
   ArrowLeft,
   Camera,
+  Check,
   ExternalLink,
   ImageIcon,
   LineChart,
@@ -38,12 +39,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
+import { Progress } from "@/components/ui/progress";
 import { useHome } from "@/lib/data-context";
 import {
   STATUS_LABEL,
   STATUS_ORDER,
   formatMoney,
+  itemProgress,
   timeAgo,
   type ProjectStatus,
 } from "@/lib/types";
@@ -52,7 +54,7 @@ import { cn } from "@/lib/utils";
 export default function ProjectDetailPage() {
   const params = useParams<{ id: string }>();
   const router = useRouter();
-  const { db, updateProject, addPricePoint, deleteProject } = useHome();
+  const { db, updateProject, addPricePoint, deleteProject, setCompleted } = useHome();
   const project = db.projects.find((p) => p.id === params.id);
   const [newPrice, setNewPrice] = useState("");
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -71,6 +73,7 @@ export default function ProjectDetailPage() {
   }
 
   const category = db.categories.find((c) => c.id === project.categoryId);
+  const isDone = project.status === "done";
   const history = [...project.priceHistory].sort((a, b) => a.date.localeCompare(b.date));
   const lowest = history.length ? Math.min(...history.map((h) => h.price)) : null;
   const atLowest = lowest !== null && project.estimatedCost <= lowest;
@@ -273,39 +276,73 @@ export default function ProjectDetailPage() {
         <div className="flex flex-col gap-5">
           <section data-reveal className="glass rounded-[1.75rem] p-6">
             <h2 className="mb-5 text-sm font-normal tracking-wide text-muted-foreground uppercase">
-              Progress
+              Status
             </h2>
             <div className="space-y-5">
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <Label className="font-light">Completion</Label>
-                  <span className="font-normal">{project.progress}%</span>
-                </div>
-                <Slider
-                  value={[project.progress]}
-                  max={100}
-                  step={5}
-                  onValueChange={([v]) => updateProject(project.id, { progress: v })}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="font-light">Status</Label>
-                <Select
-                  value={project.status}
-                  onValueChange={(v) => updateProject(project.id, { status: v as ProjectStatus })}
+              {/* Completion checkbox */}
+              <button
+                type="button"
+                onClick={() => setCompleted(project.id, !isDone)}
+                aria-pressed={isDone}
+                className={cn(
+                  "flex w-full items-center gap-3 rounded-2xl border px-4 py-3.5 text-left transition-all",
+                  isDone
+                    ? "border-brand-green/50 bg-brand-green/12"
+                    : "border-white/10 bg-white/[0.04] hover:border-brand-cyan/40 hover:bg-white/[0.07]"
+                )}
+              >
+                <span
+                  className={cn(
+                    "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border-2 transition-colors",
+                    isDone
+                      ? "border-brand-green bg-brand-green text-brand-ink"
+                      : "border-white/30"
+                  )}
                 >
-                  <SelectTrigger className="glass-chip h-11 w-full rounded-xl font-light">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {STATUS_ORDER.map((s) => (
-                      <SelectItem key={s} value={s}>
-                        {STATUS_LABEL[s]}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+                  {isDone && <Check className="h-4 w-4" strokeWidth={3} />}
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block text-sm font-normal">
+                    {isDone ? "Project complete" : "Mark project complete"}
+                  </span>
+                  <span className="block text-[11px] font-light text-muted-foreground">
+                    {isDone && project.completedAt
+                      ? `Checked off ${new Date(project.completedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} — tap to reopen`
+                      : "Moves it to the Completed list"}
+                  </span>
+                </span>
+              </button>
+
+              {!isDone && (
+                <div className="space-y-2">
+                  <Label className="font-light">Stage</Label>
+                  <Select
+                    value={project.status}
+                    onValueChange={(v) => updateProject(project.id, { status: v as ProjectStatus })}
+                  >
+                    <SelectTrigger className="glass-chip h-11 w-full rounded-xl font-light">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {STATUS_ORDER.filter((st) => st !== "done").map((st) => (
+                        <SelectItem key={st} value={st}>
+                          {STATUS_LABEL[st]}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+
+              {itemProgress(project) !== null && (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <Label className="font-light">Items purchased</Label>
+                    <span className="font-normal">{itemProgress(project)}%</span>
+                  </div>
+                  <Progress value={itemProgress(project) ?? 0} className="h-1.5" />
+                </div>
+              )}
               <div className="space-y-2">
                 <Label className="font-light">Spent so far ($)</Label>
                 <Input
