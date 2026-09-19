@@ -11,7 +11,8 @@ export async function enterDemo(member?: string) {
   const opts = {
     httpOnly: true,
     sameSite: "lax" as const,
-    maxAge: 60 * 60 * 24 * 30,
+    // A year — the middleware also renews this on every visit
+    maxAge: 60 * 60 * 24 * 365,
     path: "/",
   };
   cookieStore.set(DEMO_COOKIE, "1", opts);
