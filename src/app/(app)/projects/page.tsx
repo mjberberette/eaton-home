@@ -27,13 +27,15 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useHome } from "@/lib/data-context";
-import { formatMoney, itemProgress, timeAgo, type Category, type Project } from "@/lib/types";
+import { formatMoney, projectProgress, timeAgo, type Category, type Project } from "@/lib/types";
+import { SubtaskList, SubtaskToggle } from "@/components/subtasks";
 import { cn } from "@/lib/utils";
 
 export default function ProjectsPage() {
   const { db, setRank, setCompleted } = useHome();
   const { projects, categories } = db;
   const [zone, setZone] = useState<"all" | "outdoor" | "indoor" | "repairs">("all");
+  const [expanded, setExpanded] = useState<string | null>(null);
 
   const rankedAll = useMemo(() => [...projects].sort((a, b) => a.rank - b.rank), [projects]);
   const ranked = useMemo(() => rankedAll.filter((p) => p.status !== "done"), [rankedAll]);
@@ -123,6 +125,8 @@ export default function ProjectsPage() {
                       project={p}
                       first={i === 0}
                       categories={categories}
+                      open={expanded === p.id}
+                      onToggle={() => setExpanded(expanded === p.id ? null : p.id)}
                     />
                   ))}
                 </div>
@@ -275,10 +279,14 @@ function SortableRow({
   project: p,
   first,
   categories,
+  open,
+  onToggle,
 }: {
   project: Project;
   first: boolean;
   categories: Category[];
+  open: boolean;
+  onToggle: () => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id: p.id });
@@ -288,12 +296,13 @@ function SortableRow({
       ref={setNodeRef}
       style={{ transform: CSS.Transform.toString(transform), transition }}
       className={cn(
-        "flex items-center gap-3 rounded-2xl border border-transparent bg-white/[0.05] px-3 py-3 transition-colors hover:border-brand-cyan/25 hover:bg-white/[0.09] sm:gap-4 sm:px-4",
-        p.status === "done" && "opacity-55",
+        "rounded-2xl border border-transparent bg-white/[0.05] transition-colors hover:border-brand-cyan/25",
+        open ? "border-brand-cyan/25 bg-white/[0.08]" : "hover:bg-white/[0.09]",
         isDragging &&
-          "relative z-10 border-brand-cyan/50 bg-white/[0.12] opacity-100 shadow-2xl backdrop-blur"
+          "relative z-10 border-brand-cyan/50 bg-white/[0.12] shadow-2xl backdrop-blur"
       )}
     >
+    <div className="flex items-center gap-3 px-3 py-3 sm:gap-4 sm:px-4">
       <button
         {...attributes}
         {...listeners}
@@ -321,8 +330,8 @@ function SortableRow({
         </p>
       </Link>
       <div className="hidden w-28 lg:block">
-        {itemProgress(p) !== null && (
-          <Progress value={itemProgress(p) ?? 0} className="h-1.5" />
+        {projectProgress(p) !== null && (
+          <Progress value={projectProgress(p) ?? 0} className="h-1.5" />
         )}
       </div>
       <TrendChip history={p.priceHistory} className="hidden md:inline-flex" />
@@ -341,6 +350,13 @@ function SortableRow({
           </button>
         }
       />
+      <SubtaskToggle project={p} open={open} onToggle={onToggle} />
+    </div>
+    {open && (
+      <div className="border-t border-white/10 px-3 py-3 sm:px-4">
+        <SubtaskList project={p} compact />
+      </div>
+    )}
     </div>
   );
 }

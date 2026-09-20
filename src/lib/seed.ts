@@ -70,6 +70,12 @@ export const SEED_PROJECTS: Project[] = [
       { id: "i-deck-3", name: "Joist tape + hidden fasteners", price: 168, url: "https://www.homedepot.com/s/deck%20hidden%20fasteners", purchased: true },
       { id: "i-deck-4", name: "Concrete footings (6)", price: 210, url: "https://www.homedepot.com/s/concrete%20deck%20footing", purchased: false },
     ],
+    subtasks: [
+      { id: "s-deck-1", title: "Pour footings + set posts", done: true, completedAt: agoTime(200) },
+      { id: "s-deck-2", title: "Frame the joists", done: true, completedAt: agoTime(100) },
+      { id: "s-deck-3", title: "Lay composite boards", done: false },
+      { id: "s-deck-4", title: "Install cable railing", done: false },
+    ],
     createdAt: ago(140),
     updatedBy: "Nate",
     updatedAt: agoTime(2),
@@ -155,6 +161,13 @@ export const SEED_PROJECTS: Project[] = [
       { date: ago(100), price: 3200 },
       { date: ago(45), price: 3050 },
       { date: ago(12), price: 2900, note: "Fireplace insert on sale" },
+    ],
+    subtasks: [
+      { id: "s-fp-1", title: "Remove the old mantel and patch drywall", done: true, completedAt: agoTime(120) },
+      { id: "s-fp-2", title: "Frame out the fluted oak panels", done: true, completedAt: agoTime(40) },
+      { id: "s-fp-3", title: "Run media conduit + outlet behind the TV", done: false },
+      { id: "s-fp-4", title: "Mount the electric insert", done: false },
+      { id: "s-fp-5", title: "Hang the picture-light sconces", done: false },
     ],
     createdAt: ago(110),
     updatedBy: "Nate",
@@ -298,6 +311,11 @@ export const SEED_PROJECTS: Project[] = [
     priceHistory: [
       { date: ago(52), price: 1280 },
       { date: ago(14), price: 1150 },
+    ],
+    subtasks: [
+      { id: "s-mud-1", title: "Board-and-batten wall", done: false },
+      { id: "s-mud-2", title: "Build and mount the oak bench", done: false },
+      { id: "s-mud-3", title: "Install hooks + console shelf", done: false },
     ],
     createdAt: ago(58),
     updatedBy: "Melanie",

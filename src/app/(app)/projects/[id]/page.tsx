@@ -26,6 +26,7 @@ import { Reveal } from "@/components/anim";
 import { ProjectFormDialog } from "@/components/project-form-dialog";
 import { ProjectItems } from "@/components/project-items";
 import { ProjectNotes } from "@/components/project-notes";
+import { ProjectSubtasks } from "@/components/subtasks";
 import { SafeImage } from "@/components/safe-image";
 import { StatusBadge, TrendChip } from "@/components/project-bits";
 import { PriceChart } from "@/components/price-chart";
@@ -46,6 +47,7 @@ import {
   STATUS_ORDER,
   formatMoney,
   itemProgress,
+  subtaskProgress,
   timeAgo,
   type ProjectStatus,
 } from "@/lib/types";
@@ -334,6 +336,15 @@ export default function ProjectDetailPage() {
                 </div>
               )}
 
+              {subtaskProgress(project) !== null && (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <Label className="font-light">Subtasks done</Label>
+                    <span className="font-normal">{subtaskProgress(project)}%</span>
+                  </div>
+                  <Progress value={subtaskProgress(project) ?? 0} className="h-1.5" />
+                </div>
+              )}
               {itemProgress(project) !== null && (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
@@ -368,6 +379,7 @@ export default function ProjectDetailPage() {
             </p>
           </section>
 
+          <ProjectSubtasks project={project} />
           <ProjectNotes project={project} />
         </div>
       </div>

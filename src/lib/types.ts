@@ -31,6 +31,15 @@ export interface ProjectNote {
   createdAt: string;
 }
 
+/** A step that must be done to finish a project (no pricing). */
+export interface Subtask {
+  id: string;
+  title: string;
+  done: boolean;
+  /** ISO timestamp when checked off */
+  completedAt?: string;
+}
+
 /** A material/part needed to complete a project. */
 export interface ProjectItem {
   id: string;
@@ -64,6 +73,8 @@ export interface Project {
   notes?: ProjectNote[];
   /** Everything needed to complete the project, with per-item links and prices */
   items?: ProjectItem[];
+  /** Steps to finish the project ("hang canvas prints", "hang artwork"…) */
+  subtasks?: Subtask[];
   createdAt: string;
   /** Household member who last changed this project */
   updatedBy?: string;
@@ -78,6 +89,18 @@ export function itemProgress(p: Project): number | null {
   const items = p.items ?? [];
   if (items.length === 0) return null;
   return Math.round((items.filter((i) => i.purchased).length / items.length) * 100);
+}
+
+/** Completed-subtasks ratio (0–100), or null when a project has no subtasks. */
+export function subtaskProgress(p: Project): number | null {
+  const subs = p.subtasks ?? [];
+  if (subs.length === 0) return null;
+  return Math.round((subs.filter((s) => s.done).length / subs.length) * 100);
+}
+
+/** Best available completion signal for list rows: subtasks first, then items. */
+export function projectProgress(p: Project): number | null {
+  return subtaskProgress(p) ?? itemProgress(p);
 }
 
 export const HOUSEHOLD_MEMBERS = ["Melanie", "Nate"] as const;

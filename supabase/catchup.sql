@@ -10,6 +10,7 @@ alter table public.projects add column if not exists items jsonb not null defaul
 alter table public.projects add column if not exists updated_by text;
 alter table public.projects add column if not exists updated_at timestamptz;
 alter table public.projects add column if not exists completed_at timestamptz;
+alter table public.projects add column if not exists subtasks jsonb not null default '[]'::jsonb;
 
 -- Household change log
 create table if not exists public.activity_log (

@@ -32,6 +32,8 @@ create table public.projects (
   notes jsonb not null default '[]'::jsonb,
   -- array of {id, name, price, url?, purchased} materials for the project
   items jsonb not null default '[]'::jsonb,
+  -- array of {id, title, done, completedAt?} steps to finish the project
+  subtasks jsonb not null default '[]'::jsonb,
   created_at date not null default current_date,
   -- household member attribution ("changed by Nate")
   updated_by text,

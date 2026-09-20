@@ -26,6 +26,7 @@ import {
   type Project,
   type ProjectItem,
   type ProjectNote,
+  type Subtask,
   type RecurringTask,
 } from "./types";
 
@@ -54,6 +55,9 @@ interface DataContextValue {
   addItem: (projectId: string, item: Omit<ProjectItem, "id">) => void;
   updateItem: (projectId: string, itemId: string, patch: Partial<ProjectItem>) => void;
   deleteItem: (projectId: string, itemId: string) => void;
+  addSubtask: (projectId: string, title: string) => void;
+  toggleSubtask: (projectId: string, subtaskId: string) => void;
+  deleteSubtask: (projectId: string, subtaskId: string) => void;
   deleteProject: (id: string) => void;
   updateHomeInfo: (info: HomeInfo) => void;
   /** Set when a database write fails — surface it to the user. */
@@ -84,6 +88,7 @@ type ProjectRow = {
   price_history: PricePoint[] | null;
   notes: ProjectNote[] | null;
   items: ProjectItem[] | null;
+  subtasks: Subtask[] | null;
   created_at: string;
   updated_by: string | null;
   updated_at: string | null;
@@ -110,6 +115,7 @@ function rowToProject(r: ProjectRow): Project {
     priceHistory: r.price_history ?? [],
     notes: r.notes ?? [],
     items: r.items ?? [],
+    subtasks: r.subtasks ?? [],
     createdAt: r.created_at,
     updatedBy: r.updated_by ?? undefined,
     updatedAt: r.updated_at ?? undefined,
@@ -137,6 +143,7 @@ function projectToRow(p: Project): ProjectRow {
     price_history: p.priceHistory,
     notes: p.notes ?? [],
     items: p.items ?? [],
+    subtasks: p.subtasks ?? [],
     created_at: p.createdAt,
     updated_by: p.updatedBy ?? null,
     updated_at: p.updatedAt ?? null,
@@ -849,6 +856,81 @@ export function DataProvider({
     [patchItems, logActivity, projectTitle]
   );
 
+  /** Shared helper: patch one project's subtasks and persist it. */
+  const patchSubtasks = useCallback(
+    (projectId: string, fn: (subs: Subtask[]) => Subtask[]) => {
+      const meta = stamp();
+      apply((prev) => ({
+        ...prev,
+        projects: prev.projects.map((p) =>
+          p.id === projectId ? { ...p, subtasks: fn(p.subtasks ?? []), ...meta } : p
+        ),
+      }));
+      if (remote) {
+        setDb((current) => {
+          const p = current.projects.find((x) => x.id === projectId);
+          if (p) guard("Saving the subtasks", remote.from("projects").upsert(projectToRow(p)));
+          return current;
+        });
+      }
+    },
+    [apply, remote, stamp, guard]
+  );
+
+  const addSubtask = useCallback(
+    (projectId: string, title: string) => {
+      const trimmed = title.trim();
+      if (!trimmed) return;
+      const id = `s-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+      patchSubtasks(projectId, (subs) => [...subs, { id, title: trimmed, done: false }]);
+      logActivity("updated_project", projectTitle(projectId), {
+        targetId: projectId,
+        detail: `added subtask "${trimmed}"`,
+      });
+    },
+    [patchSubtasks, logActivity, projectTitle]
+  );
+
+  const toggleSubtask = useCallback(
+    (projectId: string, subtaskId: string) => {
+      let label = "a subtask";
+      let nowDone = false;
+      patchSubtasks(projectId, (subs) =>
+        subs.map((st) => {
+          if (st.id !== subtaskId) return st;
+          label = st.title;
+          nowDone = !st.done;
+          return { ...st, done: nowDone, completedAt: nowDone ? new Date().toISOString() : undefined };
+        })
+      );
+      logActivity("updated_project", projectTitle(projectId), {
+        targetId: projectId,
+        detail: nowDone ? `finished "${label}"` : `reopened "${label}"`,
+      });
+    },
+    [patchSubtasks, logActivity, projectTitle]
+  );
+
+  const deleteSubtask = useCallback(
+    (projectId: string, subtaskId: string) => {
+      let label = "a subtask";
+      patchSubtasks(projectId, (subs) =>
+        subs.filter((st) => {
+          if (st.id === subtaskId) {
+            label = st.title;
+            return false;
+          }
+          return true;
+        })
+      );
+      logActivity("updated_project", projectTitle(projectId), {
+        targetId: projectId,
+        detail: `removed subtask "${label}"`,
+      });
+    },
+    [patchSubtasks, logActivity, projectTitle]
+  );
+
   const deleteProject = useCallback(
     (id: string) => {
       const title = projectTitle(id);
@@ -904,12 +986,15 @@ export function DataProvider({
       addItem,
       updateItem,
       deleteItem,
+      addSubtask,
+      toggleSubtask,
+      deleteSubtask,
       deleteProject,
       updateHomeInfo,
       syncIssue,
       clearSyncIssue: () => setSyncIssue(null),
     }),
-    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, setCompleted, completeTask, addTask, updateTask, deleteTask, updateBudget, addPricePoint, addNote, deleteNote, addItem, updateItem, deleteItem, deleteProject, updateHomeInfo, syncIssue]
+    [db, loading, remote, userName, updateProject, addProject, moveRank, setRank, setCompleted, completeTask, addTask, updateTask, deleteTask, updateBudget, addPricePoint, addNote, deleteNote, addItem, updateItem, deleteItem, addSubtask, toggleSubtask, deleteSubtask, deleteProject, updateHomeInfo, syncIssue]
   );
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

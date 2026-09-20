@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import {
@@ -16,7 +17,8 @@ import { StatusBadge, TrendChip } from "@/components/project-bits";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { useHome } from "@/lib/data-context";
-import { daysUntilDue, formatMoney, itemProgress } from "@/lib/types";
+import { daysUntilDue, formatMoney, projectProgress } from "@/lib/types";
+import { SubtaskList, SubtaskToggle } from "@/components/subtasks";
 import { FEATURES } from "@/lib/features";
 import { HomeFacts } from "@/components/home-facts";
 
@@ -24,6 +26,7 @@ const HouseScene = dynamic(() => import("@/components/house/house-scene"), { ssr
 
 export default function DashboardPage() {
   const { db, userName } = useHome();
+  const [expanded, setExpanded] = useState<string | null>(null);
   const { projects, tasks, budget, categories } = db;
 
   const active = projects.filter((p) => p.status === "in_progress");
@@ -122,40 +125,59 @@ export default function DashboardPage() {
           </div>
 
           <div className="space-y-2.5">
-            {topPriorities.map((p, i) => (
-              <Link
-                key={p.id}
-                href={`/projects/${p.id}`}
-                className="group flex items-center gap-4 rounded-2xl border border-transparent bg-white/[0.05] px-4 py-3.5 transition-all hover:border-brand-cyan/25 hover:bg-white/[0.09]"
-              >
-                <span
+            {topPriorities.map((p, i) => {
+              const open = expanded === p.id;
+              return (
+                <div
+                  key={p.id}
                   className={
-                    "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sm " +
-                    (i === 0
-                      ? "bg-brand-yellow font-medium text-brand-ink"
-                      : "bg-secondary font-light text-secondary-foreground")
+                    "rounded-2xl border border-transparent bg-white/[0.05] transition-all hover:border-brand-cyan/25 " +
+                    (open ? "border-brand-cyan/25 bg-white/[0.08]" : "hover:bg-white/[0.09]")
                   }
                 >
-                  {p.rank}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate font-normal">{p.title}</p>
-                  <p className="text-xs font-light text-muted-foreground">
-                    {categoryName(p.categoryId)}
-                  </p>
-                </div>
-                <div className="hidden w-28 sm:block">
-                  {itemProgress(p) !== null && (
-                    <Progress value={itemProgress(p) ?? 0} className="h-1.5" />
+                  <div className="flex items-center gap-3 px-3 py-3 sm:gap-4 sm:px-4">
+                    <Link href={`/projects/${p.id}`} className="group flex min-w-0 flex-1 items-center gap-3 sm:gap-4">
+                      <span
+                        className={
+                          "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sm " +
+                          (i === 0
+                            ? "bg-brand-yellow font-medium text-brand-ink"
+                            : "bg-secondary font-light text-secondary-foreground")
+                        }
+                      >
+                        {p.rank}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate font-normal group-hover:underline">{p.title}</p>
+                        <p className="text-xs font-light text-muted-foreground">
+                          {categoryName(p.categoryId)}
+                        </p>
+                      </div>
+                      <div className="hidden w-28 sm:block">
+                        {projectProgress(p) !== null && (
+                          <Progress value={projectProgress(p) ?? 0} className="h-1.5" />
+                        )}
+                      </div>
+                      <TrendChip history={p.priceHistory} className="hidden md:inline-flex" />
+                      <span className="shrink-0 text-right text-sm font-light tabular-nums sm:w-20 sm:text-base">
+                        {formatMoney(p.estimatedCost)}
+                      </span>
+                      <StatusBadge status={p.status} className="hidden lg:inline-flex" />
+                    </Link>
+                    <SubtaskToggle
+                      project={p}
+                      open={open}
+                      onToggle={() => setExpanded(open ? null : p.id)}
+                    />
+                  </div>
+                  {open && (
+                    <div className="border-t border-white/10 px-3 py-3 sm:px-4">
+                      <SubtaskList project={p} compact />
+                    </div>
                   )}
                 </div>
-                <TrendChip history={p.priceHistory} className="hidden md:inline-flex" />
-                <span className="w-20 text-right font-light tabular-nums">
-                  {formatMoney(p.estimatedCost)}
-                </span>
-                <StatusBadge status={p.status} className="hidden lg:inline-flex" />
-              </Link>
-            ))}
+              );
+            })}
           </div>
         </section>
 
