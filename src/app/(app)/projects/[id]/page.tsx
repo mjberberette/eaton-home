@@ -205,8 +205,9 @@ export default function ProjectDetailPage() {
       </div>
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.4fr_1fr]">
-        {/* Price tracking + market check */}
+        {/* Subtasks, price tracking, items */}
         <div className="flex flex-col gap-5">
+        <ProjectSubtasks project={project} />
         <section data-reveal className="glass rounded-[1.75rem] p-6">
           <div className="mb-1 flex items-center gap-2 text-muted-foreground">
             <LineChart className="h-4.5 w-4.5" />
@@ -379,7 +380,6 @@ export default function ProjectDetailPage() {
             </p>
           </section>
 
-          <ProjectSubtasks project={project} />
           <ProjectNotes project={project} />
         </div>
       </div>
