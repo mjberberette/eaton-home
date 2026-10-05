@@ -42,5 +42,9 @@
     "playwright": "^1.62.1",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "allowScripts": {
+    "fsevents@2.3.2": true,
+    "unrs-resolver@1.12.2": true
   }
 }
