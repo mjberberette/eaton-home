@@ -29,7 +29,8 @@ export function Reveal({
     () => {
       const targets = scope.current?.querySelectorAll("[data-reveal]");
       if (!targets?.length) return;
-      gsap.fromTo(
+      if (document.hidden || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const tween = gsap.fromTo(
         targets,
         { opacity: 0, y, filter: "blur(6px)" },
         {
@@ -43,6 +44,13 @@ export function Reveal({
           clearProps: "filter",
         }
       );
+      // requestAnimationFrame can stall (background tabs, embedded webviews),
+      // which would leave the content stuck at opacity 0.
+      const failsafe = window.setTimeout(
+        () => tween.progress(1),
+        (delay + tween.totalDuration() + 0.5) * 1000
+      );
+      return () => window.clearTimeout(failsafe);
     },
     { scope }
   );
